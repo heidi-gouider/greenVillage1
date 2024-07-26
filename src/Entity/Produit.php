@@ -44,20 +44,25 @@ class Produit
     /**
      * @var Collection<int, self>
      */
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'sousRubriques')]
-    private Collection $rubriques;
+    // #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'sousRubriques')]
+    // private Collection $rubriques;
 
     /**
      * @var Collection<int, self>
      */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'rubriques')]
-    private Collection $sousRubriques;
+    // #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'rubriques')]
+    // private Collection $sousRubriques;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
 
     public function __construct()
     {
         $this->fournisseurs = new ArrayCollection();
-        $this->rubriques = new ArrayCollection();
-        $this->sousRubriques = new ArrayCollection();
+        // $this->rubriques = new ArrayCollection();
+        $this->categorie = new ArrayCollection();
+        // $this->sousRubriques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,50 +173,62 @@ class Produit
     /**
      * @return Collection<int, self>
      */
-    public function getRubriques(): Collection
-    {
-        return $this->rubriques;
-    }
+    // public function getRubriques(): Collection
+    // {
+    //     return $this->rubriques;
+    // }
 
-    public function addRubrique(self $rubrique): static
-    {
-        if (!$this->rubriques->contains($rubrique)) {
-            $this->rubriques->add($rubrique);
-        }
+    // public function addRubrique(self $rubrique): static
+    // {
+    //     if (!$this->rubriques->contains($rubrique)) {
+    //         $this->rubriques->add($rubrique);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeRubrique(self $rubrique): static
-    {
-        $this->rubriques->removeElement($rubrique);
+    // public function removeRubrique(self $rubrique): static
+    // {
+    //     $this->rubriques->removeElement($rubrique);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, self>
      */
-    public function getSousRubriques(): Collection
+    // public function getSousRubriques(): Collection
+    // {
+    //     return $this->sousRubriques;
+    // }
+
+    // public function addSousRubrique(self $sousRubrique): static
+    // {
+    //     if (!$this->sousRubriques->contains($sousRubrique)) {
+    //         $this->sousRubriques->add($sousRubrique);
+    //         $sousRubrique->addRubrique($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeSousRubrique(self $sousRubrique): static
+    // {
+    //     if ($this->sousRubriques->removeElement($sousRubrique)) {
+    //         $sousRubrique->removeRubrique($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    public function getCategorie(): ?Categorie
     {
-        return $this->sousRubriques;
+        return $this->categorie;
     }
 
-    public function addSousRubrique(self $sousRubrique): static
+    public function setCategorie(?Categorie $categorie): static
     {
-        if (!$this->sousRubriques->contains($sousRubrique)) {
-            $this->sousRubriques->add($sousRubrique);
-            $sousRubrique->addRubrique($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSousRubrique(self $sousRubrique): static
-    {
-        if ($this->sousRubriques->removeElement($sousRubrique)) {
-            $sousRubrique->removeRubrique($this);
-        }
+        $this->categorie = $categorie;
 
         return $this;
     }

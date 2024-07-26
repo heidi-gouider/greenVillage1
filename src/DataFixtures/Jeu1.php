@@ -6,7 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Produit;
 use App\Entity\Fournisseur;
-use App\Entity\ProduitCategorie;
+use App\Entity\Categorie;
 
 class Jeu1 extends Fixture
 {
@@ -75,16 +75,19 @@ class Jeu1 extends Fixture
     
             $manager->persist($produit3);
 
-        //     $produitCategorie = new ProduitCategorie();
-        // $produitCategorie->setProduit($produit1);
-        // $produitCategorie->setCategorie($produit2);
-        // $produitCategorie->setRubrique("Instruments");
-        // $produitCategorie->setSousRubrique("Guitares");
-        // $manager->persist($produitCategorie);
+            $Categorie = new Categorie();
+        $Categorie->setProduit($produit1);
+        $Categorie->setCategorie($produit2);
+        // $Categorie->setRubrique("Instruments");
+        $Categorie->setSousRubrique("Guitares");
+        $Categorie->setParentCategorie("Instruments");
+        $manager->persist($Categorie);
 
         // Ajout des relations de catégorie
-        $produit1->addRubrique($produit2); // produit1 a pour rubrique produit2
-        $produit2->addSousRubrique($produit1); // produit2 a pour sous-rubrique produit1
+        $produit1->addRubrique($produit2); 
+        // produit1 a pour rubrique produit2
+        $produit2->addSousRubrique($produit1); 
+        // produit2 a pour sous-rubrique produit1
 
         $manager->flush();
     }

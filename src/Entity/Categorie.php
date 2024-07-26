@@ -30,9 +30,16 @@ class Categorie
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent_categorie')]
     private Collection $categories;
 
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie')]
+    private Collection $produits;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +107,36 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($category->getParentCategorie() === $this) {
                 $category->setParentCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): static
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits->add($produit);
+            $produit->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): static
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getCategorie() === $this) {
+                $produit->setCategorie(null);
             }
         }
 

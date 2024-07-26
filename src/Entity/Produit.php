@@ -44,13 +44,13 @@ class Produit
     /**
      * @var Collection<int, self>
      */
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'sousRubriques')]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'sousRubriques')]
     private Collection $rubriques;
 
     /**
      * @var Collection<int, self>
      */
-    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'rubriques')]
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'rubriques')]
     private Collection $sousRubriques;
 
     public function __construct()

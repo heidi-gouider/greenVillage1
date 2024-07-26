@@ -1,0 +1,217 @@
+body {
+    background-color: #222222;
+    /* background-image: url('../IMG/fond.webp');  */
+    height: 100%;
+    min-height: 100vh;
+    /* opacity: 0.5; */
+    /* background-size: cover;  */
+
+
+  }
+      h1 *{
+          color: #C9C9C9;
+      }   
+      a {
+          text-decoration: none;
+      }
+  /* LE HEADER INCLU DANS TOUTES LES PAGES  */
+  
+  /* penser à ajouter une 'box-shadow' au bottom de la .nav et voir pour le bg 
+  vérifier s'il n'est pas plus judicieux de nommer des classes perso au cas où il y aurait pls nav hors le header*/
+  
+  #menu {
+      height: 20vh;
+      background-color: rgba(29, 28, 28, 0.7);
+          /* background-color: #222222; */
+    /* background-image: url('../IMG/fond.webp'); 
+    background-size: cover;  */
+    /* height: 200px; Ajuste la hauteur du header selon tes besoins */
+      /* box-shadow: 0px 5px 10px #42031f; */
+      z-index: 2;
+      /* opacity: 0.2; */
+      box-shadow: 0 10px 10px black;
+    }
+      /* ------------------------------------------------------------------------------------------------------------ */
+      /* Page d'accueil */
+  /* .text-orange {
+    color: orange !important;
+  } */
+  /* #navbarSupportedContent{
+    background-color: #222222;
+  } */
+  
+  /* .navbar-nav a{
+    color: #d2571d;
+  }
+  .nav-link{
+    color: #d2571d;
+  } */
+  
+      /* ----------------------------------------- */
+          /*  PAGE ADMINISTRATION DISCS   */
+  
+      .btn-delete {
+        color: red;
+        background: none;
+        border: none;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    
+    /* .btn-delete:hover {
+        color: darkred;
+    } */
+  
+        /* ----------------------------------------- */
+  
+      /*  PAGE ARTIST   */
+      
+      /* ******** page artist */
+      .contenu {
+        margin-top: 15vh;
+        min-height: 100vh;
+        /* background-image: url("IMG/fond/bg3.jpeg"); */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        z-index: 1;
+        /* filter: blur(5px); */
+      }
+      .zoom-img {
+        /* background-color: #50565c; */
+        transition: transform 0.3s ease-in-out;
+      }
+      .zoom-img:hover {
+        transform: scale(1.1);
+        /* translate: 1s; */
+        border: none;
+        transition: 1s ease-in-out;
+        /* border-radius: 50%; */
+      }
+      /* .contenu::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("/dist/assets/bg3.jpeg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        z-index: 0;
+        filter: blur(5px); 
+      } */
+      
+      /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  PAGE Discs   */
+  
+  /* .card-header {
+    position: relative;
+  } */
+  
+  .card-header button {
+    /* z-index: 1; */
+    position: absolute;
+  }
+  
+      /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  PAGE FORMULAIRE  */
+  
+  /* Styles for custom form inputs */
+  .custom-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* color: black; */
+    }
+    
+    /* Styles for form errors */
+    .form-error {
+      color: red;
+    }
+    
+    /* Styles for the submit button */
+    /* .btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    } */
+    
+    /* #formulaire {
+      background-color: rgba(36, 38, 41, 0.6);
+    } */
+    .text-orange {
+      color: #9c3b0e; /* Code couleur pour le texte blanc */
+      font-size: large;
+  }
+  
+    .text-white {
+      color: #ffffff; /* Code couleur pour le texte blanc */
+  }
+    #formulaire label {
+      color: #f3e5e5;
+      /* background-color: rgba(178, 181, 187, 0.3); */
+    }
+  
+    /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  LE FOOTER  */
+  
+  .footer {
+      bottom: 0;
+      background-color: #f8f9fa;
+      opacity: 0.9;
+    }
+    
+    .footer ul {
+      margin-bottom: 0;
+    }
+    
+    .footer ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .footer ul li:last-child {
+      margin-right: 0;
+    }
+    
+    .footer ul li a {
+      color: #50565c;
+      font-size: 24px;
+      text-decoration: none;
+    }
+    
+    .footer ul li a:hover {
+      /* color: #007bff; */
+      color: #ff8400;
+  
+    }
+    
+    /* .link-external i:hover{
+    afficher le nom en texte du lien
+    } */
+    
+    /* ////////////////menu déroulant mobile/////////// */
+    @media (max-width: 767px) {
+      .collapse.navbar-collapse {
+          /* background-color: rgba(226, 226, 226, 0.7);  */
+          /* Ajoutez votre couleur de fond ici */
+          background-color: rgba(226, 226, 226); 
+          box-shadow: 0px 5px 10px #bf7113; /* Conservez votre ombre si nécessaire */
+      }
+  
+      .navbar-nav {
+        margin-left: auto; /* Aligne les éléments du menu à droite */
+    }
+  
+    .navbar-toggler {
+        margin-left: auto; /* Aligne le bouton de menu à droite */
+    }  }

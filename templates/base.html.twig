@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Green Village{% endblock %}</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+                
+		{% block stylesheets %}{% endblock %}
+
+     
+            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+    </head>
+    <body>
+    {# le header #}
+	
+		{# <nav class="navbar navbar-expand-lg search-bar">
+			<div class="container-fluid m-auto fixed-top mb-4" id="menu">
+				 <a class="navbar-brand logo d-flex col-3 mx-2 py-3 justify-content-center" href="/index.php">
+					<img src="{{ asset('img/logo.webp') }}" alt="logo"  style="width: 50%; border-radius: 60%;">
+				</a>
+
+				<!-- Icône du panier avec lien -->
+				<a href="/templates/panier.php" class="d-md-none">
+					<i class="bi bi-basket btn-icon btn-icon-large"></i>
+				</a> 
+
+				<!-- Lien "Mon compte" en tant que bouton en version mobile -->
+				<a href="/templates/mon_compte.php" class="btn btn-primary d-md-none">Mon compte</a>
+
+				<!-- Bouton de menu avec icône du menu -->
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="bi bi-list"></i>
+					<!-- Icône du menu -->
+					<!-- <span class="navbar-toggler-icon" style="z-index:1"></span> -->
+				</button>
+
+				<div
+					class="collapse navbar-collapse" id="navbarSupportedContent">
+					<!-- <ul class="nav-fill justify-content-end"> -->
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center text-sm">
+						<li class="nav-item pe-4 pt-2">
+							<a class="nav-link nav-link-custom" id="link-active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
+						</li>
+						<li
+							class="nav-item pe-4 pt-2">
+							<!-- <a class="nav-link nav-link-custom" href="/templates/profil.php">Profil</a> -->
+							<a class="nav-link nav-link-custom" href="{{ path('app_profil') }}">Profil</a>
+						</li>
+						<li class="nav-item pe-4 pt-2">
+							<a class="nav-link nav-link-custom" href="{{ path('app_contact') }}">Contact
+								<i class="bi bi-envelope"></i>
+							</a>
+						</li>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<li class="nav-item pe-4 pt-2">
+								<a class="nav-link nav-link-custom" href="{{ path('app_logout') }}">Déconnexion</a>
+							</li>
+						{% else %}
+							<li class="nav-item pe-4 pt-2">
+								<a class="nav-link nav-link-custom" href="{{ path('app_login') }}" id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
+							</li>
+						{% endif %}
+
+						<a class="btn btn-command rounded-0 mt-3 align-items-center text-nowrap" href="{{ path('panier_index') }}">
+							<span class="d-md-none">Ma commande</span>
+							<span
+								class="d-md-flex d-none">
+								<!-- <i class="bi bi-basket btn-icon"></i>-->
+								Ma commande</span>
+						</a>
+
+					</ul>
+				</div>
+			</div>
+		</nav> #}
+		{# <div class="container-fluid m-auto fixed-top mb-5" id="menu"> #}
+
+		{# Barre de navigation #}
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid m-auto fixed-top mb-5" id="menu">
+
+			{# <a class="navbar-brand" href="{{ path('app_accueil') }}">Accueil</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button> #}
+
+				<a class="navbar-brand logo d-flex col-3 mx-2 py-3 justify-content-center" href="{{ path('app_accueil') }}">
+					<img src="{{ asset('IMG/logo.webp') }}" alt="logo"  style="width: 50%; border-radius: 60%;">
+				</a>
+						{# <form class="form-inline my-2 my-lg-0 text-center">
+      <input class="form-control-sm mr-sm-2" type="search" placeholder="recherche" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+    </form> #}
+
+			<!-- Bouton de menu avec icône du menu -->
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				{# <i class="bi bi-list"></i> #}
+				<span class="navbar-toggler-icon"></span>
+
+				</button>
+				{# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button> #}
+ 
+
+			<div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+
+				{# <ul class="navbar-nav mr-auto"> #}
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center text-sm text-white">
+					<li class="nav-item">
+						<a class="nav-link nav-link-custom text-white " id="link-active" aria-current="page" {#href="{{ path('app_accueil') }}"#}>Accueil</a>
+					</li>
+							{# <a class="navbar-brand" href="{{ path('app_accueil') }}">Accueil</a> #}
+
+					<li class="nav-item">
+						<a class="nav-link text-white " {#href="{{ path('app_contact') }}"#}>Contact</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link text-white " {#href="{{ path('app_artists') }}"#}>Catalogue</a>
+					</li>
+					{# <li class="nav-item active">
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion<        <!-- Votre contenu PHP/HTML -->
+        <!-- <?php -->
+        // Exemple de contenu généré par PHP
+        // echo '<h1>Bienvenue sur ma page!</h1>';
+        // 
+        ?>
+/a>
+					</li> #}
+					{% if app.user %}
+					{% if is_granted('ROLE_ADMIN') %}	
+					<li class="nav-item active">
+						<a class="nav-link text-white " {# href="{{ path('admin_index') }}" #}>Administration</a>
+					</li>
+					{% endif %}
+{# la ligne du dessous donne la permission à l'utilisateur doit être authentifié pour accéder à une page,
+mais aucun rôle spécifique n'est nécessaire.  #}
+					{# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
+							<li class="nav-item">
+							{# <li class="nav-item pe-4 pt-2"> #}
+								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_profil') }}" #}>Mon compte</a>
+								{# <i class="bi bi-person"></i> #}
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_logout') }}" #}>Déconnexion</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_login') }}" #} id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
+							</li>
+						{% endif %}
+						{# {% endif %} #}
+
+							<li class="nav-item">
+								<a class="nav-link nav-link-custom text-white " {#href="{{ path('panier_index') }}"#} id="monPanierBtn" title="Panier"><i class="bi bi-basket"></i></a>
+							</li>
+
+						{# <a class="btn btn-command rounded-0 mt-3 align-items-center text-nowrap" href="{{ path('panier_index') }}">
+							<span class="d-md-none">Mon panier</span>
+							<span
+								class="d-md-flex d-none"> #}
+								<!-- <i class="bi bi-basket btn-icon"></i>-->
+								{# <i class="bi bi-basket"></i>
+								Mon panier</span>
+						</a> #}
+
+					{# <li class="nav-item active">
+						<a class="nav-link" href="{{ path('app_login') }}">Inscription</a>
+					</li>
+ #}
+
+					
+					{# <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+						</li> 
+					{% endif %} #}
+				</ul>
+			</div>
+			<!-- Bouton de menu avec icône du menu -->
+				{# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="bi bi-list"></i> #}
+					<!-- Icône du menu -->
+					<!-- <span class="navbar-toggler-icon" style="z-index:1"></span> -->
+				{# </button> #}
+
+		</nav>
+	</div>
+
+				{% block body %}{% endblock %}
+
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 
+		{% block javascripts %}
+			{# <script src="{{ asset('js/script.js') }}"></script> #}
+			{# {{ encore_entry_script_tags('app') }} #}
+		{% endblock %}
+
+    </body>
+</html>

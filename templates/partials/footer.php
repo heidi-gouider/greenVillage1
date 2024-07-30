@@ -35,14 +35,17 @@
                             <a href="#"><i class="bi bi-instagram"></i></a>
                         </li>
                     </ul>
-                    <p class="mt-5">&copy; 2024 Velvet Record. Tous droits réservés.</p>
+                    <p class="mt-5">&copy; 2024 Green Village Record. Tous droits réservés.</p>
                 </div>
                 <div class="col-md-4">
-                    <ul class="text-end">
-                        <li class="text-sm"><a {# href="{{ path('politique') }}" #}>Politique de confidentialité</a></li>
-                        <li class="text-sm"><a {# href="{{ path ('conditions') }}" #}>>Conditions d'utilisation</a></li>
-                        <li class="text-sm"><a {# href="{{ path ('accessibilite') }}" #}>>Accessibilité</a></li> <!-- Lien vers la page d'accessibilité -->
-                    </ul>
+                    <!-- <ul class="text-end"> -->
+                        <!-- <li class="text-sm"> -->
+                            <a {# href="{{ path('politique') }}" #}>Politique de confidentialité</a></li>
+                        <!-- <li class="text-sm"> -->
+                            <a {# href="{{ path ('conditions') }}" #}>>Conditions d'utilisation</a></li>
+                        <!-- <li class="text-sm"> -->
+                            <a {# href="{{ path ('accessibilite') }}" #}>>Accessibilité</a></li> <!-- Lien vers la page d'accessibilité -->
+                    <!-- </ul> -->
                 </div>
             </div>
         </div>

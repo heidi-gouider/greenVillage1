@@ -64,11 +64,14 @@ body {
   
         /* ----------------------------------------- */
   
-      /*  PAGE ARTIST   */
+      /*  PAGE CATEGORIE   */
       
-      /* ******** page artist */
+      /* ******** page categorie */
       .contenu {
-        margin-top: 25vh;
+        /* padding-top: 100px; */
+        margin-top: 20vh;
+        /* margin-top: 200px; */
+
         min-height: 100vh;
         /* background-image: url("IMG/fond/bg3.jpeg"); */
         background-repeat: no-repeat;
@@ -104,7 +107,13 @@ body {
       } */
       
       /* ------------------------------------------------------------------------------------------------------------ */
-  
+      .img-centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%; /* ou toute autre valeur de largeur souhaitée */
+        height: auto; /* pour garder les proportions de l'image */
+    }
   /*  PAGE Discs   */
   
   /* .card-header {

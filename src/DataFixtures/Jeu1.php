@@ -29,6 +29,21 @@ class Jeu1 extends Fixture
         $manager->persist($fournisseur1);
         $manager->persist($fournisseur2);
 
+        // foreach ($categorie as $categorie) {
+        //     $artistDB = new Artist();
+        //     $artistDB
+        //         ->setId($art['artist_id'])
+        //         ->setName($art['artist_name']);
+            // ->setUrl($art['artist_url']);
+
+            // $manager->persist($artistDB);
+
+            // empêcher l'auto incrément
+            // $metadata = $manager->getClassMetaData(Artist::class);
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        // }
+        $manager->flush();
+
         // $manager->flush()
         // Obtiens l'ID du fournisseur
         // $fournisseurId = $fournisseur->getId(); 
@@ -54,7 +69,7 @@ $categorie1 = new Categorie();
 $categorie1->setParentCategorie($parentCategorie);
 $categorie1->setLibelleCategorie("les pianos");
 $categorie1->setDescriptionCategorie("les pianos sont supers");
-$categorie1->setImageCategorie("../IMG/guitarre1.webp");
+$categorie1->setImageCategorie("IMG/guitarre1.webp");
 
 
 $manager->persist($categorie1);
@@ -64,7 +79,7 @@ $categorie2 = new Categorie();
 $categorie2->setParentCategorie($parentCategorie);
 $categorie2->setLibelleCategorie("Les guitare");
 $categorie2->setDescriptionCategorie("les guitares");
-$categorie2->setImageCategorie("../IMG/les_guitares.webp");
+$categorie2->setImageCategorie("IMG/les_guitares.webp");
 
 
 $manager->persist($categorie2);
@@ -74,7 +89,7 @@ $categorie3 = new Categorie();
 $categorie3->setParentCategorie($parentCategorie);
 $categorie3->setLibelleCategorie("les violons");
 $categorie3->setDescriptionCategorie("les violons sont super");
-$categorie3->setImageCategorie("../IMG/les_violons.webp");
+$categorie3->setImageCategorie("IMG/les_violons.webp");
 
 
 
@@ -89,7 +104,7 @@ $manager->persist($categorie3);
     $produit1->setLibelleProduit("Guitare1");
         $produit1->setDescriptionProduit("Voici une super guitare");
         $produit1->setPrixAchatHt("150");
-        $produit1->setPhoto("../IMG/guitarre1.webp");
+        $produit1->setPhoto("IMG/guitarre1.webp");
         $produit1->setQuantiteStock("12");
         $produit1->setCategorie($categorie2);
         $produit1->setParentCategorie($parentCategorie);
@@ -102,7 +117,7 @@ $manager->persist($categorie3);
         $produit2->setLibelleProduit("Guitare2");
             $produit2->setDescriptionProduit("Voici une guitare geniale");
             $produit2->setPrixAchatHt("250");
-            $produit2->setPhoto("../IMG/guitare2.webp");
+            $produit2->setPhoto("IMG/guitare2.webp");
             $produit2->setQuantiteStock("10");
             $produit2->setCategorie($categorie2);
             $produit2->setParentCategorie($parentCategorie);
@@ -118,7 +133,7 @@ $manager->persist($categorie3);
         $produit3->setLibelleProduit("Saxo1");
             $produit3->setDescriptionProduit("Voici un saxophone stylé");
             $produit3->setPrixAchatHt("2500");
-            $produit3->setPhoto("../IMG/saxophone.webp");
+            $produit3->setPhoto("IMG/saxophone.webp");
             $produit3->setQuantiteStock("10");
             $produit3->setCategorie($categorie1);
             $produit3->setParentCategorie($parentCategorie);
@@ -133,7 +148,7 @@ $manager->persist($categorie3);
             $produit4->setLibelleProduit("ViolonDingue");
             $produit4->setDescriptionProduit("Voici un violon trop cool");
             $produit4->setPrixAchatHt("450");
-            $produit4->setPhoto("../IMG/guitare2.webp");
+            $produit4->setPhoto("IMG/guitare2.webp");
             $produit4->setQuantiteStock("5");
             $produit4->setCategorie($categorie3);
             $produit4->setParentCategorie($parentCategorie);
@@ -165,6 +180,10 @@ $manager->persist($categorie3);
                 //     $categorie->setLibelleCategorie($catName); 
                 //     $manager->persist($categorie);
                 // }
+                            // empêcher l'auto incrément
+            // $metadata = $manager->getClassMetaData(Categorie::class);
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+
 
         $manager->flush();
     }

@@ -15,7 +15,20 @@ class CategorieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categorie::class);
     }
-
+    // public function getSomeCategories($libelleCategorie)
+    // {
+    //     $entityManager = $this->getEntityManager(); //on instancie l'entity manager
+    
+    //     $query = $entityManager->createQuery( //on crée la requête 
+    //         'SELECT a
+    //         FROM App\Entity\Categorie a
+    //         WHERE a.libelleCategorie  like :libelle_categorie'
+    //     )->setParameter('libelle_categorie', '%'.$libelleCategorie.'%');
+    
+    //     // retourne un tableau d'objets de type Categorie
+    //     return $query->getResult();
+    
+    // } 
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
 //     */

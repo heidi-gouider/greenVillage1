@@ -38,11 +38,11 @@ class AccueilController extends AbstractController
     #[Route('/categorie', name: 'app_categorie')]
     public function categorie(): Response
     {
-        $categorie = $this->categorieRepository->findAll();
+        $categories = $this->categorieRepository->findAll();
         // dump($categorie);
         return $this->render('accueil/categorie.html.twig', [
             'controller_name' => 'AccueilController',
-            'categorie' => $categorie
+            'categories' => $categories
         ]);
     }
 }

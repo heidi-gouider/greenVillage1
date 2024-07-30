@@ -8,24 +8,23 @@
 		<h1 class="fst-italic">Notre catalogue</h1>
 		<main class="container">
 			<div class="row">
-				{% for  categorie in categorie %}
+				{% for  categorie in categories %}
 					<div class="col-md-6 mb-4">
-						{# <div class="card" id="images" style="width: 18rem;"> #}
+						 <div class="card" id="images" style="width: 18rem;"> 
                         	<a href="{{ path('app_categorie', {'categorie_id': categorie.id}) }}">
                             {{ categorie.libelleCategorie}}
 								{# <img class="card-img-top mx-auto" src="{{ asset('../IMG/les_violons.webp' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
-                                <img class="card-img-top mx-auto" src="{{ asset('../IMG/' ~ categorie.ImageCategorie) }}" alt="{{ categorie.libelleCategorie }}">
+                                {# <img class="card-img-top mx-auto" src="{{ asset('IMG/' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
+                                {# <img class="card-img-top mx-auto" src="{{ asset( categorie.image_categorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
 
 							</a>
-							{# <img src="{{ asset('IMG/food/' ~ disc.picture) }}" alt="{{ artist.name }}"> #}
-							{# <div class="card-body"> #}
-								{# <h5 class="card-title">{{ artist.name }}></h5> #}
-								{# {# <p class="card-text">
-									{{ categorie.description_categorie}}</p> #}
-								{# <p class="content bg-body">
-									{{ artist.prix}} euros</p>
-							</div> #} 
-						{# </div> #}
+							{# <img src="{{ asset('IMG/' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
+							<div class="card-body">
+								<h5 class="card-title">{{ categorie.libelleCategorie }}></h5>
+								 <p class="card-text">
+									{{ categorie.descriptionCategorie}}</p> 
+							</div> 
+						 </div> 
 					</div>
 					{# $count++; // Incrémentez le compteur
 								            // Si vous avez affiché 2 disques, fermez la rangée actuelle et commencez une nouvelle rangée

@@ -112,7 +112,7 @@
 				{# <ul class="navbar-nav mr-auto"> #}
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center text-sm text-white">
 					<li class="nav-item">
-						<a class="nav-link nav-link-custom text-white " id="link-active" aria-current="page" {#href="{{ path('app_accueil') }}"#}>Accueil</a>
+						<a class="nav-link nav-link-custom text-white " id="link-active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
 					</li>
 							{# <a class="navbar-brand" href="{{ path('app_accueil') }}">Accueil</a> #}
 
@@ -121,15 +121,9 @@
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link text-white " {#href="{{ path('app_artists') }}"#}>Catalogue</a>
-					</li>
-					{# <li class="nav-item active">
-						<a class="nav-link" href="{{ path('app_login') }}">Connexion<        <!-- Votre contenu PHP/HTML -->
-        <!-- <?php -->
-        // Exemple de contenu généré par PHP
-        // echo '<h1>Bienvenue sur ma page!</h1>';
-        // 
-        ?>
-/a>
+					{# </li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
 					</li> #}
 					{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}	
@@ -147,11 +141,11 @@ mais aucun rôle spécifique n'est nécessaire.  #}
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_logout') }}" #}>Déconnexion</a>
+								<a class="nav-link nav-link-custom text-white " href="{{ path('app_logout') }}">Déconnexion</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_login') }}" #} id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
+								<a class="nav-link nav-link-custom text-white "  href="{{ path('app_login') }}" id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
 							</li>
 						{% endif %}
 						{# {% endif %} #}

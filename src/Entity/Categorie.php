@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
@@ -22,6 +23,7 @@ class Categorie
     private ?string $description_categorie = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: true)]
     private ?self $parent_categorie = null;
 
     /**
@@ -33,13 +35,23 @@ class Categorie
     /**
      * @var Collection<int, Produit>
      */
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie', cascade: ['persist'])]
     private Collection $produits;
+
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'parentCategorie')]
+    private Collection $produit;
+
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $image_categorie = null;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->produits = new ArrayCollection();
+        $this->produit = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,6 +151,26 @@ class Categorie
                 $produit->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduit(): Collection
+    {
+        return $this->produit;
+    }
+
+    public function getImageCategorie()
+    {
+        return $this->image_categorie;
+    }
+
+    public function setImageCategorie($image_categorie): static
+    {
+        $this->image_categorie = $image_categorie;
 
         return $this;
     }

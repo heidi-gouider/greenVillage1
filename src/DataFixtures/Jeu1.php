@@ -37,6 +37,51 @@ class Jeu1 extends Fixture
         // $fournisseur = $fournisseurRepository->find($fournisseurId['fournisseur_id']); 
         // Récupère l'entité fournisseur
         // $fournisseurId = set
+
+
+        // Création de la catégorie parent
+        $parentCategorie = new Categorie;
+        $parentCategorie->setParentCategorie($parentCategorie);
+        $parentCategorie->setLibelleCategorie("Instruments à corde");
+        $manager->persist($parentCategorie);
+
+        
+// Création de catégories
+// $categorie = new Categorie();
+
+$categorie1 = new Categorie();
+// $categorie1->setParentCategorieId("1");
+$categorie1->setParentCategorie($parentCategorie);
+$categorie1->setLibelleCategorie("les pianos");
+$categorie1->setDescriptionCategorie("les pianos sont supers");
+$categorie1->setImageCategorie("../IMG/guitarre1.webp");
+
+
+$manager->persist($categorie1);
+
+
+$categorie2 = new Categorie();
+$categorie2->setParentCategorie($parentCategorie);
+$categorie2->setLibelleCategorie("Les guitare");
+$categorie2->setDescriptionCategorie("les guitares");
+$categorie2->setImageCategorie("../IMG/les_guitares.webp");
+
+
+$manager->persist($categorie2);
+
+
+$categorie3 = new Categorie();
+$categorie3->setParentCategorie($parentCategorie);
+$categorie3->setLibelleCategorie("les violons");
+$categorie3->setDescriptionCategorie("les violons sont super");
+$categorie3->setImageCategorie("../IMG/les_violons.webp");
+
+
+
+$manager->persist($categorie3);
+
+
+// $manager->flush();
         
                 // Cration d'un produit
     $produit1 = new Produit();
@@ -46,11 +91,12 @@ class Jeu1 extends Fixture
         $produit1->setPrixAchatHt("150");
         $produit1->setPhoto("../IMG/guitarre1.webp");
         $produit1->setQuantiteStock("12");
+        $produit1->setCategorie($categorie2);
+        $produit1->setParentCategorie($parentCategorie);
+
         // $produit1->setReferenceFournisseur($fournisseurId);
 
         $manager->persist($produit1);
-        // $product = new Product();
-        // $manager->persist($product);
         $produit2 = new Produit();
 
         $produit2->setLibelleProduit("Guitare2");
@@ -58,6 +104,9 @@ class Jeu1 extends Fixture
             $produit2->setPrixAchatHt("250");
             $produit2->setPhoto("../IMG/guitare2.webp");
             $produit2->setQuantiteStock("10");
+            $produit2->setCategorie($categorie2);
+            $produit2->setParentCategorie($parentCategorie);
+
             // $produit1->setReferenceFournisseur($fournisseurId);
     
             $manager->persist($produit2);
@@ -71,23 +120,51 @@ class Jeu1 extends Fixture
             $produit3->setPrixAchatHt("2500");
             $produit3->setPhoto("../IMG/saxophone.webp");
             $produit3->setQuantiteStock("10");
-            // $produit1->setReferenceFournisseur($fournisseurId);
-    
+            $produit3->setCategorie($categorie1);
+            $produit3->setParentCategorie($parentCategorie);
+
+            // $produit3->setCategorieId
             $manager->persist($produit3);
 
-            $Categorie = new Categorie();
-        $Categorie->setProduit($produit1);
-        $Categorie->setCategorie($produit2);
-        // $Categorie->setRubrique("Instruments");
-        $Categorie->setSousRubrique("Guitares");
-        $Categorie->setParentCategorie("Instruments");
-        $manager->persist($Categorie);
+            // $produit1->setReferenceFournisseur($fournisseurId);
+            $produit4 = new Produit();
+
+    
+            $produit4->setLibelleProduit("ViolonDingue");
+            $produit4->setDescriptionProduit("Voici un violon trop cool");
+            $produit4->setPrixAchatHt("450");
+            $produit4->setPhoto("../IMG/guitare2.webp");
+            $produit4->setQuantiteStock("5");
+            $produit4->setCategorie($categorie3);
+            $produit4->setParentCategorie($parentCategorie);
+
+
+            $manager->persist($produit4);
+
+
+ // Ajout des produits aux catégories
+        $categorie2->addProduit($produit1);
+        $categorie2->addProduit($produit2);
+        $categorie1->addProduit($produit3);
+        $categorie3->addProduit($produit4);
 
         // Ajout des relations de catégorie
-        $produit1->addRubrique($produit2); 
+        // $produit1->addRubrique($produit2); 
         // produit1 a pour rubrique produit2
-        $produit2->addSousRubrique($produit1); 
+        // $produit2->addSousRubrique($produit1); 
         // produit2 a pour sous-rubrique produit1
+                // Liste de catégories à ajouter
+                // $categories = [
+                //     'categorieEnfant1',
+                //     'categorieEnfant2',
+                //     'categorieEnfant3',
+                // ];
+        
+                // foreach ($categories as $catName) {
+                //     $categorie = new Categorie();
+                //     $categorie->setLibelleCategorie($catName); 
+                //     $manager->persist($categorie);
+                // }
 
         $manager->flush();
     }

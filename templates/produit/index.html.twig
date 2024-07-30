@@ -5,11 +5,7 @@
 
 {% block body %}
 	<div class="contenu">
-		<h1 class="row col-12">Tous nos instruments</h1>
-	</li>
-	<li class="nav-item text-orange">
-		<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
-	</li>
+		<h1 class="row col-12 text-center">Tous nos instruments</h1>
 
 
 	{# <main class="container"> #}
@@ -51,7 +47,12 @@
 										</div>
 									<div class="row"> {% endif %} #}
 			{% endfor %}
-								</div>
+											</div>
+
+				<li class="nav-item text-orange">
+		<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
+	</li>
+
 
 		</div>
 	{# </div> #}

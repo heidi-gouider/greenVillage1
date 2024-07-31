@@ -25,8 +25,8 @@ class Produit
     #[ORM\Column]
     private ?int $prix_achat_ht = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $photo = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
 
     #[ORM\Column]
     private ?int $quantite_stock = null;
@@ -49,10 +49,20 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $parentCategorie = null;
 
+    /**
+     * @var Collection<int, Commande>
+     */
+    #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'produits')]
+    private Collection $commandes;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $quantite_vendu = null;
+
     public function __construct()
     {
         $this->fournisseurs = new ArrayCollection();
         // $this->categorie = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +190,45 @@ class Produit
     public function setParentCategorie(?Categorie $parentCategorie): static
     {
         $this->parentCategorie = $parentCategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): static
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): static
+    {
+        if ($this->commandes->removeElement($commande)) {
+            $commande->removeProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function getQuantiteVendu(): ?int
+    {
+        return $this->quantite_vendu;
+    }
+
+    public function setQuantiteVendu(?int $quantite_vendu): static
+    {
+        $this->quantite_vendu = $quantite_vendu;
 
         return $this;
     }

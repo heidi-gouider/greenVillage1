@@ -24,7 +24,8 @@
 					{% for produit in produit %}
 
 						<div class="card m-2" style="width: 18rem;">
-							<img src="{{ asset('IMG/' ~ produit.photo) }}" alt="{{ produit.libelleProduit }}">
+						    {# <img class="card-img-top mx-auto" src="{{ asset(categorie.imageCategorie) }}" alt="{{ categorie.imageCategorie }}"> #}
+							<img class="w-50 card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
 							<div class="card-body">
 								<h5 class="card-title">
 									{{ produit.libelleProduit }}</h5>
@@ -32,8 +33,11 @@
 									{{ produit.prixAchatHt}}€
 						{# </form> #}
 						{% if produit.quantiteStock > 0 %}
-							<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" {# href="{{ path('panier_ajout', {id: disc.id})}}" #}>
-								Ajouter au panier
+							{# <button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3"  href="{{ path('commande_ajout', {id: produit.produit.id})}}" >
+								Ajouter à la commande #}
+								 <a class="d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('commande_ajout', { 'id': produit.id }) }}">
+                                Ajouter à la commande
+                            </a>
 								{# <i class="bi bi-basket"></i> #}
 							</button>
 							{% else %}

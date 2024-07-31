@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,26 @@ class Commande
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse_client = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?Utilisateur $Utilisateur = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nom_produit = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $quantite_produit = null;
+
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'commandes')]
+    private Collection $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +157,66 @@ class Commande
     public function setAdresseClient(?string $adresse_client): static
     {
         $this->adresse_client = $adresse_client;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->Utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $Utilisateur): static
+    {
+        $this->Utilisateur = $Utilisateur;
+
+        return $this;
+    }
+
+    public function getNomProduit(): ?string
+    {
+        return $this->nom_produit;
+    }
+
+    public function setNomProduit(?string $nom_produit): static
+    {
+        $this->nom_produit = $nom_produit;
+
+        return $this;
+    }
+
+    public function getQuantiteProduit(): ?string
+    {
+        return $this->quantite_produit;
+    }
+
+    public function setQuantiteProduit(?string $quantite_produit): static
+    {
+        $this->quantite_produit = $quantite_produit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): static
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits->add($produit);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): static
+    {
+        $this->produits->removeElement($produit);
 
         return $this;
     }

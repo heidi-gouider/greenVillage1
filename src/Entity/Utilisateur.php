@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,8 +38,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom_client = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $reference_client = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $reference_client = null;
 
     #[ORM\Column]
     private ?int $telephone_client = null;
@@ -48,8 +50,22 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $code_postal_client = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $coef_client = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
+    /**
+     * @var Collection<int, Commande>
+     */
+    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'Utilisateur')]
+    private Collection $commandes;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,17 +153,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getReferenceClient(): ?string
-    {
-        return $this->reference_client;
-    }
+    // public function getReferenceClient(): ?string
+    // {
+    //     return $this->reference_client;
+    // }
 
-    public function setReferenceClient(string $reference_client): static
-    {
-        $this->reference_client = $reference_client;
+    // public function setReferenceClient(string $reference_client): static
+    // {
+    //     $this->reference_client = $reference_client;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getTelephoneClient(): ?int
     {
@@ -193,6 +209,48 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCoefClient(int $coef_client): static
     {
         $this->coef_client = $coef_client;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): static
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): static
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUtilisateur() === $this) {
+                $commande->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

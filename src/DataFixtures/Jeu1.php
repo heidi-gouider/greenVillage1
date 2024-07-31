@@ -58,6 +58,9 @@ class Jeu1 extends Fixture
         $parentCategorie = new Categorie;
         $parentCategorie->setParentCategorie($parentCategorie);
         $parentCategorie->setLibelleCategorie("Instruments à corde");
+        $parentCategorie->setImageCategorie("IMG/guitarre1.webp");
+        // IMG/guitarre1.webp
+
         $manager->persist($parentCategorie);
 
         
@@ -79,7 +82,7 @@ $categorie2 = new Categorie();
 $categorie2->setParentCategorie($parentCategorie);
 $categorie2->setLibelleCategorie("Les guitare");
 $categorie2->setDescriptionCategorie("les guitares");
-$categorie2->setImageCategorie("IMG/les_guitares.webp");
+$categorie2->setImageCategorie("IMG/guitare2.webp");
 
 
 $manager->persist($categorie2);

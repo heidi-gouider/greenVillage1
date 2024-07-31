@@ -24,7 +24,7 @@
 					{% for produit in produit %}
 
 						<div class="card m-2" style="width: 18rem;">
-							<img src="{{ asset('../IMG/' ~ produit.photo) }}" alt="{{ produit.libelleProduit }}">
+							<img src="{{ asset('IMG/' ~ produit.photo) }}" alt="{{ produit.libelleProduit }}">
 							<div class="card-body">
 								<h5 class="card-title">
 									{{ produit.libelleProduit }}</h5>

@@ -44,8 +44,8 @@ class Categorie
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'parentCategorie')]
     private Collection $produit;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $image_categorie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image_categorie = null;
 
     public function __construct()
     {

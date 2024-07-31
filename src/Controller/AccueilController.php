@@ -39,7 +39,7 @@ class AccueilController extends AbstractController
     public function categorie(): Response
     {
         $categories = $this->categorieRepository->findAll();
-        // dump($categorie);
+        //dd($categories);
         return $this->render('accueil/categorie.html.twig', [
             'controller_name' => 'AccueilController',
             'categories' => $categories

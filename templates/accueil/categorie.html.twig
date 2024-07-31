@@ -13,8 +13,8 @@
 						 <div class="card" id="images" style="width: 18rem;"> 
                         	<a href="{{ path('app_categorie', {'categorie_id': categorie.id}) }}">
                             {{ categorie.libelleCategorie}}
-								{# <img class="card-img-top mx-auto" src="{{ asset('../IMG/les_violons.webp' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
-                                {# <img class="card-img-top mx-auto" src="{{ asset('IMG/' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
+								{# <img class="card-img-top mx-auto" src="{{ asset('IMG/les_violons.webp' ~ categorie.imageCategorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
+                                <img class="card-img-top mx-auto" src="{{ asset(categorie.imageCategorie) }}" alt="{{ categorie.imageCategorie }}">
                                 {# <img class="card-img-top mx-auto" src="{{ asset( categorie.image_categorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
 
 							</a>

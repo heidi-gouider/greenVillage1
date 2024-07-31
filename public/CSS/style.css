@@ -65,6 +65,9 @@ body {
         /* ----------------------------------------- */
   
       /*  PAGE CATEGORIE   */
+      .form {
+        padding-top: 200px;
+      }
       
       /* ******** page categorie */
       .contenu {

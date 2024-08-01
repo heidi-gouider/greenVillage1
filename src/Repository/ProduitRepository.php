@@ -16,6 +16,34 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    public function recherche()
+    {
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('handleSearch'))
+            ->add('query', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Entrez un mot-clé'
+                ]
+            ])
+            ->add('recherche', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+            ->getForm();
+        return $this->render('search/searchBar.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+    // public function recherche($libelleProduit) {
+    //     return $this->createQueryBuilder('Produit')
+    //         ->andWhere('Produit.title LIKE :libelleProduit')
+    //         ->setParameter('libelleProduit', '%'.$libelleProduit.'%')
+    //         ->getQuery()
+    //         ->execute();
+    // }
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

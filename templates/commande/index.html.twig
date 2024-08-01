@@ -1,81 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier
-{% endblock %}
-
 {% block body %}
+    <h1>Détail de la commande</h1>
 
-	<div
-		class="contenu">
-		{# <h1 class="fst-italic text-center">Mon panier</h1> #}
-		{# <main class="container mt-5"> #}
-			<div class="row">
-				<div class="col-8">
-					<h2 class="text-center">Ma commande</h2>
-					<table class="table" id="formulaire">
-						<thead>
-							<tr>
-								<th>Produit</th>
-								<th>Prix</th>
-								<th>Quantité</th>
-								<th>Total</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for element in data %}
-								<tr>
-									<td>{{ element.produit.libelleProduit }}</td>
-									{# penser à %par 100 si les prix sont en centimes #}
-									<td>{{ element.produit.prixAchatHt }}
-										€</td>
-									<td>{{ element.produit.quantiteVendu }}</td>
-									<td>{{ element.produit.quantiteVendu * element.produit.prixAchatHt }}
-										€</td>
-									<td> 
-										<a href="{{ path('commande_retirer', {id: element.produit.id }) }}" class="btn btn-danger">-</a>
-										<a href="{{ path('commande_ajout', {id: element.produit.id }) }}" class="btn btn-success">+</a>
-										<a href="{{ path('commande_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>
-									</td>
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="5">La commande est vide</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="3">Total</td>
-								<td colspan="1">
-									<b>{{ total }}
-										€</b>
-								</td>
-								<td colspan="">
-									{# <a href="{{ path('commande_supprimer') }}" class="btn btn-secondary">Supprimer ma commande</a> #}
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-					 <a href= {#"{{ path('commande_ajout') }}" #} class="btn btn-primary">Valider ma commande</a> 
-                     	<a href= "{{ path('app_categorie') }}"  class="btn btn-primary">Ajouter un produit</a> 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 
-					{# je redirige vers le détail de la commande #}
-					{# <a href="{{ path('commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
-					{# {% if commande is defined %} #}
-						{# <a class="text-white" href="{{ path('panier_commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
-						{# <a class="btn btn-primary"  href="{{ path('app_commande_panier_commandes') }}" >Mes commandes</a> #}
-					{# <a class="btn btn-primary"  href="{{ path('panier_commandes') }}" >Mes commandes</a> #}
-					{# {% else %}
-						<p>Aucune commande trouvée</p>
-					{% endif %} #}
-					{# <a href="{{ path('panier_valider') }}" class="btn btn-primary">Valider ma commande</a> #}
-					{# <a href="#" class="btn btn-primary">Retour</a> #}
+    <p>Commande #{{ commande.id }}</p>
+    <p>Date: {{ commande.dateCommande|date('d/m/Y H:i') }}</p>
+    <p>Total: {{ commande.total }} €</p>
+    <p>État: {{ commande.etat }}</p>
 
-				</div>
-			{# </main> #}
-		</div>
-        		</div>
+    <h2>Détails</h2>
+    <ul>
+        {% for detail in commande.details %}
+            <li>{{ detail.produit.libelleProduit }} - {{ detail.quantite }} x {{ detail.produit.prix }} €</li>
+        {% endfor %}
+    </ul>
 
-		{% include "partials/footer.php" %}
-	{% endblock %}
+    <a href="{{ path('panier_index') }}">Retour au panier</a>
+{% endblock %}

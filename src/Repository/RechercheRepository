@@ -1,0 +1,27 @@
+<!-- <?php
+
+// namespace App\Repository;
+
+// use App\Entity\Produit;
+// use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+// use Doctrine\Persistence\ManagerRegistry;
+
+// class RechercheRepository extends ServiceEntityRepository
+// {
+//     public function __construct(ManagerRegistry $registry)
+//     {
+//         parent::__construct($registry, Produit::class);
+//     }
+
+//     public function findByNom(?string $libelleProduit): array
+//     {
+//         $qb = $this->createQueryBuilder('p');
+
+//         if ($libelleProduit) {
+//             $qb->andWhere('p.libelleProduit LIKE :libelleProduit')
+//                ->setParameter('libelleProduit', '%' . $libelleProduit . '%');
+//         }
+
+//         return $qb->getQuery()->getResult();
+//     }
+// } -->

@@ -3,205 +3,158 @@
 namespace App\Controller;
 
 use App\Entity\Commande; 
-use App\Entity\Utilisateur;
-use App\Entity\Produit;
-use App\Repository\ProduitRepository;
+use App\Entity\Detail; 
+use App\Entity\User;
+use App\Repository\DiscRepository;
+use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/commande', name: 'app_commande_')]
 class CommandeController extends AbstractController
 {
-    #[Route('/commande', name: 'commande')]
-    public function index(SessionInterface $session, Request $request, ProduitRepository $produitRepository)
-    {
-        // j'initialise les variables
-        $commande = $session->get('commande', []);
-        // Pour permettre à l'utilisateur de revenir sur la dernière page visitée
-        $referer = $request->headers->get('referer');
-        $data = [];
-        $total = 0;
+    #[isGranted('ROLE_USER', message: "Vous devez avoir un compte pour accèder à cette page!")]
 
-        foreach ($commande as $id => $quantite) {
-            $produit = $produitRepository->find($id);
-            $data[] = [
-                'produit' => $produit,
-                'quantite_produit' => $quantite
-            ];
-            $total += $produit->getPrixAchatHt() * $quantite;
+    #[Route('/ajout', name: 'ajout')]
+    public function ajout(SessionInterface $session, ProduitRepository $produitRepository, EntityManagerInterface $em): Response
+    {
+        // je m'assure que l'utilisateur est connecté
+        //on restrictionne l'accès ICI :
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $panier = $session->get('panier', []);
+
+
+        if($panier === []){
+            $this->addFlash('message', 'Votre panier est vide');
+            return $this->redirectToRoute('app_accueil');
         }
+  //Le panier n'est pas vide, on crée la commande
+  $commande = new Commande();
+
+  // On remplit la commande
+  $commande->setUser($this->getUser());
+ // Générer une référence unique entière
+//  $reference = $this->generateUniqueReference();
+//  $commande->setReference($reference);
+// $dateCommande = $commande->getDateCommande();
+//   $commande->setDateCommande(new \DateTime());
+  $commande->setEtat(0); // Etat initial
+
+  $total = 0;
+
+  // On parcourt le panier pour créer les détails de commande
+  foreach($panier as $item => $quantite){
+      $detail = new Detail();
+
+      // On va chercher le produit
+      $produit = $produitRepository->find($item);
+      
+      $prix = $produit->getPrixAchatHt();
+
+      // On crée le détail de commande
+      $detail->setProduit($produit);
+    //   $detail->setTotal($prix);
+      $detail->setQuantityVendu($quantite);
+      $commande->addDetail($detail);
+
+      $total += $prix * $quantite;
+
+       // Persist chaque detail
+       $em->persist($detail);
+  }
+
+  $commande->setTotal($total);
+
+  // On persiste et on flush
+  $em->persist($commande);
+  $em->flush();
+
+  $session->remove('panier');
+
+  $this->addFlash('message', 'Commande créée avec succès');
+  return $this->redirectToRoute('app_accueil');
         return $this->render('commande/index.html.twig', [
-            'data' => $data,
-            'total' => $total
-        ]);        
-    }
-        // ***Ajout à la commande***
-        #[Route('/commande/ajout/{id}', name: 'commande_ajout')]
-        public function add(Produit $produit, SessionInterface $session, Request $request)
-        {
-    // dd($session);
-    // Récupérer la quantité depuis la requête ou utiliser une valeur par défaut
-            $quantite = $request->request->get('quantite_produit', 1);
-            $action = $request->request->get('action');
-
-            if ($action === 'increment') {
-                $quantite++;
-            } elseif ($action === 'decrement' && $quantite > 1) {
-                $quantite--;
-            }
-    
-    
-            $form = $this->createFormBuilder()
-                ->add('quantite_produit', IntegerType::class, [
-                    'attr' => ['min' => 1, 'max' => 10],
-                    // Définis les valeurs minimales et maximales
-                ])
-                ->getForm();
-    
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                $quantite = $form->get('quantite_produit')->getData();
-                // Traitement des données, y compris la quantité choisie
-            }
-            // récuperer l'id du produit
-            $id = $produit->getId();
-
-            // Obtenez le panier existant à partir de la session ou créez-en un nouveau.
-            $commande = $session->get('commande', []);
-    
-            // Ajoutez ou mettez à jour la quantité du produit dans le panier.
-            $commande[$produit->getId()] = $quantite;
-    
-            // Enregistrez le panier mis à jour dans la session.
-            $session->set('commande', $commande);
-            return $this->redirectToRoute('commande');
-     // Récupérez l'URL de la page actuelle et stockez-la dans la session.
-     $referer = $request->headers->get('referer');
-     $session->set('referer_url', $referer);
-
-     // Redirigez l'utilisateur vers la page précédente.
-     // return $this->redirect($referer);        
-     return $this->render('commande/index.html.twig', [
-         'controller_name' => 'CommandeController',
-     ]);
-
-}
-// #[Route('/commande/ajout/{id}', name: 'commande_ajout')]
-// public function ajout(Produit $produit, SessionInterface $session)
-// {
-//     $id = $produit->getId();
-//     $commande = $session->get('commande', []);
-
-//     if (empty($commande[$id])) {
-//         $commande[$id] = 1;
-//     } else {
-//         $commande[$id]++;
-//     }
-    
-//     $session->set('commande', $commande);
-
-    // return $this->render('commande/index.html.twig')
-    // return $this->redirectToRoute('commande');
-    // return $this->redirectToRoute('commande_index');
-    // return $this->render('commande/index.html.twig', [
-    //     'controller_name' => 'CommandeController',
-    // ]);
-
-
-
-
-#[Route('/retirer/{id}', name: 'commande_retirer')]
-public function retirer(Produit $produit, SessionInterface $session)
-{
-
-    // récuperer l'id du produit
-    $id = $produit->getId();
-    // Obtenez le panier existant à partir de la session ou créez-en un nouveau.
-    $commande = $session->get('commande', []);
-    // app_commande_ajoutco
-    //     unset($panier[$id]);
-    if (!empty($commande[$id])) {
-        if ($commande[$id] > 1)
-            $commande[$id]--;
-    } else {
-        unset($commande[$id]);
-    }
-    
-    // Enregistrez le panier mis à jour dans la session.
-    $session->set('commande', $commande);
-
-
-    return $this->redirectToRoute('commande');
-}
-
-#[Route('/supprimer/{id}', name: 'commande_supprimer')]
-public function supprimer(Produit $produit, SessionInterface $session)
-{
-    $id = $produit->getId();
-    $commande = $session->get('commande', []);
-
-    if (!empty($panier[$id])) {
-        // si le panier est vide de défais la variable
-        unset($commande[$id]);
-    }
-    $session->set('commande', $commande);
-
-
-    return $this->redirectToRoute('commande');
-// return $this->render('panier/index.html.twig', [
-//     'controller_name' => 'PanierController',
-// ]);
-}
-#[Route('/valider', name: 'valider')]
-public function valider(SessionInterface $session, EntityManagerInterface $em)
-{
-    $panier = $session->get('panier', []);
-    if (empty($panier)) {
-        return $this->redirectToRoute('panier_index');
-    }
-
-    $user = $this->getUser();
-
-    $commande = new Commande();
-    $commande->setUser($user);
-    $commande->setDateCommande(new \DateTime());
-    $commande->setEtat('1');
-
-    $total = 0;
-    foreach ($commande as $id => $quantite) {
-        $produit = $em->getRepository(Produit::class)->find($id);
-        $detail = new Detail();
-        $detail->setCommande($commande);
-        $detail->setProduit($produit);
-        $detail->setQuantiteProduit($quantite);
-
-        $em->persist($detail);
-
-        $total += $produit->getPrixAchatHt() * $quantite;
-    }
-
-    $commande->setTotal($total);
-
-    $em->persist($commande);
-    $em->flush();
-
-    $session->remove('commande');
-
-    $this->addFlash('success', 'Votre commande a bien été envoyée.');
-
-    return $this->redirectToRoute('commande_detail', ['id' => $commande->getId()]);
-}
-#[Route('/commande/{id}', name: 'commande_detail')]
-    public function commandeDetail(Commande $commande)
-    {
-        return $this->render('commande/index.html.twig', [
-            'commande' => $commande,
+            'controller_name' => 'CommandeController',
         ]);
-}}
+    }
+    
+// je récupere l'historique de commande de l'utilisateur
+// pour l'afficher via le lien dans la vue du panier
+    /**
+     * @Route("/panier/commandes", name="panier_commandes")
+     */
+    #[Route('/panier/commandes', name: 'panier_commandes')]
+
+    public function index(UserInterface $user)
+    {
+
+    if (!$user instanceof User) {
+        throw new \Exception('User must be an instance of App\Entity\User');
+    }
+        $commandes = $user->getCommandes();
+
+ // Préparer les commandes avec leur libellé d'état
+ $commandesWithEtatLibelle = [];
+ foreach ($commandes as $commande) {
+     $commandesWithEtatLibelle[] = [
+         'commande' => $commande,
+        //  'etat_libelle' => \App\Entity\Commande::getEtatLibelle($commande->getEtat()),
+     ];
+
+        return $this->render('panier/commandes.html.twig', [
+            'commandes' => $commandes,
+        ]);
+    }
+}
+    // Définition de la méthode generateUniqueReference
+    // private function generateUniqueReference(): int
+    // {
+        // Utilisez le timestamp actuel en secondes
+        // $timestamp = time();
+        // Ajouter une composante aléatoire pour garantir l'unicité
+        // $randomComponent = random_int(1000, 9999);
+
+        // Combinez les deux pour obtenir une référence unique
+        // $reference = (int) ($timestamp . $randomComponent);
+
+        // return $reference;
+    // }
+
+    //  #[Route("/commande/{id}", name : "commande_show")]
+     
+    //  public function show(Commande $commande): Response
+    // {
+    //     $etat = $commande->getEtat();
+    //     $etatLibelle = Commande::getEtatLibelle($etat);
+
+    //     return $this->render('commande/show.html.twig', [
+    //         'commande' => $commande,
+    //         'etat_libelle' => $etatLibelle,
+    //     ]);
+    // }
+    // je recupère la méthode et le query builder du repo detail 
+    // #[Route('/top_discs', name: 'top_discs')]
+    #[Route('/', name: 'top_produits')]
+private $detailRepo;
+public function __construct(DetailRepository $detailRepo)
+{
+    $this->detailRepo = $detailRepo;
+}
+    public function topProduits(): Response
+    {
+    
+        // j'utilise la méthode créer dans le repo findByTopVente()
+        $topDiscs = $this->detailRepo->findByTopVente();
+
+        // je passe le résultat à ma vue
+        return $this->render('accueil/index.html.twig', [
+            'topProduits' => $topProduits,
+        ]);
+    }
+}

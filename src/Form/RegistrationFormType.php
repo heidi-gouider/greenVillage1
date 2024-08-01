@@ -24,6 +24,13 @@ class RegistrationFormType extends AbstractType
             ->add('telephone_client')
             ->add('code_postal_client')
             // ->add('reference_client')
+            ->add('coef_client', ChoiceType::class, [
+                'choices'  => [
+                    'Particulier' => 'particulier',
+                    'Professionnel' => 'professionnel',
+                ],
+                'label' => 'Type de Client'
+            ])
 
 
             ->add('agreeTerms', CheckboxType::class, [

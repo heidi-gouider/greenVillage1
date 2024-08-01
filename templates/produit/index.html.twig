@@ -35,9 +35,14 @@
 						{% if produit.quantiteStock > 0 %}
 							{# <button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3"  href="{{ path('commande_ajout', {id: produit.produit.id})}}" >
 								Ajouter à la commande #}
-								 <a class="d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('commande_ajout', { 'id': produit.id }) }}">
+									{# vers panier #}
+									<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('panier_ajout', {id: produit.id})}}"> ajouter au panier
+									{# <i class="bi bi-basket"> #}
+									</button>
+
+								 {# <a class="d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('commande_ajout', { 'id': produit.id }) }}">
                                 Ajouter à la commande
-                            </a>
+                            </a> #}
 								{# <i class="bi bi-basket"></i> #}
 							</button>
 							{% else %}

@@ -7,13 +7,31 @@
 
 		<h2 class="text-white text-center">Bienvenue à Green Village</h2>
 		<form class="form-inline my-2 my-lg-0 text-center">
-      <input class="form-control-sm mr-sm-2" type="search" placeholder="recherche" aria-label="Search">
+      <input class="form-control-sm mr-sm-2" type="search" {# value="{{ searchTerm }}" #} placeholder="recherche" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
     </form>
+	 {# <ul>
+        {% for produit in produits %}
+            <li>{{ produit.libelleProduit }} </li>
+        {% else %}
+            <li>Aucun produit trouvé.</li>
+        {% endfor %}
+    </ul> #}
 <div class="mt-5">
 		{# <h2 class="text-white text-center">Bienvenue à Green Village</h2> #}
 
 			{# <h2 class="text-white text-center">Notre Catalogue</h2> #}
+			{# <div class="d-flex flex-wrap justify-content-around">
+						{% for produit in topProduits %}
+							<div class="card m-2" style="width: 15rem;">
+								<img class="card-img-top zoom-img" src="{{ asset('img/' ~ produit.photoProduit) }}" alt="">
+								<div class="card-body">
+									<h5
+										class="card-title">
+										{{ produit.libelle_categorie }}</h5>
+								</div>
+							</div>
+						{% endfor %} #}
 
 			<li class="nav-item text-orange">
 				<a class="nav-link text-center text-orange"  href="{{ path('app_categorie') }}" >Notre Catalogue</a>

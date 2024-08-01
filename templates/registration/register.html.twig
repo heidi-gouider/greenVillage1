@@ -11,35 +11,66 @@
 <div class="contenu">
 
 		<div class="container">
-            		<h1 class="fst-italic">Inscription</h1>
+            		<h1 class="fst-italic mx-auto">Inscription</h1>
 
 
-			<div class="row text-center">
-             <div class="col-6">
+ <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_start(registrationForm) }}
+                <div class="mb-3">
+                        {{ form_label(registrationForm.nom) }}
+                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.nom) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.prenom_client) }}
+                        {{ form_widget(registrationForm.prenom_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.prenom_client) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.adresse_client) }}
+                        {{ form_widget(registrationForm.adresse_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.adresse_client) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.telephone_client) }}
+                        {{ form_widget(registrationForm.telephone_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.telephone_client) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.coef_client, 'Type de compte') }}
+                        {{ form_widget(registrationForm.coef_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.coef_client) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.code_postal_client) }}
+                        {{ form_widget(registrationForm.code_postal_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.code_postal_client) }}
+                    </div>
+                                        <div class="mb-3">
+                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions') }}
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
 
-    {{ form_errors(registrationForm) }}
+                                    {{ form_end(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.prenom_client) }}
-    {{ form_row(form.adresse_client) }}
-    {{ form_row(form.telephone_client) }}
-    {{ form_row(form.code_postal_client) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
-         {{ form_row(form.coef_client) }}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'Jaccepte les conditions'
-        }) }}
-
-        <button type="submit" class="class="btn btn-lg btn-primary"">Enregistrer</button>
-    {{ form_end(registrationForm) }}
-</div>
+                    <div class="d-grid gap-3 col-3">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+            </div>
         </div>
-        </div>
-</div>
+    </div>
 
 		{% include "partials/footer.php" %}
 

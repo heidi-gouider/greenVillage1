@@ -120,7 +120,7 @@
 						<a class="nav-link text-white " {#href="{{ path('app_contact') }}"#}>Contact</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link text-white " href="{{ path('app_categorie') }}">Produits</a>
+						<a class="nav-link text-white " href="{{ path('app_produit') }}">Produits</a>
 					{# </li>
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
@@ -153,7 +153,17 @@ mais aucun rôle spécifique n'est nécessaire.  #}
 							<li class="nav-item">
 								<a class="nav-link nav-link-custom text-white" href="{{ path('panier_index') }}" id="monPanierBtn" title="Panier"><i class="bi bi-basket"></i></a>
 							</li>
-
+ <!-- Logos réseaux sociaux avec une classe pour l'espacement -->
+                    <li class="nav-item social-icons">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li class="nav-item social-icons">
+                        <a href="#" class="social-icon"><i class="bi bi-geo-alt"></i></a>
+                    </li>
+                    <li class="nav-item social-icons">
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    </li>
+                </ul>
 						{# <a class="btn btn-command rounded-0 mt-3 align-items-center text-nowrap" href="{{ path('commande') }}">
 							<span class="d-md-none">Commande</span>
 							<span

@@ -63,6 +63,15 @@ class Jeu1 extends Fixture
 
         $manager->persist($parentCategorie);
 
+        // Création de la catégorie parent2
+        $parentCategorie2 = new Categorie;
+        $parentCategorie2->setParentCategorie($parentCategorie);
+        $parentCategorie2->setLibelleCategorie("Percussions");
+        $parentCategorie2->setImageCategorie("IMG/guitarre1.webp");
+        // IMG/guitarre1.webp
+
+        $manager->persist($parentCategorie);
+
         
 // Création de catégories
 // $categorie = new Categorie();

@@ -50,14 +50,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $code_postal_client = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $coef_client = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $coef_client = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(type: 'string', length: 100)]
     private $resetToken;
+
+    
+    // #[ORM\Column(type="string", length: 255, nullable: true)]
+    // private ?string $resetToken;
 
     /**
      * @var Collection<int, Commande>
@@ -214,12 +218,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCoefClient(): ?int
+    public function getCoefClient(): ?string
     {
         return $this->coef_client;
     }
 
-    public function setCoefClient(int $coef_client): static
+    public function setCoefClient(string $coef_client): static
     {
         $this->coef_client = $coef_client;
 

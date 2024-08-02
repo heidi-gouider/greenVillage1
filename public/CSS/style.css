@@ -131,6 +131,11 @@ body {
       /* ------------------------------------------------------------------------------------------------------------ */
   
   /*  PAGE FORMULAIRE  */
+  form{
+    background-color: rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    padding: 2%;
+  }
   
   /* Styles for custom form inputs */
   .custom-input {
@@ -155,7 +160,15 @@ body {
       border-radius: 5px;
       cursor: pointer;
     } */
-    
+    .submit{
+      margin-top: 10%;
+      background-color: #41666C;
+      cursor: pointer;
+      color: #FFF;
+    }
+    .submit:hover{
+      filter: brightness(1.1);
+    }
     /* #formulaire {
       background-color: rgba(36, 38, 41, 0.6);
     } */

@@ -47,22 +47,22 @@
                         <div class="input-group">
                             {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'id': 'passwordField'}}) }}
                         <span class="input-group-text">
-                            <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
+                            <i class="bi bi-eye-slash" name="pass" type="text" id="togglePassword" style="cursor: pointer" OnClick="changer"></i>
                         </span>
                     </div>
                     {{ form_errors(registrationForm.plainPassword) }}
-                </div>
+                {# </div>
                                     <div class="mb-3">
                         {{ form_label(registrationForm.confirmPassword, 'Confirmation du mot de passe') }}
                         <div class="input-group">
                             {{ form_widget(registrationForm.confirmPassword, {'attr': {'class': 'form-control', 'id': 'confirmPasswordField'}}) }}
                             <span class="input-group-text">
-                                <i class="bi bi-eye-slash" id="toggleConfirmPassword" style="cursor: pointer;"></i>
+                                <i class="bi bi-eye-slash" name="pass" type="text" id="toggleConfirmPassword" style="cursor: pointer" OnClick="changer"></i>
                             </span>
                         </div>
                         {{ form_errors(registrationForm.confirmPassword) }}
                     </div>
-
+ #}
                     <div class="mb-3">
                         {{ form_label(registrationForm.coef_client, 'Type de compte') }}
                         {{ form_widget(registrationForm.coef_client, {'attr': {'class': 'form-control'}}) }}
@@ -82,7 +82,7 @@
                                     {{ form_end(registrationForm) }}
 
                     <div class="d-grid gap-3 col-3">
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="submit" class="submit">S'enregistrer</button>
                     </div>
             </div>
         </div>

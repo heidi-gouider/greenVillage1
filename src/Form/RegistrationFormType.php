@@ -56,20 +56,19 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('confirmPassword', PasswordType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez confirmer votre mot de passe',
-                    ]),
-                    new EqualTo([
-                        'propertyPath' => 'plainPassword',
-                        // 'value' => $builder->get('plainPassword')->getData(),
-                        'message' => 'Les mots de passe doivent correspondre',
-                    ]),
-                ],
-                'attr' => ['autocomplete' => 'new-password'],
-            ])
+            // ->add('confirmPassword', PasswordType::class, [
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new NotBlank([
+            //             'message' => 'Veuillez confirmer votre mot de passe',
+            //         ]),
+            //         new EqualTo([
+            //             'propertyPath' => 'plainPassword',
+            //             'message' => 'Les mots de passe doivent correspondre',
+            //         ]),
+            //     ],
+            //     'attr' => ['autocomplete' => 'new-password'],
+            // ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
 'constraints' => [

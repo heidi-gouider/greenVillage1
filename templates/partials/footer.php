@@ -19,7 +19,7 @@
 		{% endblock %} -->
 
 <body>
-    <footer class="sticky-bottom footer">
+    <footer class="sticky-bottom footer text-white">
         <div class="container">
             <div class="row justify-content-end custom-line">
                 <div class="col-md-6 text-center mt-3">

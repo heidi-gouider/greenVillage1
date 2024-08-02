@@ -1,4 +1,6 @@
-<!-- namespace App\Service\MailService;
+<?php
+
+namespace App\Service\MailService;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -31,8 +33,8 @@ $email = (new Email())
 ->text($content);
 
 // dd($email);
-$mailer->send($email); -->
+$mailer->send($email);
 
 
-<!-- }
-} -->
+}
+}

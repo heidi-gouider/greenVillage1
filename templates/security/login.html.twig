@@ -27,6 +27,11 @@
     <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <span class="input-group-text">
+     <i class="bi bi-eye-slash" name="pass" type="text" id="pass" style="cursor: pointer" OnClick="changer"></i>
+    </span>
+    </div>
+
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -37,13 +42,20 @@
             <input type="checkbox" name="_remember_me"> Se souvenir de moi
         </label>
     </div>
+     <div class="d-grid gap-3 col-3 mx-auto">
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="submit" type="submit">
         Connexion
     </button>
-            <a class="btn btn-lg btn-primary" href="{{ path('app_register') }}">
+        </div>
+
+                        <div class="d-grid gap-3 col-3 mx-auto">
+
+            <a class="submit" href="{{ path('app_register') }}">
         Créer un compte
     </a>
+        </div>
+
     <div>
             <a class="" style="text-decoration: none"
  href="{#{{ path('app_forgot_password_request') }} #}">

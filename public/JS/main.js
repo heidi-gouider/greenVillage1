@@ -1,33 +1,40 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const passwordField = document.getElementById('passwordField');
-    const confirmPasswordField = document.getElementById('confirmPasswordField');
-    const togglePassword = document.getElementById('togglePassword');
-    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-    
-    if (passwordField && togglePassword) {
-        togglePassword.addEventListener('click', function () {
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                togglePassword.classList.replace('bi-eye', 'bi-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                togglePassword.classList.replace('bi-eye-slash', 'bi-eye');
-            }
-        });
-    }
+// document.addEventListener('DOMContentLoaded', function () {
+//     const passwordField = document.getElementById('passwordField');
+//     const confirmPasswordField = document.getElementById('confirmPasswordField');
+//     const togglePassword = document.getElementById('togglePassword');
+//     const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
 
-    if (confirmPasswordField && toggleConfirmPassword) {
-        toggleConfirmPassword.addEventListener('click', function () {
-            if (confirmPasswordField.type === 'password') {
-                confirmPasswordField.type = 'text';
-                toggleConfirmPassword.classList.replace('bi-eye', 'bi-eye-slash');
-            } else {
-                confirmPasswordField.type = 'password';
-                toggleConfirmPassword.classList.replace('bi-eye-slash', 'bi-eye');
-            }
-        });
-    }
-});
+//     if (passwordField && togglePassword) {
+//         togglePassword.addEventListener('click', function () {
+//             if (passwordField.type === 'password') {
+//                 passwordField.type = 'text';
+//                 togglePassword.classList.replace('bi-eye', 'bi-eye-slash');
+//             } else {
+//                 passwordField.type = 'password';
+//                 togglePassword.classList.replace('bi-eye-slash', 'bi-eye');
+//             }
+//         });
+//     }
+
+//     if (confirmPasswordField && toggleConfirmPassword) {
+//         toggleConfirmPassword.addEventListener('click', function () {
+//             if (confirmPasswordField.type === 'password') {
+//                 confirmPasswordField.type = 'text';
+//                 toggleConfirmPassword.classList.replace('bi-eye', 'bi-eye-slash');
+//             } else {
+//                 confirmPasswordField.type = 'password';
+//                 toggleConfirmPassword.classList.replace('bi-eye-slash', 'bi-eye');
+//             }
+//         });
+//     }
+// });
+// e=true;
+// function changer(){
+//     if(e){
+//         document.getElementById("pass").setAttribute("type","text");
+//         e=false;
+//     }
+// }
 //     function togglePasswordVisibility(field, icon) {
 //         if (field.type === 'password') {
 //             field.type = 'text';

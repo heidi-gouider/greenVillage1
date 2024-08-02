@@ -44,9 +44,25 @@
                     </div>
                     <div class="mb-3">
                         {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
-                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.plainPassword) }}
+                        <div class="input-group">
+                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'id': 'passwordField'}}) }}
+                        <span class="input-group-text">
+                            <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer;"></i>
+                        </span>
                     </div>
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+                                    <div class="mb-3">
+                        {{ form_label(registrationForm.confirmPassword, 'Confirmation du mot de passe') }}
+                        <div class="input-group">
+                            {{ form_widget(registrationForm.confirmPassword, {'attr': {'class': 'form-control', 'id': 'confirmPasswordField'}}) }}
+                            <span class="input-group-text">
+                                <i class="bi bi-eye-slash" id="toggleConfirmPassword" style="cursor: pointer;"></i>
+                            </span>
+                        </div>
+                        {{ form_errors(registrationForm.confirmPassword) }}
+                    </div>
+
                     <div class="mb-3">
                         {{ form_label(registrationForm.coef_client, 'Type de compte') }}
                         {{ form_widget(registrationForm.coef_client, {'attr': {'class': 'form-control'}}) }}

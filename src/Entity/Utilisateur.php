@@ -56,6 +56,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $resetToken;
+
     /**
      * @var Collection<int, Commande>
      */
@@ -152,7 +155,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+    
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+    
+        return $this;
+    }
     // public function getReferenceClient(): ?string
     // {
     //     return $this->reference_client;

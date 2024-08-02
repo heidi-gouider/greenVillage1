@@ -178,7 +178,7 @@ body {
   
   .footer {
     background-color: rgba(29, 28, 28, 0.7);
-    height: 10vh;
+    /* height: 10vh; */
       bottom: 0;
       /* background-color: #f8f9fa; */
       /* opacity: 0.9; */

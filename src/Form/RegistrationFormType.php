@@ -6,6 +6,9 @@ use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,14 +38,6 @@ class RegistrationFormType extends AbstractType
             ->add('email')
 
 
-            ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Jaccepte les termes.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', PasswordType::class, [
                                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -52,6 +47,7 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Veuillez entrer votre mot de passe',
                     ]),
+                    
                     new Length([
                         'min' => 6,
                         'minMessage' => 'YVotre mot de passe doit çétre supérieur à 6 caractères {{ limit }} characters',
@@ -60,7 +56,31 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('confirmPassword', PasswordType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez confirmer votre mot de passe',
+                    ]),
+                    new EqualTo([
+                        'propertyPath' => 'plainPassword',
+                        // 'value' => $builder->get('plainPassword')->getData(),
+                        'message' => 'Les mots de passe doivent correspondre',
+                    ]),
+                ],
+                'attr' => ['autocomplete' => 'new-password'],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+'constraints' => [
+    new IsTrue([
+        'message' => 'Jaccepte les termes.',
+    ]),
+],
+])
+
         ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

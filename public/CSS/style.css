@@ -33,9 +33,9 @@ body {
     }
       /* ------------------------------------------------------------------------------------------------------------ */
       /* Page d'accueil */
-  /* .text-orange {
+  .text-orange {
     color: orange !important;
-  } */
+  }
   /* #navbarSupportedContent{
     background-color: #222222;
   } */
@@ -173,7 +173,7 @@ body {
       background-color: rgba(36, 38, 41, 0.6);
     } */
     .text-orange {
-      color: #9c3b0e; /* Code couleur pour le texte blanc */
+      color: #c04b14; /* Code couleur pour le texte blanc */
       font-size: large;
   }
   
@@ -187,8 +187,39 @@ body {
   
     /* ------------------------------------------------------------------------------------------------------------ */
   
-  /*  LE FOOTER  */
+  /*  LES ICONES RESEAUX SOCIAUX  */
+
+  /* Styles pour les icônes de réseaux sociaux */
+.social-icon {
+  position: fixed; /* Fixe les icônes en bas de la page */
+  bottom: 10VH; /* Espacement depuis le bas de la fenêtre */
+  right: 10VH; /* Espacement depuis le bord droit de la fenêtre */
+  list-style: none; /* Supprime les puces */
+  /* padding: 0; Supprime le padding par défaut */
+  /* margin: 0; Supprime la marge par défaut */
+  display: flex; /* Utilise Flexbox pour aligner les icônes horizontalement */
+  gap: 50px; /* Espacement entre les icônes */
+}
+
+/* .social-icon { */
+  /* Style des éléments de liste, si nécessaire */
+/* } */
+
+.social-icon-link {
+  display: block;
+  color: #1b25b4; /* Couleur des icônes (changez selon votre thème) */
+  font-size: 100px; /* Taille des icônes */
+  text-decoration: none; /* Supprime la décoration du lien */
+}
+
+.social-icon-link:hover {
+  color: #007bff; /* Couleur au survol (changez selon votre thème) */
+}
+
+    /* ------------------------------------------------------------------------------------------------------------ */
   
+  /*  LE FOOTER  */
+
   .footer {
     background-color: rgba(29, 28, 28, 0.7);
     /* height: 10vh; */

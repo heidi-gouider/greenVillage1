@@ -107,20 +107,20 @@
 			</button> #}
  
 
-			<div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse {# text-white #} text-orange" id="navbarSupportedContent">
 
 				{# <ul class="navbar-nav mr-auto"> #}
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center text-sm text-white">
 					<li class="nav-item">
-						<a class="nav-link nav-link-custom text-white " id="link-active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
+						<a class="nav-link nav-link-custom text-orange " id="link-active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
 					</li>
 							{# <a class="navbar-brand" href="{{ path('app_accueil') }}">Accueil</a> #}
 
 					<li class="nav-item">
-						<a class="nav-link text-white " href="{{ path('app_contact') }}">Contact</a>
+						<a class="nav-link text-orange " href="{{ path('app_contact') }}">Contact</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link text-white " href="{{ path('app_produit') }}">Produits</a>
+						<a class="nav-link text-orange " href="{{ path('app_produit') }}">Produits</a>
 					{# </li>
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
@@ -128,7 +128,7 @@
 					{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}	
 					<li class="nav-item active">
-						<a class="nav-link text-white " {# href="{{ path('admin_index') }}" #}>Administration</a>
+						<a class="nav-link text-orange " {# href="{{ path('admin_index') }}" #}>Administration</a>
 					</li>
 					{% endif %}
 {# la ligne du dessous donne la permission à l'utilisateur doit être authentifié pour accéder à une page,
@@ -136,25 +136,25 @@ mais aucun rôle spécifique n'est nécessaire.  #}
 					{# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
 							<li class="nav-item">
 							{# <li class="nav-item pe-4 pt-2"> #}
-								<a class="nav-link nav-link-custom text-white " {# href="{{ path('app_profil') }}" #}>Mon compte</a>
+								<a class="nav-link nav-link-custom text-orange " {# href="{{ path('app_profil') }}" #}>Mon compte</a>
 								{# <i class="bi bi-person"></i> #}
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link nav-link-custom text-white " href="{{ path('app_logout') }}">Déconnexion</a>
+								<a class="nav-link nav-link-custom text-orange " href="{{ path('app_logout') }}">Déconnexion</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a class="nav-link nav-link-custom text-white "  href="{{ path('app_login') }}" id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
+								<a class="nav-link nav-link-custom text-orange "  href="{{ path('app_login') }}" id="monCompteBtn" title="Inscription/Connexion">Connexion</a>
 							</li>
 						{% endif %}
 						{# {% endif %} #}
 
 							<li class="nav-item">
-								<a class="nav-link nav-link-custom text-white" href="{{ path('panier_index') }}" id="monPanierBtn" title="Panier"><i class="bi bi-basket"></i></a>
+								<a class="nav-link nav-link-custom text-orange" href="{{ path('panier_index') }}" id="monPanierBtn" title="Panier"><i class="bi bi-basket"></i></a>
 							</li>
  <!-- Logos réseaux sociaux avec une classe pour l'espacement -->
-                    <li class="nav-item social-icons">
+                    {# <li class="nav-item social-icons">
                         <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
                     </li>
                     <li class="nav-item social-icons">
@@ -162,7 +162,7 @@ mais aucun rôle spécifique n'est nécessaire.  #}
                     </li>
                     <li class="nav-item social-icons">
                         <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                    </li>
+                    </li> #}
                 </ul>
 						{# <a class="btn btn-command rounded-0 mt-3 align-items-center text-nowrap" href="{{ path('commande') }}">
 							<span class="d-md-none">Commande</span>

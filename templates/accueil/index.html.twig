@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 <div class="contenu">
@@ -53,7 +53,9 @@
         <p class="text-white">
             Explorez notre catalogue en ligne pour découvrir l'ensemble de notre gamme. Nous mettons à jour régulièrement notre offre pour inclure les dernières nouveautés et tendances du marché. Vous trouverez également des promotions spéciales et des offres exclusives pour nos partenaires.
         </p>
-    </div>		<li class="nav-item text-orange">
+    </div>		
+    <div class="col-md-6 mx-auto">
+    <li class="nav-item text-orange">
 				<a class="nav-link text-center text-orange"  href="{{ path('app_categorie') }}" >Notre Catalogue</a>
 				</li>
 				{# <img class="card-img-top mx-auto w-50 img-centered" src="{{ asset('IMG/les_violons.webp') }}" alt="{{ "violons" }}">  #}
@@ -66,6 +68,11 @@
 					<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}
 </div>
 </div>
+</div>
+
+			{% include "partials/socialIcons.php" %}
+
 			{# {% include "partials/footer.php" %} #}
+
 
 {% endblock %}

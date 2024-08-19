@@ -12,6 +12,10 @@ class Jeu1 extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+                 // empêcher l'auto incrément
+                 $metadata = $manager->getClassMetaData(Categorie::class);
+                 $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        
         // Cration d'un fournisseur
         $fournisseur1 = new Fournisseur();
         $fournisseur2 = new Fournisseur();
@@ -56,32 +60,32 @@ class Jeu1 extends Fixture
 
         // Création de la catégorie parent
         $parentCategorie = new Categorie;
-        $parentCategorie->setParentCategorie($parentCategorie);
+        // Attention c'est une categorie racine donc elle n'a pas de parent!
+        // $parentCategorie->setParentCategorie($parentCategorie);
         $parentCategorie->setLibelleCategorie("Instruments à corde");
-        $parentCategorie->setImageCategorie("IMG/guitarre1.webp");
-        // IMG/guitarre1.webp
+        $parentCategorie->setImageCategorie("IMG/instrument_a_corde.webp");
 
         $manager->persist($parentCategorie);
+
+        $manager->flush(); // Persist et flush ici pour s'assurer que l'ID est disponible
 
         // Création de la catégorie parent2
         $parentCategorie2 = new Categorie;
-        $parentCategorie2->setParentCategorie($parentCategorie);
+        // $parentCategorie2->setParentCategorie($parentCategorie2);
         $parentCategorie2->setLibelleCategorie("Percussions");
-        $parentCategorie2->setImageCategorie("IMG/guitarre1.webp");
-        // IMG/guitarre1.webp
+        $parentCategorie2->setImageCategorie("IMG/les_percussions.webp");
 
-        $manager->persist($parentCategorie);
-
+        $manager->persist($parentCategorie2);
+        $manager->flush();
         
-// Création de catégories
-// $categorie = new Categorie();
+// Création de catégories enfants
 
 $categorie1 = new Categorie();
 // $categorie1->setParentCategorieId("1");
 $categorie1->setParentCategorie($parentCategorie);
 $categorie1->setLibelleCategorie("les pianos");
 $categorie1->setDescriptionCategorie("les pianos sont supers");
-$categorie1->setImageCategorie("IMG/guitarre1.webp");
+$categorie1->setImageCategorie("IMG/piano.webp");
 
 
 $manager->persist($categorie1);
@@ -89,9 +93,9 @@ $manager->persist($categorie1);
 
 $categorie2 = new Categorie();
 $categorie2->setParentCategorie($parentCategorie);
-$categorie2->setLibelleCategorie("Les guitare");
+$categorie2->setLibelleCategorie("Les guitares");
 $categorie2->setDescriptionCategorie("les guitares");
-$categorie2->setImageCategorie("IMG/guitare2.webp");
+$categorie2->setImageCategorie("IMG/guitarre2.webp");
 
 
 $manager->persist($categorie2);
@@ -107,6 +111,25 @@ $categorie3->setImageCategorie("IMG/les_violons.webp");
 
 $manager->persist($categorie3);
 
+$categorie4 = new Categorie();
+$categorie4->setParentCategorie($parentCategorie2);
+$categorie4->setLibelleCategorie("les batteries");
+$categorie4->setDescriptionCategorie("les batteries sont super");
+$categorie4->setImageCategorie("IMG/drum.webp");
+
+
+
+$manager->persist($categorie4);
+
+$categorie5 = new Categorie();
+$categorie5->setParentCategorie($parentCategorie2);
+$categorie5->setLibelleCategorie("les xylophones");
+$categorie5->setDescriptionCategorie("les xylophones sont super");
+$categorie5->setImageCategorie("IMG/xylophone.webp");
+
+
+
+$manager->persist($categorie5);
 
 // $manager->flush();
         

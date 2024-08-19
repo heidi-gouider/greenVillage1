@@ -6,9 +6,11 @@ use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[ApiRessource]
 class Categorie
 {
     #[ORM\Id]
@@ -23,7 +25,8 @@ class Categorie
     private ?string $description_categorie = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
-    #[ORM\JoinColumn(nullable: true)]
+    // si une categorie parente est supprimée toutes les categories enfants le champ parent =null
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?self $parent_categorie = null;
 
     /**
@@ -158,10 +161,10 @@ class Categorie
     /**
      * @return Collection<int, Produit>
      */
-    public function getProduit(): Collection
-    {
-        return $this->produit;
-    }
+    // public function getProduit(): Collection
+    // {
+    //     return $this->produit;
+    // }
 
     public function getImageCategorie()
     {

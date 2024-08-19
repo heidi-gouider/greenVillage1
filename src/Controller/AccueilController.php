@@ -35,6 +35,7 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    // les categories parent
     #[Route('/categorie', name: 'app_categorie')]
     public function categorie(): Response
     {
@@ -43,6 +44,44 @@ class AccueilController extends AbstractController
         return $this->render('accueil/categorie.html.twig', [
             'controller_name' => 'AccueilController',
             'categories' => $categories
+        ]);
+    }
+
+    // les sous-categories
+    #[Route('/sous_categorie/{parent_categorie_id}', name: 'app_sous_categorie')]
+    public function sousCategorie(int $parent_categorie_id): Response
+    {
+        // je récupère la categorie parent
+        // $categories = $this->categorieRepository->find($parent_categorie_id);
+        $categories = $this->categorieRepository->find($parent_categorie_id);
+        //dd($parentCategorie);
+
+        // je récupère les sous-categories
+        $sousCategories = $categories->getCategories();
+        // dd($categories);
+        // dd($sousCategories);
+
+        return $this->render('accueil/sousCategorie.html.twig', [
+            // 'controller_name' => 'AccueilController',
+            'categories' => $categories,
+            'sous_categories' => $sousCategories,
+            // 'parent_categorie' => $parentCategorie,
+        ]);
+    }
+
+    // les instruments par categorie
+    #[Route('/produits/{categorie_id}', name: 'app_produits_categorie')]
+    public function produitCategorie(int $parent_categorie_id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
+    {
+        // je récupère la categorie correspondant à l'id
+        $categorie = $this->categorieRepository->find($categorie_id);
+        // dd($categorie);
+
+        $produits = $categorie->getProduits();
+        return $this->render('accueil/produitsCategorie.html.twig', [
+            // 'controller_name' => 'CatalogueController',
+            'categories' => $categorie,
+            'produits' => $produits,
         ]);
     }
 }

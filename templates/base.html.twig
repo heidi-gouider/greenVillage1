@@ -121,6 +121,20 @@
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link text-orange " href="{{ path('app_produit') }}">Produits</a>
+
+						{# liste déroulante des categories #}
+						<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Catégories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for categorie in categories %}
+                        <a class="dropdown-item" href="{{ path('app_produits_categorie', {'id': categorie.id}) }}">
+                            {{ categorie.libelle_categorie }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </li>
 					{# </li>
 					<li class="nav-item active">
 						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>

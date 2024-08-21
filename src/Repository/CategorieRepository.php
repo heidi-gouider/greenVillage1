@@ -15,6 +15,17 @@ class CategorieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categorie::class);
     }
+
+    /**
+     * Récupère uniquement les catégories parentes.
+     */
+    public function findParentCategories()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.parent_categorie IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
     // public function getSomeCategories($libelleCategorie)
     // {
     //     $entityManager = $this->getEntityManager(); //on instancie l'entity manager

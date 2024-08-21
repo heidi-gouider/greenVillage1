@@ -17,6 +17,28 @@
             <li>Aucun produit trouvé.</li>
         {% endfor %}
     </ul> #}
+    {# <form class="form-inline my-2 my-lg-0 text-center">
+    {{ form_start(form, {'attr': {'class': 'form-inline my-2 my-lg-0 text-center'}}) }}
+        {{ form_widget(form.query) }}
+        {{ form_widget(form.recherche) }}
+    {{ form_end(form) }}
+</form> #}
+     {# {{ form_start(form) }}
+        {{ form_row(form.categorie) }}
+        {{ form_row(form.query) }}
+        <button type="submit text-white">Rechercher</button>
+    {{ form_end(form) }}
+
+    <h2>Résultats</h2>
+    {% if produits is not empty %}
+        <ul>
+        {% for produit in produits %}
+            <li>{{ produit.libelleProduit }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun produit trouvé.</p>
+        </div> #}
 <div class="mt-5">
 		{# <h2 class="text-white text-center">Bienvenue à Green Village</h2> #}
 

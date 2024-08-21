@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Repository\ProduitRepository;
 // use App\Repository\RechercheRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\RechercheType;
 use APP\Entity\Produit;
+use APP\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +42,47 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    // Gestion d'un formulaire de recherche
+    #[Route('/recherche', name: 'app_recherche')]
+    public function recherche(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RechercheType::class);
+        $form->handleRequest($request);
+
+        $produits = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // // Traitement des données du formulaire
+            $data = $form->getData();
+            $query = $data['query'];
+            $categorie = $data['categorie'];
+
+            // Construire la requête pour rechercher les produits
+            $produitsRepo = $entityManager->getRepository(Produit::class);
+
+            $qb = $produitsRepo->createQueryBuilder('p');
+
+            if ($query) {
+                $qb->andWhere('p.nom LIKE :query')
+                   ->setParameter('query', '%' . $query . '%');
+            }
+
+            // Ajout d'une condition pour la catégorie. Si une catégorie a été sélectionnée,
+            // on ajoute une autre condition WHERE pour filtrer les produits appartenant à cette catégorie
+            if ($categorie) {
+                $qb->andWhere('p.categorie = :categorie')
+                   ->setParameter('categorie', $categorie);
+            }
+
+            $produits = $qb->getQuery()->getResult();
+        }
+
+        return $this->render('recherche.html.twig', [
+            // return $this->render('base.html.twig', [
+            'form' => $form->createView(),
+            'produits' => $produits,
+        ]);
+    }
 
     //  #[Route('/produits', name: 'produit_list')]
 

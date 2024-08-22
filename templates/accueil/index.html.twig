@@ -77,7 +77,7 @@
         </p>
     </div>		
     <div class="col-md-6 mx-auto">
-    <li class="nav-item text-orange">
+    <li class="nav-item">
 				<a class="nav-link text-center text-orange"  href="{{ path('app_categorie') }}" >Notre Catalogue</a>
 				</li>
 				{# <img class="card-img-top mx-auto w-50 img-centered" src="{{ asset('IMG/les_violons.webp') }}" alt="{{ "violons" }}">  #}
@@ -90,11 +90,11 @@
 					<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}
 </div>
 </div>
-</div>
 
 			{% include "partials/socialIcons.php" %}
 
-			{# {% include "partials/footer.php" %} #}
+			{# {% include "partials/footer.html.twig" %} #}
 
+</div>
 
 {% endblock %}

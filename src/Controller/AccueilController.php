@@ -27,11 +27,14 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil')]
     public function index(): Response
     {
-         //on appelle la fonction `findAll()` du repository de la classe `Artist` afin de récupérer tous les artists de la base de données;
-        //  $categorie = $this->categorieRepository->findAll();
+         //on appelle la fonction `findAll()` du repository de la classe `Categorie` afin de récupérer toutes les categories de la base de données;
+        //  $categories = $this->categorieRepository->findAll();
+         $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+
         return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
-            // 'categorie' => $categorie,
+            // return $this->render('base.html.twig', [
+            // 'controller_name' => 'AccueilController',
+            'categories' => $categories,
         ]);
     }
 
@@ -39,10 +42,13 @@ class AccueilController extends AbstractController
     #[Route('/categorie', name: 'app_categorie')]
     public function categorie(): Response
     {
-        $categories = $this->categorieRepository->findAll();
-        //dd($categories);
+        // Récupérer les catégories parentes
+        $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+        // $categories = $this->categorieRepository->findAll();
+        // dd($categories);
         return $this->render('accueil/categorie.html.twig', [
-            'controller_name' => 'AccueilController',
+            // return $this->render('base.html.twig', [
+            // 'controller_name' => 'AccueilController',
             'categories' => $categories
         ]);
     }
@@ -71,14 +77,15 @@ class AccueilController extends AbstractController
 
     // les instruments par categorie
     #[Route('/produits/{categorie_id}', name: 'app_produits_categorie')]
-    public function produitCategorie(int $parent_categorie_id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
+    public function produitCategorie(int $id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
     {
         // je récupère la categorie correspondant à l'id
-        $categorie = $this->categorieRepository->find($categorie_id);
+        $categorie = $this->categorieRepository->find($id);
         // dd($categorie);
 
         $produits = $categorie->getProduits();
         return $this->render('accueil/produitsCategorie.html.twig', [
+            // return $this->render('base.html.twig', [
             // 'controller_name' => 'CatalogueController',
             'categories' => $categorie,
             'produits' => $produits,

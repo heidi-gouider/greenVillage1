@@ -14,6 +14,14 @@ body {
       a {
           text-decoration: none;
       }
+
+      .text-orange {
+        color: orange !important;
+      }
+      /* .text-orange {
+        color: rgb(98, 0, 255) !important;
+      } */
+
   /* LE HEADER INCLU DANS TOUTES LES PAGES  */
   
   /* penser à ajouter une 'box-shadow' au bottom de la .nav et voir pour le bg 
@@ -33,9 +41,6 @@ body {
     }
       /* ------------------------------------------------------------------------------------------------------------ */
       /* Page d'accueil */
-  .text-orange {
-    color: orange !important;
-  }
   /* #navbarSupportedContent{
     background-color: #222222;
   } */
@@ -71,6 +76,7 @@ body {
       
       /* ******** page categorie */
       .contenu {
+        /* background-color: #222222; */
         /* padding-top: 100px; */
         margin-top: 20vh;
         /* margin-top: 200px; */
@@ -227,6 +233,8 @@ body {
       bottom: 0;
       /* background-color: #f8f9fa; */
       /* opacity: 0.9; */
+      position: relative; /* Assurez-vous que cela ne soit pas fixed ou absolute */
+      z-index: 1;
     }
     
     .footer ul {

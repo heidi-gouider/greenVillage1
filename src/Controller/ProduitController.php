@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
+// use App\Repository\CategorieRepository;
 // use App\Repository\RechercheRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\RechercheType;
@@ -18,12 +19,16 @@ class ProduitController extends AbstractController
 {
     private $produitRepository;
     private $rechercheRepository;
+    // private $categorieRepository;
+
 
 
     public function __construct( ProduitRepository $produitRepository)
     {
         $this->ProduitRepository = $produitRepository;
         // $this->RechercheRepository = $rechercheRepository;
+        // $this->categorieRepository = $categorieRepository;
+
     }
 
 
@@ -55,7 +60,7 @@ class ProduitController extends AbstractController
             // // Traitement des données du formulaire
             $data = $form->getData();
             $query = $data['query'];
-            $categorie = $data['categorie'];
+            $categories = $data['categorie'];
 
             // Construire la requête pour rechercher les produits
             $produitsRepo = $entityManager->getRepository(Produit::class);
@@ -69,18 +74,20 @@ class ProduitController extends AbstractController
 
             // Ajout d'une condition pour la catégorie. Si une catégorie a été sélectionnée,
             // on ajoute une autre condition WHERE pour filtrer les produits appartenant à cette catégorie
-            if ($categorie) {
+            if ($categories) {
                 $qb->andWhere('p.categorie = :categorie')
-                   ->setParameter('categorie', $categorie);
+                   ->setParameter('categorie', $categories);
             }
 
             $produits = $qb->getQuery()->getResult();
         }
 
-        return $this->render('recherche.html.twig', [
-            // return $this->render('base.html.twig', [
+        // return $this->render('recherche.html.twig', [
+            return $this->render('base.html.twig', [
             'form' => $form->createView(),
             'produits' => $produits,
+            // 'categories' => $categories,
+
         ]);
     }
 

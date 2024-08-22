@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Form\ContactFormType;
-
-//pour ajouter des contraintes de validatiob des données automatiquement
+//pour ajouter des contraintes de validation des données automatiquement
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Contact;
-
 use App\Service\MailService;
+use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,16 +17,27 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ContactController extends AbstractController
 {
+    private $categorieRepository;
+// Injection du repository dans le constructeur
+    public function __construct( CategorieRepository $categorieRepository)
+    {
+        $this->categorieRepository = $categorieRepository;
+
+    }
+
    #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, MailerInterface $mailer): Response
     {
+
+        // Récupérer les catégories parentes pour la dropdown de la base sur la page contact
+        $categories = $this->categorieRepository->findBy(['parent_categorie' => null]);
+        // dd($categories);
         // $data = new ContactData();
 
+        // Créer le formulaire
         //la méthode createForm() crée une instance du formulaire ContactFormType.
         //Ce formulaire sera affiché à l'aide de la méthode render() dans la vue index.html.twig
         $form = $this->createForm(ContactFormType::class);
-        // $form = $this->createForm(ContactFormType::class, $data);
-
 
         // Traitement des données soumises au formulaire
         $form->handleRequest($request);
@@ -59,8 +69,25 @@ class ContactController extends AbstractController
         }
         return $this->render('contact/index.html.twig', [
             //'controller_name' => 'ContactController',
-            'form' => $form
+            'form' => $form,
+            // Passer les catégories au template
+            'categories' => $categories,
+
         ]);
     }
-}
+    // #[Route('/contact', name: 'app_contact')]
+    // public function categorie(CategorieRepository $categorieRepository): Response
+    // {
+         //on appelle la fonction `findAll()` du repository de la classe `Categorie` afin de récupérer toutes les categories de la base de données;
+        //  $categories = $this->categorieRepository->findAll();
+        //  $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+
+        // return $this->render('contact/index.html.twig', [
+            // return $this->render('base.html.twig', [
+            // 'controller_name' => 'AccueilController',
+        //     'categories' => $categories,
+        // ]);
+    }
+
+
 

@@ -100,11 +100,7 @@
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				{# <i class="bi bi-list"></i> #}
 				<span class="navbar-toggler-icon"></span>
-
 				</button>
-				{# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button> #}
  
 
 			<div class="collapse navbar-collapse {# text-white #} text-orange" id="navbarSupportedContent">
@@ -120,20 +116,23 @@
 						<a class="nav-link text-orange " href="{{ path('app_contact') }}">Contact</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link text-orange " href="{{ path('app_produit') }}">Produits</a>
+						<a class="nav-link text-orange " href="{{ path('app_categorie') }}">Catalogue</a>
 
 						{# liste déroulante des categories #}
-						<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catégories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{# pour pouvoir avoir la liste fonctionnelle sur toutes mes vues
+						et éviter une répétition du code dans tous les controlleurs
+						je crée un service qui fournit les catégories paent que j'injecte dans mes controlleurs #}
+						{# <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-orange" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Catalogue
+                </a> #}
+                {# <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for categorie in categories %}
-                        <a class="dropdown-item" href="{{ path('app_produits_categorie', {'id': categorie.id}) }}">
-                            {{ categorie.libelle_categorie }}
+                        <a class="dropdown-item" href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}">
+                            {{ categorie.libelleCategorie }}
                         </a>
                     {% endfor %}
-                </div>
+                </div> #}
             </li>
 					{# </li>
 					<li class="nav-item active">
@@ -218,6 +217,8 @@ mais aucun rôle spécifique n'est nécessaire.  #}
 	</div>
 
 				{% block body %}{% endblock %}
+
+{# {% include 'partials/footer.html.twig' %} #}
 
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 

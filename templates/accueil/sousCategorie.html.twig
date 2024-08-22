@@ -10,7 +10,7 @@
 			{{ categorie.libelleCategorie }}</h1> #}
 		<main class="container">
 			<div class="row">
-				{% for  categorie in categories %}
+				{% for  categorie in sous_categories %}
 				{# {% if categorie.parentCategorie is not null %} #}
 					<div class="col-md-6 mb-4">
 						 <div class="card" id="images" style="width: 18rem;"> 
@@ -45,6 +45,6 @@
 
 					</div>
 
-			{% include "partials/footer.php" %}
+			{# {% include "partials/footer.php" %} #}
 
 	{% endblock %}

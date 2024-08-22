@@ -5,7 +5,7 @@
 
 {% block body %}
 	<div class="contenu mb-5">
-		<h1 class="fst-italic">Notre catalogue</h1>
+		<h1 class="fst-italic text-white">Notre catalogue</h1>
 		<main class="container">
 			<div class="row">
 				{% for  categorie in categories %}
@@ -17,7 +17,8 @@
 						 Si categorie.parentCategorie est null, nous redirigeons vers # ou un autre lien approprié. #}
                         	{# <a href="{{  categorie.parentCategorie ?  path('app_sous_categorie', {'parent_categorie_id': categorie.parentCategorie.id}) }}"></a> #}
 							{# : '#' #}
-							{# Lien vers les sous-catégories #}
+							{# Lien vers les sous-catégories  nom de la route,
+							je passe l'id de la categorie parent à la route #}
 							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}">
 							{# </a> #}
 							{# <a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.parentCategorie.id}) }}"> #}
@@ -50,6 +51,6 @@
 
 					</div>
 
-			{% include "partials/footer.php" %}
+			{# {% include "partials/footer.php" %} #}
 
 	{% endblock %}

@@ -75,20 +75,4 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    // les instruments par categorie
-    #[Route('/produits/{categorie_id}', name: 'app_produits_categorie')]
-    public function produitCategorie(int $id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
-    {
-        // je récupère la categorie correspondant à l'id
-        $categorie = $this->categorieRepository->find($id);
-        // dd($categorie);
-
-        $produits = $categorie->getProduits();
-        return $this->render('accueil/produitsCategorie.html.twig', [
-            // return $this->render('base.html.twig', [
-            // 'controller_name' => 'CatalogueController',
-            'categories' => $categorie,
-            'produits' => $produits,
-        ]);
-    }
 }

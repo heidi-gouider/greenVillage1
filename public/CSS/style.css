@@ -18,9 +18,9 @@ body {
       .text-orange {
         color: orange !important;
       }
-      /* .text-orange {
-        color: rgb(98, 0, 255) !important;
-      } */
+
+/* ------------------------------------------------------------------------------------------------------------ */
+      /* Page base */
 
   /* LE HEADER INCLU DANS TOUTES LES PAGES  */
   
@@ -39,8 +39,6 @@ body {
       /* opacity: 0.2; */
       box-shadow: 0 10px 10px black;
     }
-      /* ------------------------------------------------------------------------------------------------------------ */
-      /* Page d'accueil */
   /* #navbarSupportedContent{
     background-color: #222222;
   } */
@@ -53,7 +51,7 @@ body {
   } */
   
       /* ----------------------------------------- */
-          /*  PAGE ADMINISTRATION DISCS   */
+          /*  PAGE ADMINISTRATION categories   */
   
       .btn-delete {
         color: red;
@@ -69,12 +67,12 @@ body {
   
         /* ----------------------------------------- */
   
-      /*  PAGE CATEGORIE   */
+      /*  PAGEs form    */
       .form {
         padding-top: 200px;
       }
       
-      /* ******** page categorie */
+      /* ******** toute les pages */
       .contenu {
         /* background-color: #222222; */
         /* padding-top: 100px; */
@@ -124,8 +122,34 @@ body {
         width: 50%; /* ou toute autre valeur de largeur souhaitée */
         height: auto; /* pour garder les proportions de l'image */
     }
-  /*  PAGE Discs   */
   
+          /* ------------------------------------------------------------------------------------------------------------ */
+      /*  LES CARTES AVEC PRODUITS    */
+
+      .card {
+        background-color: transparent;
+        border: none;
+      }
+
+      .card-body {
+        padding: 0;
+    }
+
+    .card-title, .content {
+        text-align: center;
+        color: white;
+    }
+
+    .card-footer {
+        border-top: none;
+        background-color: transparent;
+    }
+
+    .card-img-top {
+        border-radius: 0;
+        max-width: 100%;
+        height: auto;
+    }
   /* .card-header {
     position: relative;
   } */

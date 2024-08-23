@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
-// use App\Repository\CategorieRepository;
+use App\Repository\CategorieRepository;
 // use App\Repository\RechercheRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\RechercheType;
@@ -19,15 +19,15 @@ class ProduitController extends AbstractController
 {
     private $produitRepository;
     private $rechercheRepository;
-    // private $categorieRepository;
+    private $categorieRepository;
 
 
 
-    public function __construct( ProduitRepository $produitRepository)
+    public function __construct( ProduitRepository $produitRepository, CategorieRepository $categorieRepository)
     {
         $this->ProduitRepository = $produitRepository;
         // $this->RechercheRepository = $rechercheRepository;
-        // $this->categorieRepository = $categorieRepository;
+        $this->categorieRepository = $categorieRepository;
 
     }
 
@@ -90,6 +90,32 @@ class ProduitController extends AbstractController
 
         ]);
     }
+
+            // les instruments par categorie
+    #[Route('/produits/{id}', name: 'app_produits_categorie')]
+    public function produitsCategorie(int $id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
+    {
+        // je récupère la categorie correspondant à l'id
+        $categorie = $this->categorieRepository->find($id);
+        // $categorie = $this->categorieRepository->findAll();
+
+        // dd($categorie);
+
+    // Vérifie si la catégorie existe
+    if (!$categorie) {
+        throw $this->createNotFoundException('La catégorie n\'existe pas.');
+    }
+        $produits = $categorie->getProduits();
+        return $this->render('accueil/produitsCategorie.html.twig', [
+            // return $this->render('base.html.twig', [
+            // 'controller_name' => 'CatalogueController',
+            'categories' => $categorie,
+            'libelle_categorie' => $categorie->getLibelleCategorie(),
+            'produits' => $produits,
+        ]);
+    }
+
+    
 
     //  #[Route('/produits', name: 'produit_list')]
 

@@ -78,6 +78,15 @@ class Jeu1 extends Fixture
         $manager->persist($parentCategorie2);
         $manager->flush();
         
+        // Création de la catégorie parent3
+        $parentCategorie3 = new Categorie;
+        // $parentCategorie2->setParentCategorie($parentCategorie2);
+        $parentCategorie3->setLibelleCategorie("Instruments à vent");
+        $parentCategorie3->setImageCategorie("IMG/instrument_a_vent.webp");
+        
+        $manager->persist($parentCategorie3);
+        $manager->flush();
+        
 // Création de catégories enfants
 
 $categorie1 = new Categorie();
@@ -113,9 +122,9 @@ $manager->persist($categorie3);
 
 $categorie4 = new Categorie();
 $categorie4->setParentCategorie($parentCategorie2);
-$categorie4->setLibelleCategorie("les batteries");
-$categorie4->setDescriptionCategorie("les batteries sont super");
-$categorie4->setImageCategorie("IMG/drum.webp");
+$categorie4->setLibelleCategorie("les Djumbe");
+$categorie4->setDescriptionCategorie("les Djumbe sont super");
+$categorie4->setImageCategorie("IMG/djumbe.webp");
 
 
 
@@ -131,6 +140,30 @@ $categorie5->setImageCategorie("IMG/xylophone.webp");
 
 $manager->persist($categorie5);
 
+$categorie6 = new Categorie();
+$categorie6->setParentCategorie($parentCategorie2);
+$categorie6->setLibelleCategorie("les batteries");
+$categorie6->setDescriptionCategorie("les batteries sont super");
+$categorie6->setImageCategorie("IMG/les_batteries.webp");
+
+
+
+$manager->persist($categorie6);
+
+$categorie7 = new Categorie();
+$categorie7->setParentCategorie($parentCategorie3);
+$categorie7->setLibelleCategorie("les flutes");
+$categorie7->setDescriptionCategorie("les flutes sont super");
+$categorie7->setImageCategorie("IMG/les_flute.webp");
+
+
+
+$manager->persist($categorie7);
+
+// empêcher l'auto incrément
+    $metadata = $manager->getClassMetaData(Categorie::class);
+    $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+                
 // $manager->flush();
         
                 // Cration d'un produit
@@ -152,7 +185,7 @@ $manager->persist($categorie5);
         $produit2->setLibelleProduit("Guitare2");
             $produit2->setDescriptionProduit("Voici une guitare geniale");
             $produit2->setPrixAchatHt("250");
-            $produit2->setPhoto("IMG/guitare2.webp");
+            $produit2->setPhoto("IMG/guitarre2.webp");
             $produit2->setQuantiteStock("10");
             $produit2->setCategorie($categorie2);
             $produit2->setParentCategorie($parentCategorie);
@@ -183,7 +216,7 @@ $manager->persist($categorie5);
             $produit4->setLibelleProduit("ViolonDingue");
             $produit4->setDescriptionProduit("Voici un violon trop cool");
             $produit4->setPrixAchatHt("450");
-            $produit4->setPhoto("IMG/guitare2.webp");
+            $produit4->setPhoto("IMG/violon1.webp");
             $produit4->setQuantiteStock("5");
             $produit4->setCategorie($categorie3);
             $produit4->setParentCategorie($parentCategorie);
@@ -216,8 +249,8 @@ $manager->persist($categorie5);
                 //     $manager->persist($categorie);
                 // }
                             // empêcher l'auto incrément
-            // $metadata = $manager->getClassMetaData(Categorie::class);
-            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $metadata = $manager->getClassMetaData(Produit::class);
+            $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
 
 
         $manager->flush();

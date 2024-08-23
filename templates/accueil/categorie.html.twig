@@ -8,6 +8,7 @@
 		<h1 class="fst-italic text-white">Notre catalogue</h1>
 		<main class="container">
 			<div class="row">
+				<div class="d-flex flex-wrap justify-content-around">
 				{% for  categorie in categories %}
 				{# ici je vais mettre une condition pour afficher uniquement les categories parent #}
 				{% if categorie.parentCategorie is null %}
@@ -43,6 +44,7 @@
 					{% endif %}
 					{% endif %}
 				{% endfor %}
+				</div>
 			</div>
 		</main>
 			<li class="nav-item">

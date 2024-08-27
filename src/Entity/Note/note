@@ -1,0 +1,32 @@
+A propos des categorie et sous categories :
+
+Réflexivité (Relation Réflexive ou Auto-Relation)
+
+    Définition : La réflexivité (ou relation réflexive) se produit lorsque une entité est en relation avec elle-même. C'est-à-dire que les instances de la même entité peuvent être liées entre elles.
+
+    Exemple :
+        Entité Employee : Représente un employé.
+        Relation Réflexive : Un employé peut être le manager d'autres employés. Ici, la relation est entre différentes instances de la même entité (Employee).
+        Modélisation : Dans la base de données, cela peut être représenté par une colonne manager_id dans la table Employee qui pointe vers un autre enregistrement dans la même table, représentant le manager de cet employé.
+
+    Types de réflexivité :
+        One-to-One Réflexive : Une instance de l'entité peut être liée à une autre instance unique de la même entité. Par exemple, un employé peut avoir un seul mentor.
+        One-to-Many Réflexive : Une instance de l'entité peut être liée à plusieurs instances de la même entité. Par exemple, un manager peut superviser plusieurs employés.
+        Many-to-Many Réflexive : Plusieurs instances peuvent être liées entre elles dans les deux sens. Par exemple, dans un réseau social, les utilisateurs peuvent être amis entre eux.
+
+Réflexivité :
+
+    Implique une seule entité en relation avec elle-même (par exemple, Employee qui est en relation avec Employee pour modéliser un lien de hiérarchie).
+    Les instances d'une même entité sont liées entre elles.
+    La relation est modélisée par une clé étrangère dans la même table, pointant vers une autre instance de cette table.
+    Réflexivité : Relie des instances de la même entité entre elles (comme un employé avec son manager).
+
+
+    Pourquoi ce choix :
+
+    Simplicité de Modélisation : Toutes les catégories, qu'elles soient principales ou sous-catégories, sont des catégories au sens large. Une sous-catégorie est simplement une catégorie qui est liée à une autre catégorie parent.
+
+    Flexibilité : Une relation réflexive  permet de créer une structure hiérarchique flexible où une catégorie peut avoir des sous-catégories, et ces sous-catégories peuvent elles-mêmes avoir leurs propres sous-catégories.
+
+    Scalabilité : Avec une relation réflexive, on peut facilement gérer des hiérarchies complexes de catégories à plusieurs niveaux sans avoir besoin de créer des entités supplémentaires.
+

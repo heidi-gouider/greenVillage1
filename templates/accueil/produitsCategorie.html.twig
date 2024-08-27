@@ -6,8 +6,7 @@
 {% block body %}
 	<div
 		class="contenu">
-		{# style="background-image:url('{{ asset('IMG/fond/bg3.jpeg') }}')"> #}
-		<h1 class="text-center text-white">Les instruments de
+		<h1 class="text-center text-white">
 			{{ libelle_categorie }}</h1>
 		<!-- <a href="add_form.php" class="btn btn-primary float-end">Ajouter</a> -->
 		<main class="container">
@@ -19,12 +18,12 @@
 							{# <div class="col-md-6 col-lg-5 mb-4"> #}
 							<div class="card m-2" style="width: 18rem;">
                                 <img class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
-								{# <img src="{{ asset('IMG/' ~ produit.photo) }}" alt="{{ produit.libelleProduit }}"> #}
 								<div class="card-body">
 									<h5 class="card-title">
-										{{ produit.libelleProduit }}</h5>
-									{# <p class="card-text">
-																																																																																																																																											{{ plat.description}}</p> #}
+									<a href="{{ path('app_detail_produit', {'id': produit.id}) }}">
+										{{ produit.libelleProduit }}</h5>	
+									<p class="content bg-body">
+										{{ produit.descriptionProduit}}</p>
 									<p class="content bg-body">
 										{{ produit.prixAchatHt}}
 										euros</p>

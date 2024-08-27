@@ -49,6 +49,7 @@ class ProduitController extends AbstractController
 
     // Gestion d'un formulaire de recherche
     #[Route('/recherche', name: 'app_recherche')]
+    // explication en détail dans notes
     public function recherche(Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RechercheType::class);
@@ -101,10 +102,10 @@ class ProduitController extends AbstractController
 
         // dd($categorie);
 
-    // Vérifie si la catégorie existe
-    if (!$categorie) {
-        throw $this->createNotFoundException('La catégorie n\'existe pas.');
-    }
+    // Vérifier la catégorie existe
+    // if (!$categorie) {
+    //     throw $this->createNotFoundException('La catégorie n\'existe pas.');
+    // }
         $produits = $categorie->getProduits();
         return $this->render('accueil/produitsCategorie.html.twig', [
             // return $this->render('base.html.twig', [
@@ -115,6 +116,21 @@ class ProduitController extends AbstractController
         ]);
     }
 
+        // le détail d'un produit
+        #[Route('/detail_produit/{id}', name: 'app_detail_produit')]
+        public function detailProduit(int $id, ProduitRepository $produitRepository): Response
+        {
+            // $produit = $this->produitRepository->findAll();
+            $produit = $this->produitRepository->find($id);
+            // dd($produit);
+            // if (!$produit) {
+            //     throw $this->createNotFoundException('Le produit n\'existe pas.');
+            // }
+            return $this->render('produit/detail_produit.html.twig', [
+                // 'controller_name' => 'AccueilController',
+                'produit' => $produit,
+            ]);
+        }
     
 
     //  #[Route('/produits', name: 'produit_list')]

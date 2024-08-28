@@ -20,9 +20,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
-    private ?string $nom = null;
-
     /**
      * @var list<string> The user roles
      */
@@ -35,11 +32,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 180)]
+    private ?string $nom = null;
+
     #[ORM\Column(length: 255)]
     private ?string $prenom_client = null;
-
-    // #[ORM\Column(length: 255)]
-    // private ?string $reference_client = null;
 
     #[ORM\Column]
     private ?int $telephone_client = null;
@@ -50,15 +47,20 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $code_postal_client = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $ville_client = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $coef_client = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
+    #[ORM\Column]
+    private ?bool $is_verified = null;
+
     // #[ORM\Column(type: 'string', length: 100)]
     // private $resetToken;
-
     
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $resetToken;
@@ -68,6 +70,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'Utilisateur')]
     private Collection $commandes;
+
 
     public function __construct()
     {
@@ -79,17 +82,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
@@ -148,6 +140,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+
     public function getPrenomClient(): ?string
     {
         return $this->prenom_client;
@@ -159,28 +164,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function getResetToken(): ?string
-    {
-        return $this->resetToken;
-    }
     
-    public function setResetToken(?string $resetToken): self
-    {
-        $this->resetToken = $resetToken;
-    
-        return $this;
-    }
-    // public function getReferenceClient(): ?string
-    // {
-    //     return $this->reference_client;
-    // }
-
-    // public function setReferenceClient(string $reference_client): static
-    // {
-    //     $this->reference_client = $reference_client;
-
-    //     return $this;
-    // }
 
     public function getTelephoneClient(): ?int
     {
@@ -218,6 +202,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getVilleClient(): ?string
+    {
+        return $this->ville_client;
+    }
+
+    public function setVilleClient(string $ville_client): static
+    {
+        $this->ville_client = $ville_client;
+
+        return $this;
+    }
+
     public function getCoefClient(): ?string
     {
         return $this->coef_client;
@@ -242,6 +238,29 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function isVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setVerified(bool $is_verified): static
+    {
+        $this->is_verified = $is_verified;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+    
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+    
+        return $this;
+    }
     /**
      * @return Collection<int, Commande>
      */
@@ -271,4 +290,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }

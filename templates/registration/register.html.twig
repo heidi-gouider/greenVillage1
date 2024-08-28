@@ -74,6 +74,12 @@
                         {{ form_errors(registrationForm.code_postal_client) }}
                     </div>
                                         <div class="mb-3">
+                        {{ form_label(registrationForm.ville_client) }}
+                        {{ form_widget(registrationForm.ville_client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.ville_client) }}
+                    </div>
+
+                                        <div class="mb-3">
                         {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions') }}
                         {{ form_widget(registrationForm.agreeTerms) }}
                         {{ form_errors(registrationForm.agreeTerms) }}

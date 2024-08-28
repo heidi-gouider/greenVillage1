@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
             ->add('adresse_client')
             ->add('telephone_client')
             ->add('code_postal_client')
-            // ->add('reference_client')
+            ->add('ville_client')
             ->add('coef_client', ChoiceType::class, [
                 'choices'  => [
                     'Particulier' => 'particulier',

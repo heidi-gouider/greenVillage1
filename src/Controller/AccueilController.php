@@ -30,11 +30,17 @@ class AccueilController extends AbstractController
          //on appelle la fonction `findAll()` du repository de la classe `Categorie` afin de récupérer toutes les categories de la base de données;
         //  $categories = $this->categorieRepository->findAll();
          $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+         $produitsAleatoires = $this->produitRepository->findAll();
+
+        // mélange les produits
+        shuffle($produitsAleatoires);
 
         return $this->render('accueil/index.html.twig', [
             // return $this->render('base.html.twig', [
             // 'controller_name' => 'AccueilController',
             'categories' => $categories,
+            'produitsAleatoires' => $produitsAleatoires,
+
         ]);
     }
 
@@ -76,3 +82,4 @@ class AccueilController extends AbstractController
     }
 
 }
+

@@ -4,7 +4,19 @@
 {% endblock %}
 
 {% block body %}
-{% include "partials/banniere.html.twig" %}
+{# {% include "partials/banniere.html.twig" %} #}
+			<div class="row align-items-center bg-dark banniere mx-auto text-white">
+				{% for  categorie in categories %}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
 	<div class="contenu">
 		{# <h1 class="fst-italic mb-5">Notre super catalogue</h1> #}
 		<main class="container">

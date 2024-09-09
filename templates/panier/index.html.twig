@@ -15,7 +15,7 @@
 					<table class="table text-white" id="formulaire">
 						<thead>
 							<tr>
-								<th>Disque</th>
+								<th>produit</th>
 								<th>Prix</th>
 								<th>Quantité</th>
 								<th>Total</th>
@@ -25,17 +25,17 @@
 						<tbody>
 							{% for element in data %}
 								<tr>
-									<td>{{ element.disc.title }}</td>
+									<td>{{ element.produit.title }}</td>
 									{# penser à %par 100 si les prix sont en centimes #}
 									<td>{{ element.disc.prix }}
 										€</td>
 									<td>{{ element.quantite }}</td>
-									<td>{{ element.quantite * element.disc.prix }}
+									<td>{{ element.quantite * element.produit.prix }}
 										€</td>
 									<td>
-										<a href="{{ path('panier_retirer', {id: element.disc.id }) }}" class="btn btn-danger">-</a>
-										<a href="{{ path('panier_ajout', {id: element.disc.id }) }}" class="btn btn-success">+</a>
-										<a href="{{ path('panier_supprimer', {id: element.disc.id }) }}" class="btn btn-secondary">Suppr</a>
+										<a href="{{ path('panier_retirer', {id: element.produit.id }) }}" class="btn btn-danger">-</a>
+										<a href="{{ path('panier_ajout', {id: element.produit.id }) }}" class="btn btn-success">+</a>
+										<a href="{{ path('panier_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>
 									</td>
 								</tr>
 							{% else %}
@@ -73,6 +73,6 @@
 				</div>
 			</main>
 		</div>
-		{% include "partials/footer.php" %}
+		{# {% include "partials/footer.php" %} #}
 	{% endblock %}
 

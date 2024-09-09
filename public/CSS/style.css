@@ -1,5 +1,5 @@
 body {
-    background-color: #222222;
+    /* background-color: #222222; */
     /* background-image: url('../IMG/fond.webp');  */
     height: 100%;
     min-height: 100vh;
@@ -9,15 +9,31 @@ body {
 
   }
       h1 *{
-          color: #C9C9C9;
+          /* color: #C9C9C9; */
+          @font-face {
+            font-family: "Ubuntu Light";
+            src: url("public/fonts/Ubuntu-Light.ttf") format(ttf);
+        }
+        
       }   
-      a {
+  a {
           text-decoration: none;
+          color: black;
       }
 
       .text-orange {
         color: orange !important;
       }
+/* ------------------------------------------------------------------------------------------------------------ */
+      /* Bandeau */
+.banniere {
+  margin-top: 21vh;
+  height: 6vh;
+}
+
+
+
+
 
 /* ------------------------------------------------------------------------------------------------------------ */
       /* Page base */
@@ -64,10 +80,29 @@ body {
     /* .btn-delete:hover {
         color: darkred;
     } */
+          /* ----------------------------------------- */
   
+      /*  PAGE ACCUEIL   */
+
+.category-banner {
+  background-color: #75797e;
+  
+}
+
+
+/****** image banniere **********/
+
+
+#img-promo {
+  width: 100%;
+  height: auto;
+}
+
+
+
         /* ----------------------------------------- */
   
-      /*  PAGEs form    */
+      /*  PAGES form    */
       .form {
         padding-top: 200px;
       }
@@ -76,7 +111,7 @@ body {
       .contenu {
         /* background-color: #222222; */
         /* padding-top: 100px; */
-        margin-top: 20vh;
+        margin-top: 30vh;
         /* margin-top: 200px; */
         margin-left: 10vh;
 
@@ -137,7 +172,8 @@ body {
 
     .card-title, .content {
         text-align: center;
-        color: white;
+        /* color: white; */
+
     }
 
     .card-footer {
@@ -163,7 +199,7 @@ body {
   
   /*  PAGE FORMULAIRE  */
   form{
-    background-color: rgba(0, 0, 0, 0.3);
+    /* background-color: rgba(0, 0, 0, 0.3); */
     box-sizing: border-box;
     padding: 2%;
   }
@@ -211,8 +247,10 @@ body {
     .text-white {
       color: #ffffff; /* Code couleur pour le texte blanc */
   }
+  
     #formulaire label {
-      color: #f3e5e5;
+      /* color: #f3e5e5; */
+      color: black;
       /* background-color: rgba(178, 181, 187, 0.3); */
     }
   

@@ -70,7 +70,7 @@ class PanierController extends AbstractController
                 $quantite = $form->get('quantite')->getData();
                 // Traitement des données, y compris la quantité choisie
             }
-            // récuperer l'id du disc
+            // récuperer l'id du produit
             $id = $produit->getId();
 
             // Obtenez le panier existant à partir de la session ou créez-en un nouveau.
@@ -101,7 +101,7 @@ class PanierController extends AbstractController
         }
     
         #[Route('/ajout/{id}', name: 'ajout')]
-        public function ajout(disc $disc, SessionInterface $session)
+        public function ajout(Produit $produit, SessionInterface $session)
         {
             $id = $produit->getId();
             $panier = $session->get('panier', []);
@@ -119,7 +119,7 @@ class PanierController extends AbstractController
         }
     
         #[Route('/retirer/{id}', name: 'retirer')]
-        public function retirer(disc $disc, SessionInterface $session)
+        public function retirer(Produit $produit, SessionInterface $session)
         {
 
             // récuperer l'id du disc
@@ -143,7 +143,7 @@ class PanierController extends AbstractController
         }
     
         #[Route('/supprimer/{id}', name: 'supprimer')]
-        public function supprimer(Disc $disc, SessionInterface $session)
+        public function supprimer(Produit $produit, SessionInterface $session)
         {
             $id = $produit->getId();
             $panier = $session->get('panier', []);
@@ -178,7 +178,7 @@ class PanierController extends AbstractController
 
         $total = 0;
         foreach ($panier as $id => $quantite) {
-            $produit = $em->getRepository(Disc::class)->find($id);
+            $produit = $em->getRepository(produit::class)->find($id);
             $detail = new Detail();
             $detail->setCommande($commande);
             $detail->setProduit($produit);

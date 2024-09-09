@@ -18,21 +18,15 @@ class ContactFormType extends AbstractType
         $builder
             ->add('objet')
             ->add('email')
-
-            //ajout d'un label et rendre le champ optionnel en
-            // donnant la valeur false à l'attribut required
-            ->add(
-                'message',
-                TextareaType::class,
-                [
-                    'label' => 'Votre message',
-                    // rendre le champ optionnel
-                    // 'required' => false,
-                    'required' => true,
-
-                ]
+            ->add('message'
+                // TextareaType::class,
+                // [
+                //     'label' => 'Message',
+                //     'required' => true,
+                //     rendre le champ optionnel
+                //     'required' => false,
+                // ]
             )
-
             ->add(
                 'jaccepte',
                 CheckboxType::class,
@@ -47,11 +41,10 @@ class ContactFormType extends AbstractType
                 ]
 
             )
-
-                        // les données liées a la checkbox ne seront pas enregistrer dans l'entité ou avec le shema de données, pour le faire il faudra le faire manuellement
+            // les données liées a la checkbox ne seront pas enregistrer dans l'entité ou avec le shema de données, pour le faire il faudra le faire manuellement
             // ->add('agreeTerms', CheckboxType::class, ['mapped' => false])
             ->add('save', SubmitType::class, [
-                'label' => 'Envoyer le message',
+                'label' => 'Envoyer',
             ]);
 
     }

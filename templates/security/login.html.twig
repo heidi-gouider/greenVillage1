@@ -1,76 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion!{% endblock %}
+{% block title %}Connexion!
+{% endblock %}
 
 {% block body %}
-<div class="contenu">
+	<div class="contenu">
 		<h1 class="fst-italic">Inscription</h1>
 
-		<div class="container text-white">
+		<div class="container">
 
 			<div class="row text-center">
-             <div class="col-6 mx-auto">
+				<div class="col-6 mx-auto">
 
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+					<form method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-        </div>
-    {% endif %}
+						{% if app.user %}
+							<div class="mb-3">
+								Vous êtes connecté en tant que
+								{{ app.user.userIdentifier }},
+								<a href="{{ path('app_logout') }}">Se déconnecter</a>
+							</div>
+						{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez vous</h1>
-    <label for="inputNom">Email</label>
-    <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <span class="input-group-text">
-     <i class="bi bi-eye-slash" name="pass" type="text" id="pass" style="cursor: pointer" OnClick="changer"></i>
-    </span>
-    </div>
+						<h1 class="h3 mb-3 font-weight-normal">Connectez vous</h1>
 
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Se souvenir de moi
-        </label>
-    </div>
-     <div class="d-grid gap-3 col-3 mx-auto">
-
-    <button class="submit" type="submit">
-        Connexion
-    </button>
-        </div>
-
-                        <div class="d-grid gap-3 col-3 mx-auto">
-
-            <a class="submit" href="{{ path('app_register') }}">
-        Créer un compte
-    </a>
-        </div>
-
-    <div>
-            <a class="" style="text-decoration: none"
- href="{#{{ path('app_forgot_password_request') }} #}">
-        Mot de passe oublié ?
-    </a>
-</div>
+						<label class="mb-3" for="inputNom">Email</label>
+						<input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						<label class="mt-4 mb-3" for="inputPassword">Mot de passe</label>
+						<input
+						type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+						<span class="input-group-text">
+							<i class="bi bi-eye-slash" name="pass" type="text" id="pass" style="cursor: pointer" OnClick="changer"></i>
+						 </span>
 
 
-</form>
-</div>
-</div>
-</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-		{# {% include "partials/footer.php" %} #}
+						<div class="checkbox mb-3">
+							<label>
+								<input type="checkbox" name="_remember_me">
+								Se souvenir de moi
+							</label>
+						</div>
+			<div class="row ">
+						<div class="d-grid gap-3 col-3 mx-auto">
+							<button class="submit" type="submit">
+								Connexion
+							</button>
+						</div>
 
-</div>
+						<div class="d-grid gap-3 col-3 mx-auto">
 
-{% endblock %}
+							<a class="submit" href="{{ path('app_register') }}">
+								Créer un compte
+							</a>
+						</div>
+
+						<div>
+							<a class="" style="text-decoration: none" href="{#{{ path('app_forgot_password_request') }} #}">
+								Mot de passe oublié ?
+							</a>
+						</div>
+                        </div>
+					</form>
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{# {% include "partials/footer.php" %} #}
+</div>{% endblock %}

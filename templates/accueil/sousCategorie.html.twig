@@ -4,49 +4,40 @@
 {% endblock %}
 
 {% block body %}
-	<div class="contenu mb-5">
-		<h1 class="fst-italic">Notre super catalogue</h1>
-        		{# <h1 class="text-center text-white">Les instruments de
-			{{ categorie.libelleCategorie }}</h1> #}
+{% include "partials/banniere.html.twig" %}
+	<div class="contenu">
+		{# <h1 class="fst-italic mb-5">Notre super catalogue</h1> #}
 		<main class="container">
 			<div class="row">
-			<div class="d-flex flex-wrap justify-content-around">
-				{% for  categorie in sous_categories %}
-				{# {% if categorie.parentCategorie is not null %} #}
-					<div class="col-md-6 mb-4">
-						 <div class="card" id="images" style="width: 18rem;"> 
-                        	<a href="{{ path('app_produits_categorie', {'id': categorie.id}) }}">
-                            {{ categorie.libelleCategorie}}
-                                <img class="card-img-top mx-auto" src="{{ asset(categorie.imageCategorie) }}" alt="{{ categorie.imageCategorie }}">
-                                {# <img class="card-img-top mx-auto" src="{{ asset( categorie.image_categorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
-							</a>
-							<div class="card-body">
-								<h5 class="card-title">{{ categorie.libelleCategorie }}</h5>
-								 <p class="card-text">
-									{{ categorie.descriptionCategorie}}</p> 
-							</div> 
-						 </div> 
-					</div>
-					{# $count++; // Incrémentez le compteur
-								            // Si vous avez affiché 2 disques, fermez la rangée actuelle et commencez une nouvelle rangée
-								            if ($count % 2 == 0) {
-								                echo '</div><div class="row">';
-								            } #}
-					{% if loop.index is even %}
-					</div>
-					<div class="row">
-					{# {% endif %} #}
-					{% endif %}
-				{% endfor %}
+				<div class="d-flex flex-wrap justify-content-around">
+					{% for  categorie in sous_categories %}
+						{# {% if categorie.parentCategorie is not null %} #}
+						<div class="col-md-4 mb-5">
+							<div class="card w-50 " id="images">
+								<a href="{{ path('app_produits_categorie', {'id': categorie.id}) }}">
+									<img
+									class="card-img-top mx-auto mb-5" src="{{ asset(categorie.imageCategorie) }}" alt="{{ categorie.imageCategorie }}">
+									{# <img class="card-img-top mx-auto" src="{{ asset( categorie.image_categorie) }}" alt="{{ categorie.libelleCategorie }}"> #}
+									{{ categorie.libelleCategorie}}
+								</a>
+								{# <div
+									class="card-body mt-5">
+									<p class="card-text">
+										{{ categorie.descriptionCategorie}}</p>
+								</div> #}
+							</div>
+						</div>
+						{# {% endif %} #}
+					{% endfor %}
 				</div>
 			</div>
 		</main>
-			<li class="nav-item">
-				<a class="nav-link text-center text-orange" href="{{ path('app_accueil') }}">Retour à l'accueil</a>
-			</li>
+		<div class="nav-item">
+			<a class="nav-link text-center text-orange" href="{{ path('app_accueil') }}">Retour à l'accueil</a>
+		</div>
 
-					</div>
+	</div>
 
-			{# {% include "partials/footer.php" %} #}
+	{# {% include "partials/footer.php" %} #}
 
-	{% endblock %}
+{% endblock %}

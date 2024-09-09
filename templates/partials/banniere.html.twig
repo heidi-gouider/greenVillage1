@@ -1,0 +1,13 @@
+			<div class="row align-items-center bg-dark banniere mx-auto">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+

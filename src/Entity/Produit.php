@@ -27,6 +27,9 @@ class Produit
     #[ORM\Column]
     private ?int $prix_achat_ht = null;
 
+    #[ORM\Column(type: 'integer', precision: 10, nullable: true)]
+    private ?int $prix = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
@@ -108,6 +111,17 @@ class Produit
         return $this;
     }
 
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
     public function getPhoto()
     {
         return $this->photo;

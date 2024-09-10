@@ -4,8 +4,21 @@
 {% endblock %}
 
 {% block body %}
+			<div class="row align-items-center bg-dark banniere mx-auto text-center">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
 	<div class="contenu">
-		<h1 class="text-center">
+		<h1 class="mb-5">
 			{{ libelle_categorie }}</h1>
 		<!-- <a href="add_form.php" class="btn btn-primary float-end">Ajouter</a> -->
 		<main class="container">
@@ -16,8 +29,7 @@
 						{% for produit in produits %}
 							{# <div class="col-md-6 col-lg-5 mb-4"> #}
 							<div class="card mt-5 w-25">
-								{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}">
-									{{ produit.libelleProduit}} #}
+								<a href="{{ path('app_detail_produit', {'id': produit.id}) }}">
 									<img class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
 									<div class="card-body">
 										<h5 class="card-title">

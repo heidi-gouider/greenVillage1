@@ -26,9 +26,12 @@ body {
       }
 /* ------------------------------------------------------------------------------------------------------------ */
       /* Bandeau */
+
+
 .banniere {
   margin-top: 21vh;
   height: 6vh;
+  font-size: 2rem;
 }
 
 
@@ -86,10 +89,10 @@ margin-top: 10vh;
   
       /*  PAGE ACCUEIL   */
 
-.category-banner {
+/* .category-banner {
   background-color: #75797e;
   
-}
+} */
 
 
 /****** image banniere **********/

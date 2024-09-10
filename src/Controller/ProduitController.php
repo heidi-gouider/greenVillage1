@@ -25,7 +25,7 @@ class ProduitController extends AbstractController
 
     public function __construct( ProduitRepository $produitRepository, CategorieRepository $categorieRepository)
     {
-        $this->ProduitRepository = $produitRepository;
+        $this->produitRepository = $produitRepository;
         // $this->RechercheRepository = $rechercheRepository;
         $this->categorieRepository = $categorieRepository;
 
@@ -120,13 +120,14 @@ class ProduitController extends AbstractController
         #[Route('/detail_produit/{id}', name: 'app_detail_produit')]
         public function detailProduit(int $id, ProduitRepository $produitRepository): Response
         {
-            // $produit = $this->produitRepository->findAll();
+            // $produits = $this->produitRepository->findAll();
             $produit = $this->produitRepository->find($id);
-            // dd($produit);
-            // if (!$produit) {
-            //     throw $this->createNotFoundException('Le produit n\'existe pas.');
-            // }
-            return $this->render('produit/detail_produit.html.twig', [
+            // dd($produits);
+            // S'assurer que le produit existe
+            if (!$produit) {
+                throw $this->createNotFoundException('Le produit n\'existe pas.');
+            }
+            return $this->render('accueil/detailProduit.html.twig', [
                 // 'controller_name' => 'AccueilController',
                 'produit' => $produit,
             ]);

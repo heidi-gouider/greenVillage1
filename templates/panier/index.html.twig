@@ -25,9 +25,9 @@
 						<tbody>
 							{% for element in data %}
 								<tr>
-									<td>{{ element.produit.title }}</td>
+									<td>{{ element.produit.libelleProduit }}</td>
 									{# penser à %par 100 si les prix sont en centimes #}
-									<td>{{ element.disc.prix }}
+									<td>{{ element.produit.prix }}
 										€</td>
 									<td>{{ element.quantite }}</td>
 									<td>{{ element.quantite * element.produit.prix }}

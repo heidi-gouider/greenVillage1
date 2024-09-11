@@ -5,12 +5,11 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
-use ApiPlatform\Metadata\ApiResource;
+// use Doctrine\DBAL\Types\Types;
+// use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-#[ApiRessource]
 class Produit
 {
     #[ORM\Id]
@@ -36,15 +35,18 @@ class Produit
     #[ORM\Column]
     private ?int $quantite_stock = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $reference_fournisseur = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $total_ht = null;
 
 
-    /**
-     * @var Collection<int, Fournisseur>
-     */
-    #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'produit')]
-    private Collection $fournisseurs;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $reference_fournisseur = null;
+
+    // /**
+    //  * @var Collection<int, Fournisseur>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'produit')]
+    // private Collection $fournisseurs;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
@@ -63,12 +65,20 @@ class Produit
     #[ORM\Column(nullable: true)]
     private ?int $quantite_vendu = null;
 
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Detail::class)]
+    private Collection $details;
+
     public function __construct()
     {
-        $this->fournisseurs = new ArrayCollection();
-        // $this->categorie = new ArrayCollection();
-        $this->commandes = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
+
+    // public function __construct()
+    // {
+    //     $this->fournisseurs = new ArrayCollection();
+    //     $this->categorie = new ArrayCollection();
+    //     $this->commandes = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -146,45 +156,57 @@ class Produit
         return $this;
     }
 
-    public function getReferenceFournisseur(): ?string
+    public function getTotalHt()
     {
-        return $this->reference_fournisseur;
+        return $this->total_ht;
     }
 
-    public function setReferenceFournisseur(string $reference_fournisseur): static
+    public function setTotalHt($total_ht): static
     {
-        $this->reference_fournisseur = $reference_fournisseur;
+        $this->total_ht = $total_ht;
 
         return $this;
     }
 
+    // public function getReferenceFournisseur(): ?string
+    // {
+    //     return $this->reference_fournisseur;
+    // }
 
-    /**
-     * @return Collection<int, Fournisseur>
-     */
-    public function getFournisseurs(): Collection
-    {
-        return $this->fournisseurs;
-    }
+    // public function setReferenceFournisseur(string $reference_fournisseur): static
+    // {
+    //     $this->reference_fournisseur = $reference_fournisseur;
 
-    public function addFournisseur(Fournisseur $fournisseur): static
-    {
-        if (!$this->fournisseurs->contains($fournisseur)) {
-            $this->fournisseurs->add($fournisseur);
-            $fournisseur->addProduit($this);
-        }
+    //     return $this;
+    // }
 
-        return $this;
-    }
 
-    public function removeFournisseur(Fournisseur $fournisseur): static
-    {
-        if ($this->fournisseurs->removeElement($fournisseur)) {
-            $fournisseur->removeProduit($this);
-        }
+    // /**
+    //  * @return Collection<int, Fournisseur>
+    //  */
+    // public function getFournisseurs(): Collection
+    // {
+    //     return $this->fournisseurs;
+    // }
 
-        return $this;
-    }
+    // public function addFournisseur(Fournisseur $fournisseur): static
+    // {
+    //     if (!$this->fournisseurs->contains($fournisseur)) {
+    //         $this->fournisseurs->add($fournisseur);
+    //         $fournisseur->addProduit($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeFournisseur(Fournisseur $fournisseur): static
+    // {
+    //     if ($this->fournisseurs->removeElement($fournisseur)) {
+    //         $fournisseur->removeProduit($this);
+    //     }
+
+    //     return $this;
+    // }
 
     public function getCategorie(): ?Categorie
     {
@@ -210,32 +232,32 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
+    // /**
+    //  * @return Collection<int, Commande>
+    //  */
+    // public function getCommandes(): Collection
+    // {
+    //     return $this->commandes;
+    // }
 
-    public function addCommande(Commande $commande): static
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes->add($commande);
-            $commande->addProduit($this);
-        }
+    // public function addCommande(Commande $commande): static
+    // {
+    //     if (!$this->commandes->contains($commande)) {
+    //         $this->commandes->add($commande);
+    //         $commande->addProduit($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCommande(Commande $commande): static
-    {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeProduit($this);
-        }
+    // public function removeCommande(Commande $commande): static
+    // {
+    //     if ($this->commandes->removeElement($commande)) {
+    //         $commande->removeProduit($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getQuantiteVendu(): ?int
     {
@@ -245,6 +267,36 @@ class Produit
     public function setQuantiteVendu(?int $quantite_vendu): static
     {
         $this->quantite_vendu = $quantite_vendu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Detail[]
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(Detail $detail): self
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details[] = $detail;
+            $detail->setproduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Detail $detail): self
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getproduit() === $this) {
+                $detail->setproduit(null);
+            }
+        }
 
         return $this;
     }

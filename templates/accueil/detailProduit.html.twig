@@ -1,77 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Green Village
+{% block title %}
+	Green Village
 {% endblock %}
 
 {% block body %}
-	<div class="contenu">
-		<main class="container">
-			<div class="row">
-				<div class="col-10 mx-auto">
-					<div class="d-flex flex-wrap justify-content-around">
+	<div	class="contenu">
+		<main	class="container">
+			<div	class="row">
+				<div	class="d-flex flex-wrap justify-content-around">
+						<div	class="col-md-4 mb-5">
+							<div	class="card m-2"	style="width: 18rem;">
+								<img	class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
+									<div	class="card-body">
+										<h5	class="card-title">
+											{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a> #}
+											{{ produit.libelleProduit }}
+										</h5>
+										<p	class="content bg-body">
+											{{ produit.prix }}
+											euros
+										</p>
+									</div>
+									<div	class="card-footer mt-2"></div>
+									{% if produit.quantiteStock == 0 %}
+										<p	class="text-danger">
+											Stock épuisé !
+										</p>
+									</div>
+								{% else %}
+									<form	action="{{ path('panier_ajout', {'id': produit.id}) }}"	method="post">
+										<div	class="d-flex justify-content-center">
 
-						<div class="card m-2" style="width: 18rem;">
-							<img class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
-							<div class="card-body">
-								<h5
-									class="card-title">
-									{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a> #}
-									{{ produit.libelleProduit }}</h5>
-								<p class="content bg-body">
-									{{ produit.prix}}
-									euros</p>
-							</div>
-							<div class="card-footer mt-2"></div>
-							{% if produit.quantiteStock == 0 %}
-								<p class="text-danger">Stock épuisé !</p>
-							</div>
-						{% else %}
-							<form action="{{ path('panier_ajout', {'id': produit.id}) }}" method="post">
-								<div class="d-flex justify-content-center">
+											{# ***les quantités***
+											Je décide de mettre les quantités dans le  panier #}
 
-									{# ***les quantités***
-																																																																																																																																																																																																																																																																																			 Je décide de mettre les quantités dans le  panier #}
+											{# <button class="btn btn-secondary bg-danger quantity-button" href="{{ path('panier_retirer', {id: produit.id }) }}"  data-produit-id="{{ produit.id }}" data-action="decrement">-</button>
+											<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
 
-									{# <button class="btn btn-secondary bg-danger quantity-button" href="{{ path('panier_retirer', {id: produit.id }) }}"  data-produit-id="{{ produit.id }}" data-action="decrement">-</button>
-																																																																																																																																																																																																																																																																																		<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
+											{# ***bouton lien d'ajout au panier*** #}
+											{# </button class="btn btn-secondary bg-success quantity-button" href="{{ path('panier_ajout', {id: produit.id }) }}" data-produit-id="{{ produit.id }}" data-action="increment">+</button>
+											</div>  #}
 
-									{# ***bouton lien d'ajout au panier*** #}
-									{# </button class="btn btn-secondary bg-success quantity-button" href="{{ path('panier_ajout', {id: produit.id }) }}" data-produit-id="{{ produit.id }}" data-action="increment">+</button>
-																																																																																																																																																																																																																																																																																			 </div>  #}
+											{# vers panier #}
+												<button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_ajout', {id: produit.id}) }}">	ajouter au panier
+											{# <i class="bi bi-basket"> #}
+											</button>
 
-									{# vers panier #}
-										<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('panier_ajout', {id: produit.id})}}"> ajouter au panier
-										{# <i class="bi bi-basket"> #}
-									</button>
-
-
-									{# vers modal #}
-									{# <button type="button" class=" d-block mt-5 btn btn-success mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#modal{{ plat.id }}">Ajouter au panier</button>
-																																																																																																																																																																																																																																																																																			</button> #}
+										{# vers modal #}
+										{# <button type="button" class=" d-block mt-5 btn btn-success mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#modal{{ plat.id }}">Ajouter au panier</button>
+										</button> #}
+										</div>
+									{# {% if loop.index is even %} #}
+									{# <div class="row">
+									#}
+									</form>
+								{% endif %}
+								<div>
+									<p	class="content bg-body">
+										{{ produit.descriptionProduit }}
+									</p>
 								</div>
-								{# {% if loop.index is even %} #}
-								{# <div class="row">
-																																																																																																																													 #}
-							</form>
-						{% endif %}
-						<div>
-							<p class="content bg-body">
-								{{ produit.descriptionProduit}}</p>
+							<div	class="row"></div>
 						</div>
-
-						{# </div> #}
-
-						<div class="row"></div>
-
-						{# {% endfor %} #}
-					</div>
 					<!-- /// LA MODAL D'AJOUT AU PANIER/// -->
 					{# <div class="modal fade" id="modal{{ plat.id }}" tabindex="-1"> #}
-				</div>
+					</div>
 
-				<li class="nav-item text-orange">
-					<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
-				</li>
-			</main>
-		</div>
-	</div>{# {% include "partials/footer.php" %} #}{% endblock %}
+					<li	class="nav-item text-orange">
+						<a	class="nav-link text-center"	href="{{ path('app_categorie') }}">
+							Retour au catalogue
+						</a>
+					</li>
+
+				</div>
+			</div>
+		</main>
+	</div>
+{% endblock %}

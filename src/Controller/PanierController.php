@@ -172,15 +172,15 @@ class PanierController extends AbstractController
         $user = $this->getUser();
 
         $commande = new Commande();
-        $commande->setUser($user);
+        $commande->setUtilisateur($user);
         $commande->setDateCommande(new \DateTime());
-        $commande->setEtat('1');
+        // $commande->setEtat('1');
 
         $total = 0;
         foreach ($panier as $id => $quantite) {
             $produit = $em->getRepository(produit::class)->find($id);
             $detail = new Detail();
-            $detail->setCommande($commande);
+            // $detail->setCommande($commande);
             $detail->setProduit($produit);
             $detail->setQuantity($quantite);
 
@@ -189,7 +189,7 @@ class PanierController extends AbstractController
             $total += $produit->getPrix() * $quantite;
         }
 
-        $commande->setTotal($total);
+        $commande->setTotalHt($total_ht);
 
         $em->persist($commande);
         $em->flush();

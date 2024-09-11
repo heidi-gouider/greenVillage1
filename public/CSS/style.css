@@ -31,7 +31,8 @@ body {
 .banniere {
   margin-top: 21vh;
   height: 6vh;
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  font-size: 10%;
 }
 
 
@@ -163,12 +164,13 @@ margin-top: 10vh;
         height: auto; /* pour garder les proportions de l'image */
     }
   
-          /* ------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------ */
       /*  LES CARTES AVEC PRODUITS    */
 
       .card {
         background-color: transparent;
-        border: none;
+        /* border: none; */
+        border-right: black;
       }
 
       .card-body {

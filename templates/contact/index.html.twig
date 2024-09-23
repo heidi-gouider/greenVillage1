@@ -30,6 +30,18 @@
 					{{ form_end(form) }}
 				</div>
 			</div>
+			{# Affichage des messages flash de confirmation#}
+			{# {% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ label }}">
+					{{ message }}
+				</div>
+			{% endfor %} #}
+			{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+		{% endfor %}
 		</div>
 	</div>
 </div></div>{# {% include "partials/footer.php" %}  #}{% endblock %}

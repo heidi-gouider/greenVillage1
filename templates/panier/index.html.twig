@@ -48,21 +48,32 @@
                                             {{ element.quantite }}
                                             <i class="bi bi-chevron-down"></i>
                                         </button> #}
-										<button class="btn {#dropdown-toggle #}" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+										{# <button class="btn " type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
 										{{ element.quantite }}
 										<span class="chevrons">
 										<i class="bi bi-chevron-down"></i>
 										<i class="bi bi-chevron-up"></i> <!-- Ajout de la flèche vers le haut -->
 									</span>
-									</button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ element.produit.id }}">
+									</button> #}
+                                            {# <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ element.produit.id }}">
                                                 {% for i in 1..10 %}
                                                     <li>
-                                                        <a class="dropdown-item" {# href="{{ path('panier_update_quantity', {id: element.produit.id, quantite: i}) }} #}">{{ i }}</a>
+                                                        <a class="dropdown-item" href="{{ path('panier_update_quantity', {id: element.produit.id, quantite: i}) }}">{{ i }}</a>
                                                     </li>
                                                 {% endfor %}
-                                            </ul>
+                                            </ul> #}
                                         </div>
+										 {# Formulaire pour la quantité avec une liste déroulante #}
+        <form action="{{ path('panier_ajout', {id: element.produit.id}) }}" method="post">
+            <select name="quantite" onchange="this.form.submit()">
+                {% for i in 1..10 %}
+                    <option value="{{ i }}" {% if i == element.quantite %}selected{% endif %}>
+                        {{ i }}
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="action" value="update">
+        </form>
 										{# <a href="{{ path('panier_remove', {id: element.produit.id }) }}"><i class="bi bi-caret-down-fill"></i></a>
 										<a href="{{ path('panier_ajout', {id: element.produit.id }) }}"><i class="bi bi-caret-up-fill"></i></a> #}
 										<a href="{{ path('panier_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>

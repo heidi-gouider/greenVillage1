@@ -52,6 +52,9 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $total_ht = null;
 
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
+    private Collection $details;
+
     /**
      * @var Collection<int, Produit>
      */
@@ -60,8 +63,11 @@ class Commande
 
     public function __construct()
     {
+                // Initialisation de la collection de produits et de détails
         $this->produits = new ArrayCollection();
+        $this->details = new ArrayCollection(); // Ajout de l'initialisation ici
     }
+
 
     public function getId(): ?int
     {
@@ -234,5 +240,33 @@ class Commande
         $this->produits->removeElement($produit);
 
         return $this;
+    }
+
+     /**
+     * @return Collection<int, Detail>
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(Detail $detail): static
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Detail $detail)
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getCommande() === $this) {
+                $detail->setCommande(null);
+            }
+        }
     }
 }

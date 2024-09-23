@@ -30,37 +30,34 @@
 								</div>
 							{% else %}
 								<form	action="{{ path('panier_add', {'id': produit.id}) }}"	method="post">
-									<div	class="d-flex justify-content-center">
+									<div	class="d-flex justify-content-center">{# ***les quantités***
+									Je décide de mettre les quantités dans le  panier #}
 
-										{# ***les quantités***
-										Je décide de mettre les quantités dans le  panier #}
+									{# <button class="btn btn-secondary bg-danger quantity-button" href="{{ path('panier_retirer', {id: produit.id }) }}"  data-produit-id="{{ produit.id }}" data-action="decrement">-</button>
+									<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
 
-										{# <button class="btn btn-secondary bg-danger quantity-button" href="{{ path('panier_retirer', {id: produit.id }) }}"  data-produit-id="{{ produit.id }}" data-action="decrement">-</button>
-										<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
+									{# ***bouton lien d'ajout au panier*** #}
+									{# </button class="btn btn-secondary bg-success quantity-button" href="{{ path('panier_ajout', {id: produit.id }) }}" data-produit-id="{{ produit.id }}" data-action="increment">+</button>
+									</div>  #}
 
-										{# ***bouton lien d'ajout au panier*** #}
-										{# </button class="btn btn-secondary bg-success quantity-button" href="{{ path('panier_ajout', {id: produit.id }) }}" data-produit-id="{{ produit.id }}" data-action="increment">+</button>
-										</div>  #}
-
-										{# vers panier #}
-											{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">	ajouter au panier
-										</button> #}
+									{# vers panier #}
+									{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">	ajouter au panier
+									</button> #}
 
 									{# vers modal #}
 									{# <button type="button" class=" d-block mt-5 btn btn-success mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#modal{{ plat.id }}">Ajouter au panier</button>
 									</button> #}
-									</div>
+								</div>
 								{# {% if loop.index is even %} #}
 								{# <div class="row">
 								#}
-								</form>
+							</form>
 							{% endif %}
 							{# <div>
 								<p	class="content bg-body">
 								{{ produit.descriptionProduit }}
 								</p>
-							</div> #}
-							<div	class="row"></div>
+							</div> #}<div	class="row">	</div>
 						</div>
 					</div>
 					<div>
@@ -77,26 +74,33 @@
 						{# <a	class="nav-link text-center"	href="{{ path('panier_index') }}">
 							Voir le panier
 						</a> #}
-						{# vers panier #}
-																	{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">	ajouter au panier
-										</button> #}
+						{# {% if productAdd %}
+							<a	class="d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_index') }}">
+								Voir le panier
+							</a>
+						{% else %} #}
+							{# vers panier #}
+							<a	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
+								ajouter au panier
+							</a>
+						{# {% endif %} #}
 
-						<button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
-							ajouter au panier
-						{# <i class="bi bi-basket"> #}
-						</button>
+							{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
+							ajouter au panier #}
+							{# <i class="bi bi-basket"> #}
+							{# </button> #}
 
-						<!-- /// LA MODAL D'AJOUT AU PANIER / Message flash d'ajout au panier/// -->
-						{# <div class="modal fade" id="modal{{ plat.id }}" tabindex="-1"> #}
-						{% for message in app.flashes('success') %}
-							<div	class="alert alert-success">
-								{{ message }}
-							</div>
-						{% endfor %}
+							<!-- /// LA MODAL D'AJOUT AU PANIER / Message flash d'ajout au panier/// -->
+							{# <div class="modal fade" id="modal{{ plat.id }}" tabindex="-1"> #}
+								{% for message in app.flashes('success') %}
+									<div	class="alert alert-success">	{{ message }}
+								</div>
+							{% endfor %}
 
+						</div>
 					</div>
 				</div>
-			</div>
-		</main>
-	</div>
-{% endblock %}
+			</main>
+		</div>
+	{% endblock %}
+	

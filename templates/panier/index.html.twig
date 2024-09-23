@@ -9,32 +9,62 @@
 		class="contenu">
 		{# <h1 class="fst-italic text-center">Mon panier</h1> #}
 		<main class="container mt-5">
-			<div class="row">
+			<div class="row mx-auto">
 				<div class="col-8">
-					<h2 class="text-center text-white">Mon panier</h2>
-					<table class="table text-white" id="formulaire">
+					<h2 class="fw-bold">Votre panier</h2>
+					<table class="table" id="formulaire">
 						<thead>
 							<tr>
-								<th>produit</th>
-								<th>Prix</th>
-								<th>Quantité</th>
-								<th>Total</th>
+							<th></th>
 								<th></th>
-							</tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								</tr>
 						</thead>
 						<tbody>
 							{% for element in data %}
 								<tr>
+								<td>
+									<img src="{{ asset(element.produit.photo) }}" alt="{{ element.produit.libelleProduit }}" class="img-thumbnail w-25">
+								</td>
 									<td>{{ element.produit.libelleProduit }}</td>
 									{# penser à %par 100 si les prix sont en centimes #}
 									<td>{{ element.produit.prix }}
-										€</td>
+										€ Unité</td>
 									<td>{{ element.quantite }}</td>
-									<td>{{ element.quantite * element.produit.prix }}
+									<td class="fw-bold">{{ element.quantite * element.produit.prix }}
 										€</td>
 									<td>
-										<a href="{{ path('panier_retirer', {id: element.produit.id }) }}" class="btn btn-danger">-</a>
-										<a href="{{ path('panier_ajout', {id: element.produit.id }) }}" class="btn btn-success">+</a>
+										<!-- Dropdown pour sélectionner la quantité -->
+                                        {# <div class="dropdown">
+                                            <button class="btn dropdown-toggle dropup" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ element.quantite }}
+                                            </button> #}
+
+									<!-- Icône qui change -->
+											{# <button class="btn btn-primary dropdown-toggle btn-group dropup dropdown" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ element.quantite }}
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button> #}
+										<button class="btn {#dropdown-toggle #}" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+										{{ element.quantite }}
+										<span class="chevrons">
+										<i class="bi bi-chevron-down"></i>
+										<i class="bi bi-chevron-up"></i> <!-- Ajout de la flèche vers le haut -->
+									</span>
+									</button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ element.produit.id }}">
+                                                {% for i in 1..10 %}
+                                                    <li>
+                                                        <a class="dropdown-item" {# href="{{ path('panier_update_quantity', {id: element.produit.id, quantite: i}) }} #}">{{ i }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+										{# <a href="{{ path('panier_remove', {id: element.produit.id }) }}"><i class="bi bi-caret-down-fill"></i></a>
+										<a href="{{ path('panier_ajout', {id: element.produit.id }) }}"><i class="bi bi-caret-up-fill"></i></a> #}
 										<a href="{{ path('panier_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>
 									</td>
 								</tr>
@@ -46,14 +76,14 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="3">Total</td>
+								<td colspan="4">Total</td>
 								<td colspan="1">
 									<b>{{ total }}
 										€</b>
 								</td>
-								<td colspan="">
+								{# <td colspan="">
 									<a href="#" class="btn btn-secondary">Supprimer ma commande</a>
-								</td>
+								</td> #}
 							</tr>
 						</tfoot>
 					</table>
@@ -62,16 +92,27 @@
 					{# <a href="{{ path('commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
 					{# {% if commande is defined %} #}
 						{# <a class="text-white" href="{{ path('panier_commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
-						<a class="btn btn-primary"  href="{{ path('app_commande_panier_commandes') }}" >Mes commandes</a>
+						{# <a class="btn btn-primary"  href="{{ path('app_commande_panier_commandes') }}" >Mes commandes</a> #}
 					{# <a class="btn btn-primary"  href="{{ path('panier_commandes') }}" >Mes commandes</a> #}
 					{# {% else %}
+					
 						<p>Aucune commande trouvée</p>
 					{% endif %} #}
 					{# <a href="{{ path('panier_valider') }}" class="btn btn-primary">Valider ma commande</a> #}
 					{# <a href="#" class="btn btn-primary">Retour</a> #}
 
+								<td colspan="">
+									<a href="#" class="btn btn-primary">Supprimer ma commande</a>
+								</td>
+
 				</div>
 			</main>
+			<div	class="nav-item text-orange">
+			<a	class="nav-link text-center"	href="{{ path('app_categorie') }}">
+				Retour au catalogue
+			</a>
+		</div>
+
 		</div>
 		{# {% include "partials/footer.php" %} #}
 	{% endblock %}

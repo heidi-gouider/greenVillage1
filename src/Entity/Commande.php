@@ -49,6 +49,9 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $quantite_produit = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $total_ht = null;
+
     /**
      * @var Collection<int, Produit>
      */
@@ -193,6 +196,18 @@ class Commande
     public function setQuantiteProduit(?string $quantite_produit): static
     {
         $this->quantite_produit = $quantite_produit;
+
+        return $this;
+    }
+
+    public function getTotalHT(): ?int
+    {
+        return $this->total_ht;
+    }
+
+    public function setTotalHT(?string $totalHT): static
+    {
+        $this->total_ht = $totalHT;
 
         return $this;
     }

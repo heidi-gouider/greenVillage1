@@ -1,6 +1,6 @@
 {# templates/panier/commandes.html.twig #}
 
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Historique des commandes
 {% endblock %}
@@ -14,30 +14,30 @@
 
 				{% if commandes is empty %}
 					<p class="text-white">Vous n'avez pas encore passé de commande.</p>
-				{% else %}
-					<div {# class="row text-center"> #} class="col-9 border border-light bg-light p-3">
+				{% else %} #}
+					{# <div  class="col-9 border border-light bg-light p-3">
 						<table class="table">
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Date</th>
+									<th>Date</th> #}
 									{# <th>N° Référence</th> #}
-									<th>Montant</th>
-									<th>Etat</th>
+									{# <th>Montant</th>
+									<th>Etat</th> #}
 									{# <th>Détails</th> #}
-								</tr>
+								{# </tr>
 							</thead>
 							<tbody>
 								{% for commande in commandes %}
 									<tr>
-										<td>{{ commande.id }}</td>
+										<td>{{ commande.id }}</td> #}
 										{# <td>{{ commande.date_commande }}</td> #}
 										<td>{# {{ commande.ref }} #}</td>
-										<td>{{ commande.total }}€</td>
+										{# <td>{{ commande.total }}€</td>
 										<td>{{ commande.etat }}</td>
-										<td>
+										<td> #}
 											{# <a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a> #}
-										</td>
+										{# </td>
 									</tr>
 								{% endfor %}
 							</tbody>
@@ -47,4 +47,4 @@
 			</div>
 		</main>
 	</div>
-{% endblock %}
+{% endblock %} #}

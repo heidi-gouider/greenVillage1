@@ -26,9 +26,9 @@ CREATE TABLE Categorie(
 );
 
 INSERT INTO `categorie` (`parent_categorie_id`, `libelle_categorie`, `description_categorie`, `image_categorie`) VALUES
-	(NULL, 'Accessoires', 'Tous nos accessoires pour la musique', 'IMG/cable_fond.webp'),
-   	(11, 'Les cables', 'Tous les cables pour vos instruments', 'IMG/cable.webp'),
-         	(11, 'Les caques', 'Tous les casques', 'IMG/casque.webp')
+	-- (NULL, 'Accessoires', 'Tous nos accessoires pour la musique', 'IMG/cable_fond.webp'),
+   	(12, 'Les cables', 'Tous les cables pour vos instruments', 'IMG/cable.webp'),
+         	(12, 'Les caques', 'Tous les casques', 'IMG/casque.webp')
 
 
 CREATE TABLE Fournisseur(

@@ -1,77 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Green Village
+{% block title %}
+	Green Village
 {% endblock %}
 
 {% block body %}
-	<div class="contenu">
-		<main class="container">
-			<div class="row">
-				<div class="col-10 mx-auto">
-					<div class="d-flex flex-wrap justify-content-around">
-
-						<div class="card m-2" style="width: 18rem;">
-							<img class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
-							<div class="card-body">
-								<h5
-									class="card-title">
-									{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a> #}
-									{{ produit.libelleProduit }}</h5>
-								<p class="content bg-body">
-									{{ produit.prix}}
-									euros</p>
-							</div>
-							<div class="card-footer mt-2"></div>
-							{% if produit.quantiteStock == 0 %}
-								<p class="text-danger">Stock épuisé !</p>
-							</div>
-						{% else %}
-							<form action="{{ path('panier_ajout', {'id': produit.id}) }}" method="post">
-								<div class="d-flex justify-content-center">
-
-									{# ***les quantités***
-																																																																																																																																																																																																																																																																																			 Je décide de mettre les quantités dans le  panier #}
+	<div	class="contenu">
+		<main	class="container">
+			<div	class="row">
+				<div	class="d-flex flex-wrap justify-content-around">
+					<div	class="col-md-4 mb-5">
+						<div	class="card m-2"	style="width: 18rem;">
+							<img	class="card-img-top mx-auto w-25"	src="{{ asset(produit.photo) }}"	alt="{{ produit.libelleProduit }}">
+								<div	class="card-body">
+									<h5	class="card-title">
+										{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a> #}
+										{{ produit.libelleProduit }}
+									</h5>
+									<p	class="content bg-body">
+										{{ produit.prix }}
+										euros
+									</p>
+								</div>
+								<div	class="card-footer mt-2"></div>
+								{% if produit.quantiteStock == 0 %}
+									<p	class="text-danger">
+										Stock épuisé !
+									</p>
+								</div>
+							{% else %}
+								<form	action="{{ path('panier_add', {'id': produit.id}) }}"	method="post">
+									<div	class="d-flex justify-content-center">{# ***les quantités***
+									Je décide de mettre les quantités dans le  panier #}
 
 									{# <button class="btn btn-secondary bg-danger quantity-button" href="{{ path('panier_retirer', {id: produit.id }) }}"  data-produit-id="{{ produit.id }}" data-action="decrement">-</button>
-																																																																																																																																																																																																																																																																																		<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
+									<input name="quantite" value="1" min="1" max="10" class="quantity-input col-2 text-center" data-disc-id="{{ disc.id }}" type="number"> #}
 
 									{# ***bouton lien d'ajout au panier*** #}
 									{# </button class="btn btn-secondary bg-success quantity-button" href="{{ path('panier_ajout', {id: produit.id }) }}" data-produit-id="{{ produit.id }}" data-action="increment">+</button>
-																																																																																																																																																																																																																																																																																			 </div>  #}
+									</div>  #}
 
 									{# vers panier #}
-										<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('panier_ajout', {id: produit.id})}}"> ajouter au panier
-										{# <i class="bi bi-basket"> #}
-									</button>
-
+									{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">	ajouter au panier
+									</button> #}
 
 									{# vers modal #}
 									{# <button type="button" class=" d-block mt-5 btn btn-success mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#modal{{ plat.id }}">Ajouter au panier</button>
-																																																																																																																																																																																																																																																																																			</button> #}
+									</button> #}
 								</div>
 								{# {% if loop.index is even %} #}
 								{# <div class="row">
-																																																																																																																													 #}
+								#}
 							</form>
-						{% endif %}
-						<div>
-							<p class="content bg-body">
-								{{ produit.descriptionProduit}}</p>
+							{% endif %}
+							{# <div>
+								<p	class="content bg-body">
+								{{ produit.descriptionProduit }}
+								</p>
+							</div> #}<div	class="row">	</div>
 						</div>
-
-						{# </div> #}
-
-						<div class="row"></div>
-
-						{# {% endfor %} #}
 					</div>
-					<!-- /// LA MODAL D'AJOUT AU PANIER/// -->
-					{# <div class="modal fade" id="modal{{ plat.id }}" tabindex="-1"> #}
-				</div>
+					<div>
+						<p>
+							Une super batterie trop cool!
+						</p>
+					</div>
+					<div	class="nav-item text-orange">
+						<a	class="nav-link text-center"	href="{{ path('app_categorie') }}">
+							Retour au catalogue
+						</a>
+						{# </div>
+						<div	class="nav-item text-orange"> #}
+						{# <a	class="nav-link text-center"	href="{{ path('panier_index') }}">
+							Voir le panier
+						</a> #}
+						{# {% if productAdd %}
+							<a	class="d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_index') }}">
+								Voir le panier
+							</a>
+						{% else %} #}
+							{# vers panier #}
+							<a	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
+								ajouter au panier
+							</a>
+						{# {% endif %} #}
 
-				<li class="nav-item text-orange">
-					<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
-				</li>
+							{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
+							ajouter au panier #}
+							{# <i class="bi bi-basket"> #}
+							{# </button> #}
+
+							<!-- /// LA MODAL D'AJOUT AU PANIER / Message flash d'ajout au panier/// -->
+							{# <div class="modal fade" id="modal{{ plat.id }}" tabindex="-1"> #}
+								{% for message in app.flashes('success') %}
+									<div	class="alert alert-success">	{{ message }}
+								</div>
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
 			</main>
 		</div>
-	</div>{# {% include "partials/footer.php" %} #}{% endblock %}
+	{% endblock %}
+	

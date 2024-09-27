@@ -46,10 +46,10 @@
 										{% if produit.quantiteStock == 0 %}
 											<p class="text-danger">Stock épuisé !</p>
 										{% else %}
-											<form action="{{ path('panier_ajout', {'id': produit.id}) }}" method="post">
+											<form action="{{ path('panier_add', {'id': produit.id}) }}" method="post">
 												<div class="d-flex justify-content-center"></button>
 											</form>
-
+{# voir pour ajouter un bouton Afficher détails #}
 										</div>
 									</div>
 

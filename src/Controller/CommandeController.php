@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Commande; 
 use App\Entity\Detail; 
-use App\Entity\Utilisateur;
-use App\Repository\ProduitRepository;
+use App\Entity\User;
+use App\Repository\DiscRepository;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -32,7 +32,7 @@ class CommandeController extends AbstractController
 
         if($panier === []){
             $this->addFlash('message', 'Votre panier est vide');
-            return $this->redirectToRoute('app_accueil');
+            return $this->redirectToRoute('app_categorie');
         }
   //Le panier n'est pas vide, on crée la commande
   $commande = new Commande();
@@ -61,18 +61,8 @@ class CommandeController extends AbstractController
       // On crée le détail de commande
       $detail->setProduit($produit);
     //   $detail->setTotal($prix);
-    //   $detail->setQuantityVendu($quantite);
-    //   $commande->addDetail($detail); public function getTotal(): ?string
-    //   {
-    //       return $this->total;
-    //   }
-  
-    //   public function setTotal(string $total): static
-    //   {
-    //       $this->total = $total;
-  
-    //       return $this;
-    //   }
+      $detail->setQuantite($quantite);
+      $commande->addDetail($detail);
 
     //   $total += $prix * $quantite;
 
@@ -80,7 +70,7 @@ class CommandeController extends AbstractController
        $em->persist($detail);
   }
 
-  $commande->setTotal($total);
+  $commande->setTotalHt($total);
 
   // On persiste et on flush
   $em->persist($commande);
@@ -89,9 +79,8 @@ class CommandeController extends AbstractController
   $session->remove('panier');
 
   $this->addFlash('message', 'Commande créée avec succès');
-  return $this->redirectToRoute('app_accueil');
+//   return $this->redirectToRoute('app_accueil');
         return $this->render('commande/index.html.twig', [
-            'controller_name' => 'CommandeController',
         ]);
     }
     
@@ -105,7 +94,7 @@ class CommandeController extends AbstractController
     public function index(UserInterface $user)
     {
 
-    if (!$user instanceof User) {
+    if (!$user instanceof Utilisateur) {
         throw new \Exception('User must be an instance of App\Entity\User');
     }
         $commandes = $user->getCommandes();
@@ -161,11 +150,11 @@ public function __construct(DetailRepository $detailRepo)
     {
     
         // j'utilise la méthode créer dans le repo findByTopVente()
-        $topDiscs = $this->detailRepo->findByTopVente();
+        // $topDiscs = $this->detailRepo->findByTopVente();
 
         // je passe le résultat à ma vue
         return $this->render('accueil/index.html.twig', [
-            'topProduits' => $topProduits,
+            // 'topProduits' => $topProduits,
         ]);
     }
 }

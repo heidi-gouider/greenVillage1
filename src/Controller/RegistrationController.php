@@ -76,7 +76,7 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
-
+// désactivé en prod 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {

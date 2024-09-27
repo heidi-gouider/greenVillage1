@@ -49,6 +49,12 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $quantite_produit = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    private ?string $total = null;
+
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
+    private Collection $details;
+
     /**
      * @var Collection<int, Produit>
      */
@@ -58,6 +64,7 @@ class Commande
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +203,45 @@ class Commande
 
         return $this;
     }
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): static
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(Detail $detail): static
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Detail $detail): static
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getCommande() === $this) {
+                $detail->setCommande(null);
+            }
+        }
 
     /**
      * @return Collection<int, Produit>

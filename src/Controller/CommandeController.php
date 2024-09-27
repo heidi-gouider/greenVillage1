@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Commande; 
 use App\Entity\Detail; 
-use App\Entity\User;
-use App\Repository\DiscRepository;
+use App\Entity\Utilisateur;
+use App\Repository\ProduitRepository;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,13 +38,14 @@ class CommandeController extends AbstractController
   $commande = new Commande();
 
   // On remplit la commande
-  $commande->setUser($this->getUser());
+  $commande->setUtilisateur($this->getUser());
  // Générer une référence unique entière
 //  $reference = $this->generateUniqueReference();
 //  $commande->setReference($reference);
 // $dateCommande = $commande->getDateCommande();
 //   $commande->setDateCommande(new \DateTime());
-  $commande->setEtat(0); // Etat initial
+// Etat initial
+//   $commande->setEtat(0); 
 
   $total = 0;
 
@@ -60,10 +61,20 @@ class CommandeController extends AbstractController
       // On crée le détail de commande
       $detail->setProduit($produit);
     //   $detail->setTotal($prix);
-      $detail->setQuantityVendu($quantite);
-      $commande->addDetail($detail);
+    //   $detail->setQuantityVendu($quantite);
+    //   $commande->addDetail($detail); public function getTotal(): ?string
+    //   {
+    //       return $this->total;
+    //   }
+  
+    //   public function setTotal(string $total): static
+    //   {
+    //       $this->total = $total;
+  
+    //       return $this;
+    //   }
 
-      $total += $prix * $quantite;
+    //   $total += $prix * $quantite;
 
        // Persist chaque detail
        $em->persist($detail);

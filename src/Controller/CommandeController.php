@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Commande; 
 use App\Entity\Detail; 
-use App\Entity\User;
-use App\Repository\DiscRepository;
+use App\Entity\Utilisateur;
+use App\Repository\ProduitRepository;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -86,16 +86,14 @@ class CommandeController extends AbstractController
     
 // je récupere l'historique de commande de l'utilisateur
 // pour l'afficher via le lien dans la vue du panier
-    /**
-     * @Route("/panier/commandes", name="panier_commandes")
-     */
-    #[Route('/panier/commandes', name: 'panier_commandes')]
+
+#[Route('/panier/commandes', name: 'panier_commandes')]
 
     public function index(UserInterface $user)
     {
 
     if (!$user instanceof Utilisateur) {
-        throw new \Exception('User must be an instance of App\Entity\User');
+        throw new \Exception('User must be an instance of App\Entity\Utilisateur');
     }
         $commandes = $user->getCommandes();
 

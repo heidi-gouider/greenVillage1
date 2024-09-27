@@ -244,7 +244,7 @@ class Commande
                 $detail->setCommande(null);
             }
         }
-
+    }
     public function getTotalHT(): ?int
     {
         return $this->total_ht;
@@ -281,31 +281,14 @@ class Commande
         return $this;
     }
 
-     /**
-     * @return Collection<int, Detail>
-     */
-    public function getDetails(): Collection
-    {
-        return $this->details;
-    }
+    //  /**
+    //  * @return Collection<int, Detail>
+    //  */
+    // public function getDetails(): Collection
+    // {
+    //     return $this->details;
+    // }
 
-    public function addDetail(Detail $detail): static
-    {
-        if (!$this->details->contains($detail)) {
-            $this->details->add($detail);
-            $detail->setCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetail(Detail $detail)
-    {
-        if ($this->details->removeElement($detail)) {
-            // set the owning side to null (unless already changed)
-            if ($detail->getCommande() === $this) {
-                $detail->setCommande(null);
-            }
-        }
-    }
+        
+    
 }

@@ -1,43 +1,45 @@
 {# templates/panier/commandes.html.twig #}
 
-{# {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Historique des commandes
 {% endblock %}
 
 {% block body %}
 	<div class="contenu">
-		<h1 class="fst-italic text-white text-center">Historique des commandes</h1>
+		<h1 class="fst-italic text-center">Historique des commandes</h1>
 		<div class="container mx-auto mt-5">
 			<main class="row text-center">
 
 
 				{% if commandes is empty %}
-					<p class="text-white">Vous n'avez pas encore passé de commande.</p>
-				{% else %} #}
-					{# <div  class="col-9 border border-light bg-light p-3">
+					<p class="">Vous n'avez pas encore passé de commande.</p>
+				{% else %}
+					<div  class="col-9 border border-light bg-light p-3">
 						<table class="table">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Date</th> #}
+									<th>Ref(ID)</th>
+									<th>Date</th> 
 									{# <th>N° Référence</th> #}
-									{# <th>Montant</th>
-									<th>Etat</th> #}
+									<th>Produit</th>
+									<th>Quantité</th>
+									<th>Total</th>
+									<th>Etat</th>
 									{# <th>Détails</th> #}
-								{# </tr>
+								</tr>
 							</thead>
 							<tbody>
 								{% for commande in commandes %}
 									<tr>
-										<td>{{ commande.id }}</td> #}
-										{# <td>{{ commande.date_commande }}</td> #}
+										<td>{{ commande.id }}</td>
+										<td>{{ commande.dateCommande }}</td> 
 										<td>{# {{ commande.ref }} #}</td>
-										{# <td>{{ commande.total }}€</td>
-										<td>{{ commande.etat }}</td>
-										<td> #}
+										<td>{#{ element.produit }#}</td>
+										<td>{{ commande.totalHT }}€</td>
+										<td> 
 											{# <a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a> #}
-										{# </td>
+										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
@@ -45,6 +47,12 @@
 					{% endif %}
 				</div>
 			</div>
+									<div class="d-grid gap-3 col-2 mx-auto text-center">
+							<a class="submit" href="{{ path('app_commande_ajout') }}">
+								Valider
+							</a>
+							</div>
+
 		</main>
 	</div>
-{% endblock %} #}
+{% endblock %}

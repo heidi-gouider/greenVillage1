@@ -1,6 +1,13 @@
-{# {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
+	<div
+		class="contenu">
+		{# <h1 class="fst-italic text-center">Mon panier</h1> #}
+		<main class="container mt-5">
+			<div class="row mx-auto">
+				<div class="col-8">
+
     <h1>Détail de la commande</h1>
 
     {% for message in app.flashes('success') %}
@@ -9,67 +16,74 @@
         </div>
     {% endfor %}
 
+	{% for commande in commandes %}
+
     <p>Commande {{ commande.id }}</p>
     <p>Date: {{ commande.dateCommande|date('d/m/Y H:i') }}</p>
-    <p>Total: {{ commande.total }} €</p>
-    <p>État: {{ commande.etat }}</p>
+    <p>Total: {{ commande.totalHt }} €</p>
+    {# <p>État: {{ commande.etat }}</p> #}
+    {% endfor %}
 
     <h2>Détails</h2>
     <ul>
-        {% for detail in commande.details %}
+        {# {% for detail in commande.details %}
             <li>{{ detail.produit.libelleProduit }} - {{ detail.quantite }} x {{ detail.produit.prix }} €</li>
-        {% endfor %}
+        {% endfor %} #}
     </ul>
 
     <a href="{{ path('panier_index') }}">Retour au panier</a>
-{% endblock %} #}
+		</div>
+			</div>
+		</main>
+	</div>
+{% endblock %}
 {# templates/panier/commandes.html.twig #}
 
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Historique des commandes
 {% endblock %}
 
 {% block body %}
 	<div class="contenu">
-		<h1 class="fst-italic text-white text-center">Historique des commandes</h1>
+		<h1 class="fst-italic text-center">Historique des commandes</h1>
 		<div class="container mx-auto mt-5">
 			<main class="row text-center">
 
 
-				{# {% if commandes is empty %}
+				{% if commandes is empty %}
 					<p class="text-white">Vous n'avez pas encore passé de commande.</p>
-				{% else %} #}
-					<div {# class="row text-center"> #} class="col-9 border border-light bg-light p-3">
+				{% else %}
+					<div class="row text-center"> class="col-9 border border-light bg-light p-3">
 						<table class="table">
 							<thead>
 								<tr>
 									<th>ID</th>
 									<th>Date</th>
-									{# <th>N° Référence</th> #}
+									<th>N° Référence</th>
 									<th>Montant</th>
 									<th>Etat</th>
-									{# <th>Détails</th> #}
+									<th>Détails</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for commande in commandes %}
 									<tr>
 										<td>{{ commande.id }}</td>
-										{# <td>{{ commande.date_commande }}</td> #}
-										<td>{# {{ commande.ref }} #}</td>
+										<td>{{ commande.date_commande }}</td>
+										<td>{{ commande.ref }}</td>
 										<td>{{ commande.total }}€</td>
 										<td>{{ commande.etat }}</td>
 										<td>
-											{# <a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a> #}
+											<a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a>
 										</td>
 									</tr>
 								{% endfor %}
 							</tbody>
 						</table>
-					{# {% endif %} #}
+					{% endif %}
 				</div>
 			</div>
 		</main>
 	</div>
-{% endblock %}
+{% endblock %} #}

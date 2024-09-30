@@ -15,20 +15,20 @@
 					<table class="table" id="formulaire">
 						<thead>
 							<tr>
-							<th></th>
 								<th></th>
 								<th></th>
 								<th></th>
 								<th></th>
 								<th></th>
-								</tr>
+								<th></th>
+							</tr>
 						</thead>
 						<tbody>
 							{% for element in data %}
 								<tr>
-								<td>
-									<img src="{{ asset(element.produit.photo) }}" alt="{{ element.produit.libelleProduit }}" class="img-thumbnail w-25">
-								</td>
+									<td>
+										<img src="{{ asset(element.produit.photo) }}" alt="{{ element.produit.libelleProduit }}" class="img-thumbnail w-25">
+									</td>
 									<td>{{ element.produit.libelleProduit }}</td>
 									{# penser à %par 100 si les prix sont en centimes #}
 									<td>{{ element.produit.prix }}
@@ -36,95 +36,111 @@
 									<td>{{ element.quantite }}</td>
 									<td class="fw-bold">{{ element.quantite * element.produit.prix }}
 										€</td>
-									<td>
-										<!-- Dropdown pour sélectionner la quantité -->
-                                        {# <div class="dropdown">
-                                            <button class="btn dropdown-toggle dropup" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ element.quantite }}
-                                            </button> #}
+									<td><!-- Dropdown pour sélectionner la quantité -->
+										{# <div class="dropdown">
+										                                            <button class="btn dropdown-toggle dropup" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+										                                                {{ element.quantite }}
+										                                            </button> #}
 
-									<!-- Icône qui change -->
-											{# <button class="btn btn-primary dropdown-toggle btn-group dropup dropdown" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ element.quantite }}
-                                            <i class="bi bi-chevron-down"></i>
-                                        </button> #}
+										<!-- Icône qui change -->
+										{# <button class="btn btn-primary dropdown-toggle btn-group dropup dropdown" type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+										                                            {{ element.quantite }}
+										                                            <i class="bi bi-chevron-down"></i>
+										                                        </button> #}
 										{# <button class="btn " type="button" id="dropdownMenuButton{{ element.produit.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-										{{ element.quantite }}
-										<span class="chevrons">
-										<i class="bi bi-chevron-down"></i>
-										<i class="bi bi-chevron-up"></i> <!-- Ajout de la flèche vers le haut -->
-									</span>
-									</button> #}
-                                            {# <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ element.produit.id }}">
-                                                {% for i in 1..10 %}
-                                                    <li>
-                                                        <a class="dropdown-item" href="{{ path('panier_update_quantity', {id: element.produit.id, quantite: i}) }}">{{ i }}</a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul> #}
-                                        </div>
-										 {# Formulaire pour la quantité avec une liste déroulante #}
-        <form action="{{ path('panier_ajout', {id: element.produit.id}) }}" method="post">
-            <select name="quantite" onchange="this.form.submit()">
-                {% for i in 1..10 %}
-                    <option value="{{ i }}" {% if i == element.quantite %}selected{% endif %}>
-                        {{ i }}
-                    </option>
-                {% endfor %}
-            </select>
-            <input type="hidden" name="action" value="update">
-        </form>
-										{# <a href="{{ path('panier_remove', {id: element.produit.id }) }}"><i class="bi bi-caret-down-fill"></i></a>
-										<a href="{{ path('panier_ajout', {id: element.produit.id }) }}"><i class="bi bi-caret-up-fill"></i></a> #}
-										<a href="{{ path('panier_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>
+																				{{ element.quantite }}
+																				<span class="chevrons">
+																				<i class="bi bi-chevron-down"></i>
+																				<i class="bi bi-chevron-up"></i> <!-- Ajout de la flèche vers le haut -->
+																			</span>
+																			</button> #}
+										{# <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ element.produit.id }}">
+										                                                {% for i in 1..10 %}
+										                                                    <li>
+										                                                        <a class="dropdown-item" href="{{ path('panier_update_quantity', {id: element.produit.id, quantite: i}) }}">{{ i }}</a>
+										                                                    </li>
+										                                                {% endfor %}
+										                                            </ul> #}
 									</td>
 								</tr>
-							{% else %}
-								<tr>
-									<td colspan="5">Le panier est vide</td>
-								</tr>
-							{% endfor %}
+							</div>
+							{# Formulaire pour la quantité avec une liste déroulante #}
+							<form action="{{ path('panier_ajout', {id: element.produit.id}) }}" method="post">
+								<select name="quantite" onchange="this.form.submit()">
+									{% for i in 1..10 %}
+										<option value="{{ i }}" {% if i == element.quantite %} selected {% endif %}>
+											{{ i }}
+										</option>
+									{% endfor %}
+								</select>
+								<input type="hidden" name="action" value="update">
+							</form>
+							{# <a href="{{ path('panier_remove', {id: element.produit.id }) }}"><i class="bi bi-caret-down-fill"></i></a>
+																	<a href="{{ path('panier_ajout', {id: element.produit.id }) }}"><i class="bi bi-caret-up-fill"></i></a> #}
+							<a href="{{ path('panier_supprimer', {id: element.produit.id }) }}" class="btn btn-secondary">Suppr</a>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4">Total</td>
-								<td colspan="1">
-									<b>{{ total }}
-										€</b>
-								</td>
-								{# <td colspan="">
-									<a href="#" class="btn btn-secondary">Supprimer ma commande</a>
-								</td> #}
-							</tr>
-						</tfoot>
-					</table>
-					<a href="{{ path('app_commande_ajout') }}" class="btn btn-primary">Valider ma commande</a>
-					{# je redirige vers le détail de la commande #}
-					{# <a href="{{ path('commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
-					{# {% if commande is defined %} #}
-						{# <a class="text-white" href="{{ path('panier_commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
-						{# <a class="btn btn-primary"  href="{{ path('app_commande_panier_commandes') }}" >Mes commandes</a> #}
-					{# <a class="btn btn-primary"  href="{{ path('panier_commandes') }}" >Mes commandes</a> #}
-					{# {% else %}
-					
-						<p>Aucune commande trouvée</p>
-					{% endif %} #}
-					{# <a href="{{ path('panier_valider') }}" class="btn btn-primary">Valider ma commande</a> #}
-					{# <a href="#" class="btn btn-primary">Retour</a> #}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">Le panier est vide</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">Total</td>
+				<td colspan="1">
+					<b>{{ total }}
+						€</b>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div
+		class="row ">
+		{# <a href="{{ path('app_commande_ajout') }}" class="btn btn-primary">Enregistrer</a> #}
+		<div class="d-grid gap-3 col-2 mx-auto text-center">
+			<a class="submit" href="{{ path('app_commande_ajout') }}">
+				Valider
+			</a>
+		</div>
+									{# {% for element in data %}
 
-								<td colspan="">
-									<a href="#" class="btn btn-primary">Supprimer ma commande</a>
-								</td>
-
-				</div>
-			</main>
-			<div	class="nav-item text-orange">
-			<a	class="nav-link text-center"	href="{{ path('app_categorie') }}">
-				Retour au catalogue
+		<div class="d-grid gap-3 col-2 mx-auto text-center">
+			<a class="submit" href="{{ path('panier_supprimer', {id: element.produit.id }) }}">
+				Supprimer
+			</a>
+		</div>
+		{% endfor %} #}
+				<div class="d-grid gap-3 col-3 mx-auto text-center">
+			<a class="submit" href="{{ path('app_categorie') }}">
+				Ajouter un produit
 			</a>
 		</div>
 
-		</div>
-		{# {% include "partials/footer.php" %} #}
-	{% endblock %}
+	</div>
 
+	{# je redirige vers le détail de la commande #}
+	{# <a href="{{ path('commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
+	{# {% if commande is defined %} #}
+	{# <a class="text-white" href="{{ path('panier_commande_detail', {'id': commande.id}) }}">Mes commandes</a> #}
+		<div><a class="btn btn-success mt-5" href="{{ path('app_commande_panier_commandes') }}"> Historique des commandes</a>
+	</div>
+	{# <a class="btn btn-primary"  href="{{ path('panier_commandes') }}" >Mes commandes</a> #}
+{# {% else %}
+					
+						<p>Aucune commande trouvée</p>
+					{% endif %} #}
+	{# <a href="{{ path('panier_valider') }}" class="btn btn-primary">Valider ma commande</a> #}
+	{# <a href="#" class="btn btn-primary">Retour</a> #}
+
+	{# <td colspan="">
+										<a href="{{ path('panier_supprimer') }}" class="btn btn-primary">Supprimer ma commande</a>
+									</td> #}
+
+</div></main>{# <div	class="nav-item text-orange">
+				<a	class="nav-link text-center"	href="{{ path('app_categorie') }}">
+					Retour au catalogue
+				</a>
+			</div> #}</div>{# {% include "partials/footer.php" %} #}{% endblock %}

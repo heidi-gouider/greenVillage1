@@ -66,6 +66,7 @@ class Commande
                 // Initialisation de la collection de produits et de détails
         $this->produits = new ArrayCollection();
         $this->details = new ArrayCollection(); // Ajout de l'initialisation ici
+        $this->created_at = new \DateTimeImmutable();
     }
 
 
@@ -280,15 +281,6 @@ class Commande
 
         return $this;
     }
-
-    //  /**
-    //  * @return Collection<int, Detail>
-    //  */
-    // public function getDetails(): Collection
-    // {
-    //     return $this->details;
-    // }
-
         
     
 }

@@ -55,6 +55,23 @@ class RegistrationController extends AbstractController
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
+            // Générer le token
+            // $header = [
+            //     'typ' => 'JWT',
+            //     'alg' => 'HS256'
+            // ];
+
+            // le payload
+            // $payload = [
+            //     'utilisateur_id' => $utilisateur->getId()
+            // ];
+
+            // On génère le token
+            // le token est valable 3ans
+            // $token = $jwt->generate($header, $playload, $this->getParameter('app.jwtsecret'),);
+            // dd($token);
+
+            // Envoyer le 'e-mail
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
                 (new TemplatedEmail())

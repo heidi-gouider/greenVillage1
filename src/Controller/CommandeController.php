@@ -30,10 +30,10 @@ class CommandeController extends AbstractController
         $panier = $session->get('panier', []);
 
 
-        if($panier === []){
-            $this->addFlash('message', 'Votre panier est vide');
-            return $this->redirectToRoute('app_categorie');
-        }
+        // if($panier === []){
+        //     $this->addFlash('message', 'Votre panier est vide');
+        //     return $this->redirectToRoute('app_categorie');
+        // }
   //Le panier n'est pas vide, on crée la commande
   $commande = new Commande();
 
@@ -64,13 +64,14 @@ class CommandeController extends AbstractController
       $detail->setQuantite($quantite);
       $commande->addDetail($detail);
 
-    //   $total += $prix * $quantite;
+      $total += $prix * $quantite;
 
        // Persist chaque detail
        $em->persist($detail);
   }
 
   $commande->setTotalHt($total);
+//   $commandes = $utilisateur->getCommandes();
 
   // On persiste et on flush
   $em->persist($commande);
@@ -81,6 +82,7 @@ class CommandeController extends AbstractController
   $this->addFlash('message', 'Commande créée avec succès');
 //   return $this->redirectToRoute('app_accueil');
         return $this->render('commande/index.html.twig', [
+            'commandes' => $commande,
         ]);
     }
     
@@ -148,7 +150,7 @@ public function __construct(DetailRepository $detailRepo)
     {
     
         // j'utilise la méthode créer dans le repo findByTopVente()
-        // $topDiscs = $this->detailRepo->findByTopVente();
+        // $topProduits = $this->detailRepo->findByTopVente();
 
         // je passe le résultat à ma vue
         return $this->render('accueil/index.html.twig', [

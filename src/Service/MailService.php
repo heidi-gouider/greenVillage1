@@ -6,15 +6,15 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use App\Entity\Contact;
 
-// class MailService
-// {
-// private $mailer;
+class MailService
+{
+private $mailer;
 
-// public function __construct(MailerInterface $mailer)
-// {
+public function __construct(MailerInterface $mailer)
+{
 // $this->mailer = $mailer;
-// }
-// public function sendMail($expediteur, $destinataire, $sujet, $message){
+}
+// public function sendMail( $expediteur, $destinataire, $sujet, $message){
 // Récupération de l'entité Contact associée au formulaire
 // $contact = $form->getData();
 
@@ -24,17 +24,28 @@ use App\Entity\Contact;
 // $content = $contact->getMessage();
 // $content = 'objet : ' . $contact->getObjet() . "\n";
 // $content .= 'message : ' . $contact->getMessage();
+public function sendMail(
+string $from,
+string $to,
+string $subject,
+string $template,
+array $context
+): void
+{
 // dd($contact);
 
-// $email = (new Email())
-// ->from($address)
-// ->to('admin@admin.com')
-// ->subject('demande de contact')
-// ->text($content);
+// On crée le mail
+$email = (new Email())
+->from($from)
+->to($to)
+->subject($subject)
+->htmlTemplate("email/$template.html.twig")
+->context($context);
 
+// Envoie du mail
 // dd($email);
-$mailer->send($email);
+$this->mailer->send($email);
 
 
-// }
-// }
+}
+}

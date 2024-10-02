@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Categorie;
+use App\Entity\Produit;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -50,14 +52,27 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // la méthode yield permet de retourner un élément comme un tableau sans le mot clé return
-        yield MenuItem::section('E-commerce');
+        // yield MenuItem::section('E-commerce');
         // je recrée une section 'produit'
         yield MenuItem::section('Produits');
         yield MenuItem::section('Actions');
 
         // voir ce que la librairie utilise font-awesome ou bootstrap pour inclure des icones
-        yield MenuItem::subMenu('Actions', 'bi bi-list')->setSubItems([]);
+        // je crée une liste d'actions pour les produits
+        yield MenuItem::subMenu('Produits', 'fa fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Ajouter un produit', 'fa fa-plus', Produit::class)->setAction('new'),
+            MenuItem::linkToCrud('Afficher les produits', 'fa fa-eye', Produit::class),
+            // Ajoutez d'autres actions ici
+        ]);
 
+                // je crée une liste d'actions pour les catégories
+                yield MenuItem::subMenu('Catégories', 'fa fa-bars')->setSubItems([
+                    // MenuItem::linkToCrud('Ajouter un produit', 'fa fa-plus', Categorie::class)->setAction(Crud::PAGE_NEW),
+                    MenuItem::linkToCrud('Ajouter une catégorie', 'fa fa-plus', Categorie::class)->setAction('new'),
+                    MenuItem::linkToCrud('Afficher les catégories', 'fa fa-eye', Categorie::class),
+                    // Ajoutez d'autres actions ici
+                ]);
+        
 
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

@@ -83,6 +83,18 @@
 							<a	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">
 								AJOUTER AU PANIER +
 							</a>
+														{# Formulaire pour la quantité avec une liste déroulante #}
+							{# <form action="{{ path('panier_ajout', {id: element.produit.id}) }}" method="post">
+								<select name="quantite" onchange="this.form.submit()">
+									{% for i in 1..10 %}
+										<option value="{{ i }}" {% if i == element.quantite %} selected {% endif %}>
+											{{ i }}
+										</option>
+									{% endfor %}
+								</select>
+								<input type="hidden" name="action" value="update">
+							</form> #}
+
 						{# {% endif %} #}
 
 							{# <button	type="submit"	class=" d-block mt-5 btn btn-success mx-auto mb-3"	href="{{ path('panier_add', {id: produit.id}) }}">

@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+{# Banniere categories #}
+			<div class="row align-items-center bg-dark banniere mx-auto">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+	<div class="contenu_accueil">
+
+		<h1 class="text-center mt-5">Village Green</h2>
+
+		{# Barre de recherche #}
+		<form class="form-inline my-2 my-lg-0 text-center">
+			<input
+			class="form-control-sm mr-sm-2" type="search" placeholder="recherche" aria-label="Search">
+			{# value="{{ searchTerm }} #}
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+		</form>
+
+ <img id="img-promo" src="IMG/instrument-a-vent.webp" alt="promo" title="promo">
+
+		{# Caroussel des produits far #}
+		{# <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+																					<div class="carousel-inner">  #}
+		{# {% set produitsAleatoires = produits|shuffle %}
+																		
+																						<!-- Première diapositive active avec 3 images -->
+																							<div class="carousel-item active" data-bs-interval="1000"> <div class="row">
+																								{% for produit in produitsAleatoires|slice(0, 3) %}
+																									<div class="col-4">
+																										<div class="card m-2" style="width: 15rem;">
+																											<img class="card-img-top zoom-img" src="{{ asset('IMG/' ~ produit.photo) }}" alt="">
+																											<div class="card-body">
+																												{# <h5 class="card-title">{{ produit.libelle_produit }}</h5> #}
+		{# </div>
+																										</div>
+																									</div>
+																								{% endfor %}
+																							</div>
+																						</div> #}
+
+		<!-- Deuxième diapositive avec 3 images -->
+			<div class="carousel-item" data-bs-interval="2000"> <div class="row">
+				<div class="col-4">
+					{% for produit in produitsAleatoires|slice(3, 3) %}
+						<div class="col-4">
+							<div class="card m-2" style="width: 15rem;">
+								<img class="card-img-top zoom-img" src="{{ asset('IMG/' ~ produit.photo) }}" alt="">
+								<div
+									class="card-body">{# <h5 class="card-title">{{ produit.libelle_produit }}</h5> #}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- Troisième diapositive avec 3 images -->
+			{# <div class="carousel-item">
+																																<div class="row">
+																																	<div class="col-4">
+																																		<img src="public/IMG/xylophone.webp" class="d-block w-100" alt="Image 1">
+																																	</div>
+																																	<div class="col-4">
+																																		<img src="public/IMG/violon1.webp" class=" d-block w-100" alt="image 2">
+																																	</div>
+																																	<div class="col-4">
+																																		<img src="public/IMG/piano.webp" class="d-block w-100" alt="Image 3">
+																																	</div>
+																																</div>
+																															</div>
+																														</div>
+																										 #}
+			<!-- Contrôles précédent et suivant -->
+				<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+
+
+		{# Barre de recherche #}
+
+		{# <ul>
+																														        {% for produit in produits %}
+																														            <li>{{ produit.libelleProduit }} </li>
+																														        {% else %}
+																														            <li>Aucun produit trouvé.</li>
+																														        {% endfor %}
+																														    </ul> #}
+		{# <form class="form-inline my-2 my-lg-0 text-center">
+																														    {{ form_start(form, {'attr': {'class': 'form-inline my-2 my-lg-0 text-center'}}) }}
+																														        {{ form_widget(form.query) }}
+																														        {{ form_widget(form.recherche) }}
+																														    {{ form_end(form) }}
+																														</form> #}
+		{# {{ form_start(form) }}
+																														        {{ form_row(form.categorie) }}
+																														        {{ form_row(form.query) }}
+																														        <button type="submit text-white">Rechercher</button>
+																														    {{ form_end(form) }}
+																														
+																														    <h2>Résultats</h2>
+																														    {% if produits is not empty %}
+																														        <ul>
+																														        {% for produit in produits %}
+																														            <li>{{ produit.libelleProduit }}</li>
+																														        {% endfor %}
+																														        </ul>
+																														    {% else %}
+																														        <p>Aucun produit trouvé.</p>
+																														        </div> #}
+			<div class="mt-5"> {# <h2 class="text-white text-center">Bienvenue à Green Village</h2> #}
+
+
+			{# Affichage des top ventes #}
+
+			{# <h2 class="text-white text-center">Notre Catalogue</h2> #}
+			{# <div class="d-flex flex-wrap justify-content-around">
+																																																		{% for produit in topProduits %}
+																																																			<div class="card m-2" style="width: 15rem;">
+																																																				<img class="card-img-top zoom-img" src="{{ asset('img/' ~ produit.photoProduit) }}" alt="">
+																																																				<div class="card-body">
+																																																					<h5
+																																																						class="card-title">
+																																																						{{ produit.libelle_categorie }}</h5>
+																																																				</div>
+																																																			</div>
+																																																		{% endfor %} #}
+			<!-- Présentation détaillée -->
+				<div class="presentation mt-5"> <h3 class="text-center">À propos de Green Village</h3>
+				<p>
+					Green Village se spécialise dans la distribution d'instruments de musique de haute qualité pour les professionnels et les passionnés. Nous offrons une large gamme de produits allant des guitares et pianos aux percussions et accessoires. Notre objectif est de fournir des instruments qui répondent aux attentes des musiciens les plus exigeants.
+				</p>
+
+				<h4>Nos Produits</h4>
+				<p>
+					Nous proposons une variété d'instruments allant des modèles classiques aux plus modernes. Que vous recherchiez une guitare électrique pour un concert ou un piano pour un studio d'enregistrement, nous avons ce qu'il vous faut. Nos produits sont sélectionnés pour leur qualité et leur fiabilité, afin d'assurer une performance exceptionnelle à chaque utilisation.
+				</p>
+
+				<h4>Pourquoi Choisir Green Village ?</h4>
+				<p>
+					En tant que grossiste, nous comprenons les besoins des détaillants et des professionnels de la musique. Nous nous engageons à offrir non seulement des produits de premier choix, mais aussi un service client de premier ordre. Nos experts sont disponibles pour vous conseiller et vous aider à choisir les meilleurs instruments pour vos besoins spécifiques.
+				</p>
+
+				<h4>Découvrez Notre Catalogue</h4>
+				<p>
+					Explorez notre catalogue en ligne pour découvrir l'ensemble de notre gamme. Nous mettons à jour régulièrement notre offre pour inclure les dernières nouveautés et tendances du marché. Vous trouverez également des promotions spéciales et des offres exclusives pour nos partenaires.
+				</p>
+			</div>
+			<div class="col-md-6 mx-auto">
+				<div class="nav-item">
+					<a class="nav-link text-center text-orange" href="{{ path('app_categorie') }}">Notre Catalogue</a>
+				</div>
+				{# <img class="card-img-top mx-auto w-50 img-centered" src="{{ asset('IMG/les_violons.webp') }}" alt="{{ "violons" }}">  #}
+
+				<div class="nav-item">
+					<a class="nav-link text-center text-orange" href="{{ path('app_produit') }}">Tous nos  instruments</a>
+				</div>
+			</div>
+			{# <div class="text-center">
+																																																	<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}
+		</div>
+	</div>
+
+	{# {% include "partials/socialIcons.php" %} #}
+
+	{# {% include "partials/footer.html.twig" %} #}
+</div>{% endblock %}

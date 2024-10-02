@@ -24,6 +24,7 @@ class AccueilController extends AbstractController
     
         }
     
+        // affichage des catégories et caroussel de produits
     #[Route('/', name: 'app_accueil')]
     public function index(): Response
     {
@@ -77,6 +78,19 @@ class AccueilController extends AbstractController
             // 'controller_name' => 'AccueilController',
             'categories' => $categories,
             'sous_categories' => $sousCategories,
+            // 'parent_categorie' => $parentCategorie,
+        ]);
+    }
+
+    // page à propos
+    #[Route('/A propos}', name: 'app_a_propos')]
+    public function aPropos(): Response
+    {
+
+        return $this->render('accueil/aPropos.html.twig', [
+            // 'controller_name' => 'AccueilController',
+            // 'categories' => $categories,
+            // 'sous_categories' => $sousCategories,
             // 'parent_categorie' => $parentCategorie,
         ]);
     }

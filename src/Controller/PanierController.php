@@ -150,7 +150,7 @@ class PanierController extends AbstractController
         $productAdd = true;
 
         // Ajout d'un message flash pour la confirmation
-        $this->addFlash('success', 'Le produit a été ajouté au panier.');
+        $this->addFlash('success', 'Le produit a été ajouté au panier <i class="bi bi-check-lg"></i>');
         // return $this->redirectToRoute('panier_index');
         // Retourner la vue de la page produit (app_detail_produit.html.twig)
         // $referer = $request->headers->get('referer');

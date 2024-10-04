@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
 
 
         // Par défaut, l'utilisateur n'est pas vérifié
-        $utilisateur->setVerified(false);
+        // $utilisateur->setVerified(false);
 
             $entityManager->persist($utilisateur);
             $entityManager->flush();
@@ -119,9 +119,9 @@ class RegistrationController extends AbstractController
         // $em->persist($utilisateur);
         $em->flush();
 
-        $this->addFlash('success', 'Your email address has been verified.');
+        // $this->addFlash('success', 'Your email address has been verified.');
             }
-            
+
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
@@ -129,7 +129,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        // $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_accueil');
     }

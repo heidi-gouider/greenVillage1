@@ -44,13 +44,17 @@ class RegistrationController extends AbstractController
                 $this->addFlash('warning', 'Vous avez déjà un compte. Veuillez vous connecter.');
                 return $this->redirectToRoute('app_login'); // Rediriger vers la page de connexion
             }
-                        // encode the plain password
+            // Hashage du mot de passe
             $utilisateur->setPassword(
                 $userPasswordHasher->hashPassword(
                     $utilisateur,
                     $form->get('plainPassword')->getData()
                 )
             );
+
+
+        // Par défaut, l'utilisateur n'est pas vérifié
+        $utilisateur->setVerified(false);
 
             $entityManager->persist($utilisateur);
             $entityManager->flush();
@@ -71,7 +75,7 @@ class RegistrationController extends AbstractController
             // $token = $jwt->generate($header, $playload, $this->getParameter('app.jwtsecret'),);
             // dd($token);
 
-            // Envoyer le 'e-mail
+            // Envoyer le e-mail de confirmation
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
                 (new TemplatedEmail())
@@ -82,7 +86,11 @@ class RegistrationController extends AbstractController
             );
 
             // do anything else you need here, like send an email
-                 return $this->redirectToRoute('app_accueil');
+            $this->addFlash('success', 'Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.');
+
+            // Ne pas authentifier l'utilisateur immédiatement, on attend la vérification de l'email
+        return $this->redirectToRoute('app_login');
+                //  return $this->redirectToRoute('app_accueil');
                 //  return $this->redirectToRoute('app_profil');
                 // }
 
@@ -95,13 +103,25 @@ class RegistrationController extends AbstractController
     }
 // désactivé en prod 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+
+            // On vérifie qu'on a bien un user et qu'il n'est pas déjà activé
+            if($utilisateur && !$utilisateur->isVerified()){
+            // Une fois l'email vérifié, on met à jour l'utilisateur
+        // $utilisateur = $this->getUser();
+        $utilisateur->setVerified(true);
+        // $em->persist($utilisateur);
+        $em->flush();
+
+        $this->addFlash('success', 'Your email address has been verified.');
+            }
+            
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
@@ -109,8 +129,8 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        // $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_accueil');
     }
 }

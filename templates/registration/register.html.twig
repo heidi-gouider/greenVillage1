@@ -84,12 +84,14 @@
                         {{ form_widget(registrationForm.agreeTerms) }}
                         {{ form_errors(registrationForm.agreeTerms) }}
                     </div>
-
-                                    {{ form_end(registrationForm) }}
+{# {{ form_row(registrationForm.RGPDConsent) }} #}
+                                    {# {{ form_end(registrationForm) }} #}
 
                     <div class="d-grid gap-3 col-3">
                         <button type="submit" class="submit">S'enregistrer</button>
                     </div>
+                                                        {{ form_end(registrationForm) }}
+
             </div>
         </div>
         </div>

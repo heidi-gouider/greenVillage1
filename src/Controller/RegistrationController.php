@@ -81,7 +81,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('support@demo.fr', 'Support'))
                     ->to($utilisateur->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Veuillez confirmer votre Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.');
 
             // Ne pas authentifier l'utilisateur immédiatement, on attend la vérification de l'email
-        return $this->redirectToRoute('app_login');
+        // return $this->redirectToRoute('app_login');
                 //  return $this->redirectToRoute('app_accueil');
                 //  return $this->redirectToRoute('app_profil');
                 // }
@@ -103,7 +103,7 @@ class RegistrationController extends AbstractController
     }
 // désactivé en prod 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $em): Response
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator,  EntityManagerInterface $em ): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -112,25 +112,27 @@ class RegistrationController extends AbstractController
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
 
             // On vérifie qu'on a bien un user et qu'il n'est pas déjà activé
-            if($utilisateur && !$utilisateur->isVerified()){
+            // if($utilisateur && !$utilisateur->isVerified()){
             // Une fois l'email vérifié, on met à jour l'utilisateur
         // $utilisateur = $this->getUser();
-        $utilisateur->setVerified(true);
+        // $utilisateur->setVerified(true);
         // $em->persist($utilisateur);
-        $em->flush();
+        // $em->flush();
 
         // $this->addFlash('success', 'Your email address has been verified.');
-            }
+            // }
 
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
+                // @TODO Change the redirect on success and handle or remove the flash message in your templates
+                $this->addFlash('success', 'Votre E-mail a bien été vérifié.');
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_accueil');
+        // return $this->redirectToRoute('app_accueil');
+        return $this->redirectToRoute('app_register');
+
     }
 }

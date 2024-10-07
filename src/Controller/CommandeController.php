@@ -77,12 +77,13 @@ class CommandeController extends AbstractController
   $em->persist($commande);
   $em->flush();
 
-  $session->remove('panier');
+//   $session->remove('panier');
 
   $this->addFlash('message', 'Commande créée avec succès');
 //   return $this->redirectToRoute('app_accueil');
         return $this->render('commande/index.html.twig', [
             'commandes' => $commande,
+            // 'details' => $detail
         ]);
     }
     
@@ -126,18 +127,18 @@ class CommandeController extends AbstractController
         // return $reference;
     // }
 
-    //  #[Route("/commande/{id}", name : "commande_show")]
+     #[Route("/commande/{id}", name : "show")]
      
-    //  public function show(Commande $commande): Response
-    // {
-    //     $etat = $commande->getEtat();
-    //     $etatLibelle = Commande::getEtatLibelle($etat);
+     public function show(Commande $commande): Response
+    {
+        $etat = $commande->getEtat();
+        $etatLibelle = Commande::getEtatLibelle($etat);
 
-    //     return $this->render('commande/show.html.twig', [
-    //         'commande' => $commande,
-    //         'etat_libelle' => $etatLibelle,
-    //     ]);
-    // }
+        return $this->render('commande/show.html.twig', [
+            'commande' => $commande,
+            'etat_libelle' => $etatLibelle,
+        ]);
+    }
     // je recupère la méthode et le query builder du repo detail 
     // #[Route('/top_discs', name: 'top_discs')]
     #[Route('/', name: 'top_produits')]

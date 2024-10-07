@@ -35,7 +35,8 @@
 										<td>{{ commande.id }}</td>
 										<td>{{ commande.dateCommande }}</td> 
 										<td>{# {{ commande.ref }} #}</td>
-										<td>{#{ element.produit }#}</td>
+										<td>{{ commande.nomProduit }}</td>
+										<td>{{ commande.quantiteProduit }}</td>
 										<td>{{ commande.totalHT }}€</td>
 										<td> 
 											{# <a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a> #}

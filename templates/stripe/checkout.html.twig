@@ -1,0 +1,27 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<button id="checkout-button">Payer</button>
+
+<script type="text/javascript">
+    var stripe = Stripe('{{ stripe_public_key }}');
+    
+    document.getElementById('checkout-button').addEventListener('click', function () {
+        fetch('/checkout', {
+            method: 'POST',
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+        });
+    });
+</script>

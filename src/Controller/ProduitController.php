@@ -157,6 +157,27 @@ class ProduitController extends AbstractController
         //     'produits' => $produits,
         //     'searchTerm' => $searchTerm
         // ]);
+
+        #[Route('/create-stripe-produit/{id}', name: 'create_stripe_produit')]
+    public function createStripeProduit(Produit $produit, StripeService $stripeService): JsonResponse
+    {
+        // Créer le produit Stripe
+        $stripeProduit = $stripeService->createProduit($produit);
+        
+        // Stocker l'ID du produit Stripe dans l'entité Produit
+        $produit->setStripeProduitId($stripeProduit->id);
+        
+        // Créer le prix Stripe pour ce produit
+        $stripePrix = $stripeService->createPrix($produit);
+
+        // Sauvegarder l'ID du produit Stripe et du prix dans la base de données si nécessaire
+        // Exemple: $entityManager->persist($produit); $entityManager->flush();
+
+        return new JsonResponse([
+            'produit_id' => $stripeProduit->id,
+            'prix_id' => $stripePrix->id,
+        ]);
+    }
     }
 
 

@@ -15,6 +15,7 @@
             {{ message }}
         </div>
     {% endfor %}
+	<form action="{{ {#path('panier_ajout', {id: element.produit.id})#} }}" method="post">
 
 	{% for commande in commandes %}
 
@@ -24,14 +25,16 @@
     {# <p>État: {{ commande.etat }}</p> #}
     {% endfor %}
 
-    <h2>Détails</h2>
+    <h2>Livraison</h2>
     <ul>
         {# {% for detail in commande.details %} #}
 		        {# {% for detail in details %}
             <li>{{ detail.produit.libelleProduit }} - {{ detail.quantite }} x {{ detail.produit.prix }} €</li>
         {% endfor %} #}
     </ul>
-
+	</form>
+<div class="mt-5 text center">
+<button class="btn brn-primary" type="submit">Valider ma commande</button>
     <a href="{{ path('panier_index') }}">Retour au panier</a>
 		</div>
 			</div>

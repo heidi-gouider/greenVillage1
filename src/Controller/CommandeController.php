@@ -127,7 +127,7 @@ class CommandeController extends AbstractController
         // return $reference;
     // }
 
-     #[Route("/commande/{id}", name : "show")]
+     #[Route('/commande/{id}', name : 'show')]
      
      public function show(Commande $commande): Response
     {
@@ -157,5 +157,10 @@ public function __construct(DetailRepository $detailRepo)
         return $this->render('accueil/index.html.twig', [
             // 'topProduits' => $topProduits,
         ]);
+    }
+    #[Route('/commande/verif', name: 'verif', methods: ['GET'])]
+    public function verifCommande(): Response
+    {
+
     }
 }

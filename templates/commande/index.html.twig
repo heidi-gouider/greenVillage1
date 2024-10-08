@@ -8,86 +8,114 @@
 			<div class="row mx-auto">
 				<div class="col-8">
 
-    <h1>Détail de la commande</h1>
+					<h1>Détail de la commande</h1>
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-	<form action="{{ {#path('panier_ajout', {id: element.produit.id})#} }}" method="post">
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+					{# <form action="{{ {path('panier_ajout', {id: element.produit.id})} }}" method="post"> #}
 
-	{% for commande in commandes %}
+					{% for commande in commandes %}
 
-    <p>Commande {{ commande.id }}</p>
-    <p>Date: {{ commande.dateCommande|date('d/m/Y H:i') }}</p>
-    <p>Total: {{ commande.totalHt }} €</p>
-    {# <p>État: {{ commande.etat }}</p> #}
-    {% endfor %}
+						<p>Commande
+							{{ commande.id }}</p>
+						<p>Date:
+							{{ commande.dateCommande|date('d/m/Y H:i') }}</p>
+						<p>Total:
+							{{ commande.totalHt }}
+							€</p>
+						{# <p>État: {{ commande.etat }}</p> #}
+					{% endfor %}
 
-    <h2>Livraison</h2>
-    <ul>
-        {# {% for detail in commande.details %} #}
-		        {# {% for detail in details %}
-            <li>{{ detail.produit.libelleProduit }} - {{ detail.quantite }} x {{ detail.produit.prix }} €</li>
-        {% endfor %} #}
-    </ul>
-	</form>
-<div class="mt-5 text center">
-<button class="btn brn-primary" type="submit">Valider ma commande</button>
-    <a href="{{ path('panier_index') }}">Retour au panier</a>
-		</div>
-			</div>
-		</main>
-	</div>
-{% endblock %}
-{# templates/panier/commandes.html.twig #}
-
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Historique des commandes
-{% endblock %}
-
-{% block body %}
-	<div class="contenu">
-		<h1 class="fst-italic text-center">Historique des commandes</h1>
-		<div class="container mx-auto mt-5">
-			<main class="row text-center">
-
-
-				{% if commandes is empty %}
-					<p class="text-white">Vous n'avez pas encore passé de commande.</p>
-				{% else %}
-					<div class="row text-center"> class="col-9 border border-light bg-light p-3">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Date</th>
-									<th>N° Référence</th>
-									<th>Montant</th>
-									<th>Etat</th>
-									<th>Détails</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for commande in commandes %}
-									<tr>
-										<td>{{ commande.id }}</td>
-										<td>{{ commande.date_commande }}</td>
-										<td>{{ commande.ref }}</td>
-										<td>{{ commande.total }}€</td>
-										<td>{{ commande.etat }}</td>
-										<td>
-											<a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					{% endif %}
+					<h2>Livraison</h2>
+					<ul>{# {% for detail in commande.details %} #}
+						{# {% for detail in details %}
+						            <li>{{ detail.produit.libelleProduit }} - {{ detail.quantite }} x {{ detail.produit.prix }} €</li>
+						        {% endfor %} #}
+					</ul>
+					{# <form action="{{ path('app_checkout' )}}" method="post"> #}
+					<div class="mt-5 text center">
+						<button class="btn brn-primary" type="submit">Valider et payer ma commande</button>
+						<a href="{{ path('panier_index') }}">Retour au panier</a>
+					</div>
+					{# </form> #}
 				</div>
-			</div>
-		</main>
-	</div>
-{% endblock %} #}
+			</main>
+		</div>
+</div>
+<p>Total: {{ commande.totalHt }}€</p>
+<p>État: {{ etat_libelle }}</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix unitaire</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail in details %}
+            <tr>
+                <td>{{ detail.produit.nom }}</td>
+                <td>{{ detail.quantite }}</td>
+                <td>{{ detail.produit.prixAchatHt }}€</td>
+                <td>{{ detail.quantite * detail.produit.prixAchatHt }}€</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+	{% endblock %}
+	{# templates/panier/commandes.html.twig #}
+
+	{# {% extends 'base.html.twig' %}
+	
+	{% block title %}Historique des commandes
+	{% endblock %}
+	
+	{% block body %}
+		<div class="contenu">
+			<h1 class="fst-italic text-center">Historique des commandes</h1>
+			<div class="container mx-auto mt-5">
+				<main class="row text-center">
+	
+	
+					{% if commandes is empty %}
+						<p class="text-white">Vous n'avez pas encore passé de commande.</p>
+					{% else %}
+						<div class="row text-center"> class="col-9 border border-light bg-light p-3">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Date</th>
+										<th>N° Référence</th>
+										<th>Montant</th>
+										<th>Etat</th>
+										<th>Détails</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for commande in commandes %}
+										<tr>
+											<td>{{ commande.id }}</td>
+											<td>{{ commande.date_commande }}</td>
+											<td>{{ commande.ref }}</td>
+											<td>{{ commande.total }}€</td>
+											<td>{{ commande.etat }}</td>
+											<td>
+												<a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						{% endif %}
+					</div>
+				</div>
+			</main>
+		</div>
+	{% endblock %} #}

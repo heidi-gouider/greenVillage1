@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div
+		class="contenu">
+		{# <h1 class="fst-italic text-center">Mon panier</h1> #}
+		<main class="container mt-5">
+			<div class="row mx-auto">
+				<div class="col-8">
+
+					<h1>Détail de ma commande</h1>
+
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+					<table class="table" id="formulaire">
+
+						<thead>
+							<tr>
+								<th>Produit</th>
+								<th>Prix unitaire</th>
+								<th>Quantité</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for detail in details %}
+								<tr>
+									<td>{{ detail.produit.libelleProduit }}</td>
+									<td>{{ detail.produit.prix }}€</td>
+									<td>{{ detail.quantite }}</td>
+									<td>{{ detail.quantite * detail.produit.prix }}€</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4">Total</td>
+								<td colspan="1">
+									{# <b>{{ total }}
+										€</b> #}
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+
+
+					<h2>Livraison</h2>
+
+					<form action="{{ path('app_checkout' )}}" method="post">
+                    <input type="hidden" name="total" value="500">
+                    <input type="hidden" name="quantite" value="2">
+					<div class="mt-5 text center">
+						<button class="btn btn-success " type="submit">Payer</button>
+						<a href="{{ path('panier_index') }}">Retour au panier</a>
+					</div>
+                    </form>
+				</div>
+			</main>
+		</div>
+	</div>
+	<p>Total:
+		{# {{ commande.totalHt }}€</p> #}
+{% endblock %}

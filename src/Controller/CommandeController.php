@@ -81,10 +81,11 @@ class CommandeController extends AbstractController
 
   $this->addFlash('message', 'Commande créée avec succès');
 //   return $this->redirectToRoute('app_accueil');
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commande,
-            // 'details' => $detail
-        ]);
+return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()]);
+        // return $this->render('commande/index.html.twig', [
+        //     'commandes' => $commande,
+        //     'details' => $detail
+        // ]);
     }
     
 // je récupere l'historique de commande de l'utilisateur
@@ -131,14 +132,32 @@ class CommandeController extends AbstractController
      
      public function show(Commande $commande): Response
     {
-        $etat = $commande->getEtat();
-        $etatLibelle = Commande::getEtatLibelle($etat);
+        // Vérifier si l'utilisateur est bien le propriétaire de la commande
+    if ($commande->getUtilisateur() !== $this->getUser()) {
+        throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à voir cette commande.');
+    }
+
+    $total = 0;
+    $quantiteTotal = 0;
+
+        // $etat = $commande->getEtat();
+        // $etatLibelle = Commande::getEtatLibelle($etat);
+
+        // Récupérer les détails de la commande
+    $details = $commande->getDetails();
 
         return $this->render('commande/show.html.twig', [
-            'commande' => $commande,
-            'etat_libelle' => $etatLibelle,
+            'commandes' => $commande,
+            // 'etat_libelle' => $etatLibelle,
+            'details' => $details,
         ]);
     }
+
+    // je met en place le checkout
+    // #[Route('/', name: 'checkout', methods: "POST")]
+    // public function checkout(): Response
+
+
     // je recupère la méthode et le query builder du repo detail 
     // #[Route('/top_discs', name: 'top_discs')]
     #[Route('/', name: 'top_produits')]
@@ -158,9 +177,5 @@ public function __construct(DetailRepository $detailRepo)
             // 'topProduits' => $topProduits,
         ]);
     }
-    #[Route('/commande/verif', name: 'verif', methods: ['GET'])]
-    public function verifCommande(): Response
-    {
 
-    }
 }

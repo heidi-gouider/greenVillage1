@@ -1,57 +1,74 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     const passwordField = document.getElementById('passwordField');
-//     const confirmPasswordField = document.getElementById('confirmPasswordField');
-//     const togglePassword = document.getElementById('togglePassword');
-//     const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+// addEventListener('DOMContentLoaded', function () {
+//     const passwordField = document.getElementById("passwordField");
+//     const confirmPasswordField = document.getElementById("confirmPasswordField");
 
-//     if (passwordField && togglePassword) {
-//         togglePassword.addEventListener('click', function () {
-//             if (passwordField.type === 'password') {
-//                 passwordField.type = 'text';
-//                 togglePassword.classList.replace('bi-eye', 'bi-eye-slash');
-//             } else {
-//                 passwordField.type = 'password';
-//                 togglePassword.classList.replace('bi-eye-slash', 'bi-eye');
-//             }
-//         });
-//     }
+// Fonction pour basculer la visibilité du mot de passe
+// if (passwordField) {
+    // Fonction pour basculer la visibilité du mot de passe
+    // document.getElementById("togglePassword").addEventListener("click", function() {
+        // const passwordField = document.getElementById("passwordField");
+        // const passwordFieldType = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        // passwordField.setAttribute("type", passwordFieldType);
 
-//     if (confirmPasswordField && toggleConfirmPassword) {
-//         toggleConfirmPassword.addEventListener('click', function () {
-//             if (confirmPasswordField.type === 'password') {
-//                 confirmPasswordField.type = 'text';
-//                 toggleConfirmPassword.classList.replace('bi-eye', 'bi-eye-slash');
-//             } else {
-//                 confirmPasswordField.type = 'password';
-//                 toggleConfirmPassword.classList.replace('bi-eye-slash', 'bi-eye');
-//             }
-//         });
-//     }
-// });
-// e=true;
-// function changer(){
-//     if(e){
-//         document.getElementById("pass").setAttribute("type","text");
-//         e=false;
-//     }
+        // Changer l'icône
+//         this.classList.toggle("bi bi-eye");
+//         this.classList.toggle("bi bi-eye-slash");
+//     });
+// } else {
+//     console.error("Le champ de mot de passe n'a pas été trouvé.");
 // }
-//     function togglePasswordVisibility(field, icon) {
-//         if (field.type === 'password') {
-//             field.type = 'text';
-//             icon.classList.remove('bi-eye');
-//             icon.classList.add('bi-eye-slash');
-//         } else {
-//             field.type = 'password';
-//             icon.classList.remove('bi-eye-slash');
-//             icon.classList.add('bi-eye');
-//         }
-//     }
+// if (confirmPasswordField) {
+//     document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
+        // const confirmPasswordField = document.getElementById("confirmPasswordField");
+        // const confirmPasswordFieldType = confirmPasswordField.getAttribute("type") === "password" ? "text" : "password";
+        // confirmPasswordField.setAttribute("type", confirmPasswordFieldType);
 
-//     togglePassword.addEventListener('click', function () {
-//         togglePasswordVisibility(passwordField, togglePassword);
+        // Changer l'icône
+//         this.classList.toggle("bi bi-eye");
+//         this.classList.toggle("bi bi-eye-slash");
 //     });
+// } else {
+//     console.error("Le champ de confirmation de mot de passe n'a pas été trouvé.");
+// }
+console.log("Fichier JS chargé avec succès !youplaboom");
 
-//     toggleConfirmPassword.addEventListener('click', function () {
-//         togglePasswordVisibility(confirmPasswordField, toggleConfirmPassword);
-//     });
 // });
+
+// } else {
+//     console.error("Le champ de confirmation de mot de passe n'a pas été trouvé.");
+// }
+// console.log("Fichier JS chargé avec succès !youplaboom");
+
+// document.addEventListener('DOMContentLoaded', function () {
+//         const togglePasswordFields = (toggleIcon, passwordFieldId) => {
+//             const passwordField = document.getElementById(passwordFieldId);
+//             toggleIcon.addEventListener('click', function() {
+//                 const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+//                 passwordField.setAttribute('type', type);
+//                 this.classList.toggle('bi bi-eye');
+//                 this.classList.toggle('bi bi-eye-slash');
+//             });
+//         };
+    
+//         const togglePasswordIcon1 = document.getElementById('togglePassword'); // Assurez-vous que l'ID correspond
+//         const togglePasswordIcon2 = document.getElementById('toggleConfirmPassword'); // Assurez-vous que l'ID correspond
+    
+//         togglePasswordFields(togglePasswordIcon1, 'passwordField');
+//         togglePasswordFields(togglePasswordIcon2, 'confirmPasswordField');
+//     });
+
+// const eye = document.querySelector(".feather-eye");
+// const eyeoff = document.querySelector(".feather-eye-off");
+// const passwordField = document.querySelector("input[type=password]");
+
+// eye.addEventListener("click", () => {
+//         eye.style.display = "none";
+//         eyeoff.style.display = "block";
+//         passwordField.type = "text";
+//       });
+      
+//       eyeoff.addEventListener("click", () => {
+//         eyeoff.style.display = "none";
+//         eye.style.display = "block";
+//         passwordField.type = "password";
+//       });

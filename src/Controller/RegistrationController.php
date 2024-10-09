@@ -38,17 +38,17 @@ class RegistrationController extends AbstractController
 
             // Vérifier si l'utilisateur existe déjà avec cet e-mail
             $existingUser = $utilisateurRepo->findOneBy(['email' => $email]);
-            // $existingUser = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
 
             if ($existingUser) {
                 $this->addFlash('warning', 'Vous avez déjà un compte. Veuillez vous connecter.');
                 return $this->redirectToRoute('app_login'); // Rediriger vers la page de connexion
             }
+
             // Hashage du mot de passe
             $utilisateur->setPassword(
                 $userPasswordHasher->hashPassword(
                     $utilisateur,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()['first']
                 )
             );
 
@@ -56,27 +56,11 @@ class RegistrationController extends AbstractController
         // Par défaut, l'utilisateur n'est pas vérifié
         // $utilisateur->setVerified(false);
 
+          // Persist and flush the nouvel utilisateur
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
-            // Générer le token
-            // $header = [
-            //     'typ' => 'JWT',
-            //     'alg' => 'HS256'
-            // ];
-
-            // le payload
-            // $payload = [
-            //     'utilisateur_id' => $utilisateur->getId()
-            // ];
-
-            // On génère le token
-            // le token est valable 3ans
-            // $token = $jwt->generate($header, $playload, $this->getParameter('app.jwtsecret'),);
-            // dd($token);
-
             // Envoyer le e-mail de confirmation
-            // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $utilisateur,
                 (new TemplatedEmail())
                     ->from(new Address('support@demo.fr', 'Support'))
@@ -88,12 +72,15 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.');
 
+            // Redirection après l'inscription
+            return $this->redirectToRoute('app_login');
+
             // Ne pas authentifier l'utilisateur immédiatement, on attend la vérification de l'email
         // return $this->redirectToRoute('app_login');
                 //  return $this->redirectToRoute('app_accueil');
                 //  return $this->redirectToRoute('app_profil');
                 // }
-
+// voir pour comentaire
             return $security->login($utilisateur, AppAutenticatorAuthenticator::class, 'main');
         }
 
@@ -101,6 +88,7 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
+
 // désactivé en prod 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator,  EntityManagerInterface $em ): Response

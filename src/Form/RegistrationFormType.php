@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -37,43 +38,43 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email')
 
-
-            ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer votre mot de passe',
-                    ]),
-                    
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit étre supérieur à 6 caractères {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre',
+                // 'options' => ['attr' => ['class' => 'passwordField']],
+                // 'required' => true,
+                'first_options'  => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                         'class' => 'passwordField'
+                        ],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Confirmez le mot de passe',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                    'max' => 4096,
+                ]),
+            ],
+        ],
+                'second_options' => [
+                    'label' => 'Confirmez le mot de passe',
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                        'class' => 'passwordField'
+                    ],        
                 ],
-            ])
-            // ->add('confirmPassword', PasswordType::class, [
-            //     'mapped' => false,
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Veuillez confirmer votre mot de passe',
-            //         ]),
-            //         new EqualTo([
-            //             'propertyPath' => 'plainPassword',
-            //             'message' => 'Les mots de passe doivent correspondre',
-            //         ]),
-            //     ],
-            //     'attr' => ['autocomplete' => 'new-password'],
-            // ])
+        'mapped' => false, // Ce champ ne sera pas directement mappé à l'entité
+                ])
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-'constraints' => [
-    new IsTrue([
-        'message' => 'Jaccepte les termes.',
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Jaccepte les termes.',
     ]),
 ],
 ])

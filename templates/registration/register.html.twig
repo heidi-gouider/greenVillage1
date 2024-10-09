@@ -1,103 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {# <div class="alert alert-danger" role="alert">{{ 'Access Denied.' | trans({}, 'messages') }}</div> #}
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		{# <div class="alert alert-danger" role="alert">{{ 'Access Denied.' | trans({}, 'messages') }}</div> #}
+	{% endfor %}
 
-<div class="contenu">
+	<div class="contenu">
 
 		<div class="container">
-            		<h1 class="fst-italic mx-auto">Inscription</h1>
+			<h1 class="fst-italic mx-auto">Inscription</h1>
 
 
- <div class="row justify-content-center">
-            <div class="col-md-6">
-                {{ form_start(registrationForm) }}
-                <div class="mb-3">
-                        {{ form_label(registrationForm.nom) }}
-                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.nom) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.prenom_client) }}
-                        {{ form_widget(registrationForm.prenom_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.prenom_client) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.adresse_client) }}
-                        {{ form_widget(registrationForm.adresse_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.adresse_client) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.telephone_client) }}
-                        {{ form_widget(registrationForm.telephone_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.telephone_client) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.email) }}
-                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.email) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
-                        <div class="input-group">
-                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'id': 'passwordField'}}) }}
-                        <span class="input-group-text">
-                            <i class="bi bi-eye-slash" name="pass" type="text" id="togglePassword" style="cursor: pointer" OnClick="changer"></i>
-                        </span>
-                    </div>
-                    {{ form_errors(registrationForm.plainPassword) }}
-                {# </div>
-                                    <div class="mb-3">
-                        {{ form_label(registrationForm.confirmPassword, 'Confirmation du mot de passe') }}
-                        <div class="input-group">
-                            {{ form_widget(registrationForm.confirmPassword, {'attr': {'class': 'form-control', 'id': 'confirmPasswordField'}}) }}
-                            <span class="input-group-text">
-                                <i class="bi bi-eye-slash" name="pass" type="text" id="toggleConfirmPassword" style="cursor: pointer" OnClick="changer"></i>
-                            </span>
-                        </div>
-                        {{ form_errors(registrationForm.confirmPassword) }}
-                    </div>
- #}
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.coef_client, 'Type de compte') }}
-                        {{ form_widget(registrationForm.coef_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.coef_client) }}
-                    </div>
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.code_postal_client) }}
-                        {{ form_widget(registrationForm.code_postal_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.code_postal_client) }}
-                    </div>
-                                        <div class="mb-3">
-                        {{ form_label(registrationForm.ville_client) }}
-                        {{ form_widget(registrationForm.ville_client, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.ville_client) }}
-                    </div>
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					{{ form_start(registrationForm) }}
+					<div class="mb-3">
+						{{ form_label(registrationForm.nom) }}
+						{{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(registrationForm.nom) }}
+					</div>
+					<div class="mb-3">
+						{{ form_label(registrationForm.prenom_client, 'Prénom') }}
+						{{ form_widget(registrationForm.prenom_client, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(registrationForm.prenom_client) }}
+					</div>
+					<div class="mb-3">
+						{{ form_label(registrationForm.email) }}
+						{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(registrationForm.email) }}
+					</div>
+					<div class="mb-3">
+						{{ form_label(registrationForm.password.first) }}
+						<div class="input-group">
+							{{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control', 'id': 'passwordField'
+                            }}) }}
+							<span class="input-group-text">
+								<i class="bi bi-eye-slash" name="pass" type="text" id="togglePassword" style="cursor: pointer"></i>
+							</span>
+						</div>
+						<div class="mb-3">
+							{{ form_label(registrationForm.password.second) }}
+							<div class="input-group">
+								{{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control', 'id': 'confirmPasswordField'
+                                }}) }}
+								<span class="input-group-text">
+									<i class="bi bi-eye-slash" name="pass" type="text" id="toggleConfirmPassword" style="cursor: pointer"></i>
+								</span>
+							</div>
+							{{ form_errors(registrationForm.password) }}
 
-                                        <div class="mb-3">
-                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions') }}
+							<div class="mb-3">
+								{{ form_label(registrationForm.prenom_client, 'Adresse') }}
+							</div>
+
+							<div class="mb-3">
+								{{ form_label(registrationForm.adresse_client, 'Voie') }}
+								{{ form_widget(registrationForm.adresse_client, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(registrationForm.adresse_client) }}
+							</div>
+							<div class="mb-3">
+								{{ form_label(registrationForm.ville_client, 'Ville') }}
+								{{ form_widget(registrationForm.ville_client, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(registrationForm.ville_client) }}
+							</div>
+							<div class="mb-3">
+								{{ form_label(registrationForm.code_postal_client, 'Code postal') }}
+								{{ form_widget(registrationForm.code_postal_client, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(registrationForm.code_postal_client) }}
+							</div>
+
+							<div class="mb-3">
+								{{ form_label(registrationForm.telephone_client) }}
+								{{ form_widget(registrationForm.telephone_client, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(registrationForm.telephone_client) }}
+							</div>
+							<div class="mb-3">
+								{{ form_label(registrationForm.coef_client, 'Type de compte') }}
+								{{ form_widget(registrationForm.coef_client, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(registrationForm.coef_client) }}
+							</div>
+
+							<div class="mb-3">
+								{{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions') }}
                         {{ form_widget(registrationForm.agreeTerms) }}
                         {{ form_errors(registrationForm.agreeTerms) }}
                     </div>
-{# {{ form_row(registrationForm.RGPDConsent) }} #}
                                     {# {{ form_end(registrationForm) }} #}
 
                     <div class="d-grid gap-3 col-3">
                         <button type="submit" class="submit">S'enregistrer</button>
                     </div>
-                                                        {{ form_end(registrationForm) }}
+                {{ form_end(registrationForm) }}
 
-            </div>
-        </div>
-        </div>
-        </div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-		{# {% include "partials/footer.php" %} #}
-    </div>
+				{# {% include "partials/footer.php" %} #}
+			</div>
 
-{% endblock %}
+		{% endblock %}

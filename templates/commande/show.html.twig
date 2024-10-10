@@ -8,7 +8,7 @@
 			<div class="row mx-auto">
 				<div class="col-8">
 
-					<h1>Détail de ma commande</h1>
+					<h1>Détail de ma commande n° CMD{{ commande.id }}</h1>
 
 					{% for message in app.flashes('success') %}
 						<div class="alert alert-success">
@@ -50,6 +50,7 @@
 					<h2>Livraison</h2>
 
 					<form action="{{ path('app_checkout' )}}" method="post">
+					<input type="hidden" name="commande_id" value="{{ commande.id }}">
                     <input type="hidden" name="total" value="500">
                     <input type="hidden" name="quantite" value="2">
 					<div class="mt-5 text center">

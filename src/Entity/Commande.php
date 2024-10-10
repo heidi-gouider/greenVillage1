@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+    // Déclaration des différents états de la commande
+    // const ETAT_ENREGISTREE_PAYEE = 0;
+    const ETAT_EN_PREPARATION = 0;
+    const ETAT_EN_COURS_DE_LIVRAISON = 1;
+    const ETAT_LIVREE = 2;
+
+    // Statuts de paiement
+    const STATUT_NON_PAYE = 0;
+    const STATUT_PAYE = 1;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -54,6 +64,12 @@ class Commande
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
     private Collection $details;
+
+    #[ORM\Column]
+    private ?bool $status = null;
+
+    #[ORM\Column]
+    private ?int $etat = null;
 
     /**
      * @var Collection<int, Produit>
@@ -219,6 +235,58 @@ class Commande
         return $this;
     }
 
+    // Méthodes pour obtenir le libellé du statut de paiement
+    public static function getStatutLibelle(int $status): string
+    {
+        switch ($status) {
+            case self::STATUT_PAYE:
+                return 'Payé';
+            case self::STATUT_NON_PAYE:
+                return 'Non payé';
+            default:
+                return 'Statut inconnu';
+        }
+    }
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+     // Méthode pour obtenir le libellé de l'état
+     public static function getEtatLibelle(int $etat): string
+     {
+         switch ($etat) {
+             case self::ETAT_ENREGISTREE_PAYEE:
+                 return 'enregistrée/payée';
+             case self::ETAT_EN_PREPARATION:
+                 return 'en préparation';
+             case self::ETAT_EN_COURS_DE_LIVRAISON:
+                 return 'en cours de livraison';
+             case self::ETAT_LIVREE:
+                 return 'livrée';
+             default:
+                 return 'état inconnu';
+         }
+     }
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): static
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
     /**
      * @return Collection<int, Detail>
      */

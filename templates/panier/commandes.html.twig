@@ -15,30 +15,52 @@
 				{% if commandes is empty %}
 					<p class="">Vous n'avez pas encore passé de commande.</p>
 				{% else %}
-					<div  class="col-9 border border-light bg-light p-3">
+					<div class="col-9 border border-light bg-light p-3">
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Ref(ID)</th>
-									<th>Date</th> 
-									{# <th>N° Référence</th> #}
-									<th>Produit</th>
-									<th>Quantité</th>
+									<th>Reférence</th>
+									<th>Date</th>
+									<th>Produits</th>
+									{# <th>Quantité</th> #}
 									<th>Total</th>
+									<th>Status</th>
 									<th>Etat</th>
-									{# <th>Détails</th> #}
+									<th>Détails</th>
 								</tr>
 							</thead>
 							<tbody>
 								{% for commande in commandes %}
 									<tr>
-										<td>{{ commande.id }}</td>
-										<td>{{ commande.dateCommande }}</td> 
-										<td>{# {{ commande.ref }} #}</td>
-										<td>{{ commande.nomProduit }}</td>
-										<td>{{ commande.quantiteProduit }}</td>
+										{# je rajoute un préfixe CMD avant l'id #}
+										<td>CMD-{{ commande.id }}</td>
+										<td>{{ commande.dateCommande|date('d/m/Y H:i') }}</td>
+										<td>
+										<!-- Liste des produits avec quantités -->
+											<ul>
+												{% for detail in commande.details %}
+													<li>{{ detail.produit.libelleProduit }}
+														(x{{ detail.quantite }})</li>
+												{% endfor %}
+											</ul>
+										</td>
+										{# <td>{{ commande.nomProduit }}</td> #}
+										{# <td>{{ commande.quantiteProduit }}</td> #}
 										<td>{{ commande.totalHT }}€</td>
-										<td> 
+										<td></td>
+										<td>
+											{% if commande.status %}
+												<span class="badge bg-success">Payé</span>
+												<!-- Statut de paiement : Payé -->
+											{% else %}
+												<span class="badge bg-danger">Non payé</span>
+												<!-- Statut de paiement : Non payé -->
+											{% endif %}
+										</td>
+										<td>{{ commande.etat|capitalize }}</td>
+										<!-- État de la commande -->
+
+										<td>
 											{# <a href="{{ path('order_show', {'id': commande.id}) }}">Voir</a> #}
 										</td>
 									</tr>
@@ -48,11 +70,11 @@
 					{% endif %}
 				</div>
 			</div>
-									<div class="d-grid gap-3 col-2 mx-auto text-center">
-							<a class="submit" href="{{ path('app_commande_ajout') }}">
-								Valider
-							</a>
-							</div>
+			<div class="d-grid gap-3 col-2 mx-auto text-center">
+				<a class="submit" href="{{ path('app_commande_ajout') }}">
+					Valider
+				</a>
+			</div>
 
 		</main>
 	</div>

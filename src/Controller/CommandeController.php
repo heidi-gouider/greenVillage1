@@ -45,7 +45,9 @@ class CommandeController extends AbstractController
 // $dateCommande = $commande->getDateCommande();
 //   $commande->setDateCommande(new \DateTime());
 // Etat initial
-//   $commande->setEtat(0); 
+  $commande->setEtat(0); 
+  $commande->setStatus(0); 
+
 
   $total = 0;
 
@@ -147,15 +149,13 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
     $details = $commande->getDetails();
 
         return $this->render('commande/show.html.twig', [
-            'commandes' => $commande,
+            'commande' => $commande,
             // 'etat_libelle' => $etatLibelle,
             'details' => $details,
+            'total' => $total,
+        'quantiteTotal' => $quantiteTotal,
         ]);
     }
-
-    // je met en place le checkout
-    // #[Route('/', name: 'checkout', methods: "POST")]
-    // public function checkout(): Response
 
 
     // je recupère la méthode et le query builder du repo detail 

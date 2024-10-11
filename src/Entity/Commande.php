@@ -12,10 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Commande
 {
     // Déclaration des différents états de la commande
-    // const ETAT_ENREGISTREE_PAYEE = 0;
-    const ETAT_EN_PREPARATION = 0;
-    const ETAT_EN_COURS_DE_LIVRAISON = 1;
-    const ETAT_LIVREE = 2;
+    const ETAT_ENREGISTREE_PAYEE = 0;
+    const ETAT_EN_PREPARATION = 1;
+    const ETAT_EN_COURS_DE_LIVRAISON = 2;
+    const ETAT_LIVREE = 3;
+    const ETAT_EN_ERREUR = 4;
 
     // Statuts de paiement
     const STATUT_NON_PAYE = 0;
@@ -32,8 +33,8 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mode_reglement = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $date_reglement = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_reglement = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $nb_expedition = null;
@@ -115,12 +116,12 @@ class Commande
         return $this;
     }
 
-    public function getDateReglement(): ?string
+    public function getDateReglement(): ?\DateTimeInterface
     {
         return $this->date_reglement;
     }
 
-    public function setDateReglement(?string $date_reglement): static
+    public function setDateReglement(?\DateTimeInterface $date_reglement): static
     {
         $this->date_reglement = $date_reglement;
 
@@ -271,6 +272,8 @@ class Commande
                  return 'en cours de livraison';
              case self::ETAT_LIVREE:
                  return 'livrée';
+                 case self::ETAT_EN_ERREUR:
+                    return 'en erreur';
              default:
                  return 'état inconnu';
          }

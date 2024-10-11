@@ -23,12 +23,10 @@ class CommandeController extends AbstractController
     #[Route('/ajout', name: 'ajout')]
     public function ajout(SessionInterface $session, ProduitRepository $produitRepository, EntityManagerInterface $em): Response
     {
-        // je m'assure que l'utilisateur est connecté
-        //on restrictionne l'accès ICI :
+        // restriction accès 
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         $panier = $session->get('panier', []);
-
 
         // if($panier === []){
         //     $this->addFlash('message', 'Votre panier est vide');
@@ -36,29 +34,23 @@ class CommandeController extends AbstractController
         // }
   //Le panier n'est pas vide, on crée la commande
   $commande = new Commande();
-
-  // On remplit la commande
   $commande->setUtilisateur($this->getUser());
- // Générer une référence unique entière
-//  $reference = $this->generateUniqueReference();
-//  $commande->setReference($reference);
-// $dateCommande = $commande->getDateCommande();
-//   $commande->setDateCommande(new \DateTime());
-// Etat initial
+    $commande->setDateCommande(new \DateTime());
+
+// Etat et status initial
   $commande->setEtat(0); 
   $commande->setStatus(0); 
-
 
   $total = 0;
 
   // On parcourt le panier pour créer les détails de commande
   foreach($panier as $item => $quantite){
       $detail = new Detail();
-
       // On va chercher le produit
       $produit = $produitRepository->find($item);
-      
-      $prix = $produit->getPrixAchatHt();
+
+    //   $prix = $produit->getPrixAchatHt();
+      $prix = $produit->getPrix();
 
       // On crée le détail de commande
       $detail->setProduit($produit);
@@ -75,11 +67,15 @@ class CommandeController extends AbstractController
   $commande->setTotalHt($total);
 //   $commandes = $utilisateur->getCommandes();
 
+// Optionnel : définir le mode de règlement et la date de règlement si nécessaire
+$commande->setModeReglement('Stripe'); // Exemple : mode de paiement
+// $commande->setDateReglement(new \DateTime()); // À définir selon l'état du paiement
+
   // On persiste et on flush
   $em->persist($commande);
   $em->flush();
 
-//   $session->remove('panier');
+  $session->remove('panier');
 
   $this->addFlash('message', 'Commande créée avec succès');
 //   return $this->redirectToRoute('app_accueil');
@@ -139,12 +135,15 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
         throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à voir cette commande.');
     }
 
+    $totalCom = 0;
     $total = 0;
     $quantiteTotal = 0;
 
         // $etat = $commande->getEtat();
         // $etatLibelle = Commande::getEtatLibelle($etat);
-
+    foreach ($commande as $commande) {
+            $totalCom += $commande->getTotalHt();  // 'getTotalHt' retourne le total de la commande
+        }
         // Récupérer les détails de la commande
     $details = $commande->getDetails();
 
@@ -153,7 +152,8 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
             // 'etat_libelle' => $etatLibelle,
             'details' => $details,
             'total' => $total,
-        'quantiteTotal' => $quantiteTotal,
+            'quantiteTotal' => $quantiteTotal,
+            'total' => $totalCom,
         ]);
     }
 

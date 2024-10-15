@@ -246,7 +246,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->is_verified;
     }
 
-    public function setVerified(bool $is_verified): static
+    public function setVerified(bool $is_verified): self
     {
         $this->is_verified = $is_verified;
 

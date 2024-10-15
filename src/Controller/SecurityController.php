@@ -15,13 +15,20 @@ class SecurityController extends AbstractController
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
-
+        // Si l'utilisateur est connecté, vérifier son statut de vérification
+            if ($this->getUser() && !$this->getUser()->isVerified()) {
+            $this->addFlash('error', 'Vous devez vérifier votre e-mail avant de vous connecter.');
+        return $this->redirectToRoute('app_logout');
+        }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        // last email entered by the user
+        $email = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', [
+            'last_email' => $email,
+            'error' => $error
+        ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

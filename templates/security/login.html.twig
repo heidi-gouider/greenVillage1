@@ -28,7 +28,7 @@
 						<h1 class="h3 mb-3 font-weight-normal">Connectez vous</h1>
 
 						<label class="mb-3" for="inputNom">Email</label>
-						<input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						<input type="text" value="{{ last_email }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 						<label class="mt-4 mb-3" for="inputPassword">Mot de passe</label>
 						<div class="input-group mb-4">
 						<input
@@ -47,14 +47,13 @@
 							</label>
 						</div>
 			<div class="row ">
-						<div class="d-grid gap-3 col-3 mx-auto">
+						<div class="d-grid gap-3 col-4 mx-auto">
 							<button class="submit" type="submit">
 								Connexion
 							</button>
 						</div>
 
-						<div class="d-grid gap-3 col-3 mx-auto">
-
+						<div class="d-grid gap-3 col-4 mx-auto">
 							<a class="submit" href="{{ path('app_register') }}">
 								Créer un compte
 							</a>

@@ -48,7 +48,8 @@ class RegistrationController extends AbstractController
             $utilisateur->setPassword(
                 $userPasswordHasher->hashPassword(
                     $utilisateur,
-                    $form->get('password')->getData()['first']
+                    $form->get('password')->getData()
+                    // ['first']
                 )
             );
 
@@ -69,19 +70,25 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            // do anything else you need here, like send an email
             $this->addFlash('success', 'Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception.');
+
+            // On vérifie qu'on a bien un user et qu'il n'est pas déjà activé
+            // if($utilisateur && !$utilisateur->isVerified()){
+            // Une fois l'email vérifié, on met à jour l'utilisateur
+        // $utilisateur = $this->getUser();
+        // $utilisateur->setVerified(true);
+        // $em->persist($utilisateur);
+        // $em->flush();
+            // };
+// voir pour comentaire
+// return $security->login($utilisateur, AppAutenticatorAuthenticator::class, 'main');
 
             // Redirection après l'inscription
             return $this->redirectToRoute('app_login');
 
             // Ne pas authentifier l'utilisateur immédiatement, on attend la vérification de l'email
-        // return $this->redirectToRoute('app_login');
-                //  return $this->redirectToRoute('app_accueil');
-                //  return $this->redirectToRoute('app_profil');
-                // }
-// voir pour comentaire
-            return $security->login($utilisateur, AppAutenticatorAuthenticator::class, 'main');
+// authentification immédiate après inscription
+            // return $security->login($utilisateur, AppAutenticatorAuthenticator::class, 'main');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -98,17 +105,7 @@ class RegistrationController extends AbstractController
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-
-            // On vérifie qu'on a bien un user et qu'il n'est pas déjà activé
-            // if($utilisateur && !$utilisateur->isVerified()){
-            // Une fois l'email vérifié, on met à jour l'utilisateur
-        // $utilisateur = $this->getUser();
-        // $utilisateur->setVerified(true);
-        // $em->persist($utilisateur);
-        // $em->flush();
-
-        // $this->addFlash('success', 'Your email address has been verified.');
-            // }
+            $this->addFlash('success', 'Votre e-mail a bien été vérifié.');
 
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
@@ -116,11 +113,11 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
                 // @TODO Change the redirect on success and handle or remove the flash message in your templates
-                $this->addFlash('success', 'Votre E-mail a bien été vérifié.');
+                // $this->addFlash('success', 'Votre E-mail a bien été vérifié.');
 
 
-        // return $this->redirectToRoute('app_accueil');
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_accueil');
+        // return $this->redirectToRoute('app_register');
 
     }
 }

@@ -41,30 +41,37 @@
 								<td colspan="2">
 									<b>{{ commande.totalHt }}
 										€</b>
-									{# <b>{{ total }}
-										€</b> #}
-
 								</td>
 							</tr>
 						</tfoot>
 					</table>
 
 
-					<h2>Livraison</h2>
-
-					<form action="{{ path('app_checkout' )}}" method="post">
-					<input type="hidden" name="commande_id" value="{{ commande.id }}">
-                    <input type="hidden" name="total" value="500">
-                    <input type="hidden" name="quantite" value="2">
-					<div class="mt-5 text center">
-						<button class="btn btn-success " type="submit">Payer</button>
-						<a href="{{ path('panier_index') }}">Retour au panier</a>
+					<h3 class="mt-5">Votre adresse de livraison</h3>
+					<div>
+						{{ rue }}
 					</div>
-                    </form>
+					<div>
+						{{ cp }}
+					</div>
+					<div>
+						{{ ville }}
+					</div>
+<div class="mt-5" >
+<p>Si cotre adresse n'est pas la même pour la livraison, veuillez cliquez sur le lien :</p>
+					<a href=" {{ path('app_profil') }}"> Modifier</a>
+					</div>
+					<form action="{{ path('app_checkout' )}}" method="post">
+						<input type="hidden" name="commande_id" value="{{ commande.id }}">
+						<input type="hidden" name="total" value="500">
+						<input type="hidden" name="quantite" value="2">
+						<div class="mt-5 text center">
+							<button class="btn btn-success " type="submit">Payer</button>
+							<a href="{{ path('panier_index') }}">Retour au panier</a>
+						</div>
+					</form>
 				</div>
 			</main>
 		</div>
 	</div>
-	<p>Total:
-		{# {{ commande.totalHt }}€</p> #}
-{% endblock %}
+	{% endblock %}

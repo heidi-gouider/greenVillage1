@@ -42,8 +42,10 @@ class EmailVerifier
      */
     public function handleEmailConfirmation(Request $request, Utilisateur $utilisateur): void
     {
+        // Valider le lien de confirmation
         $this->verifyEmailHelper->validateEmailConfirmationFromRequest($request, (string) $utilisateur->getId(), $utilisateur->getEmail());
 
+        // Marquer l'utilisateur comme vérifié
         $utilisateur->setVerified(true);
 
         $this->entityManager->persist($utilisateur);

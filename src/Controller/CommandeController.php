@@ -6,6 +6,7 @@ use App\Entity\Commande;
 use App\Entity\Detail; 
 use App\Entity\Utilisateur;
 use App\Repository\ProduitRepository;
+use App\Repository\UtilisateurRepository;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -112,19 +113,6 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
         ]);
     }
 }
-    // Définition de la méthode generateUniqueReference
-    // private function generateUniqueReference(): int
-    // {
-        // Utilisez le timestamp actuel en secondes
-        // $timestamp = time();
-        // Ajouter une composante aléatoire pour garantir l'unicité
-        // $randomComponent = random_int(1000, 9999);
-
-        // Combinez les deux pour obtenir une référence unique
-        // $reference = (int) ($timestamp . $randomComponent);
-
-        // return $reference;
-    // }
 
      #[Route('/commande/{id}', name : 'show')]
      
@@ -138,6 +126,17 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
     $totalCom = 0;
     $total = 0;
     $quantiteTotal = 0;
+
+    // Récupérer l'utilisateur à partir de la commande
+    $utilisateur = $commande->getUtilisateur(); 
+    // Récupérer l'adresse de l'utilisateur
+    // ou faire une requete dans le repo et appeller la méthode
+    // $adresse = [
+        $rue = $utilisateur->getAdresseClient();
+        $cp = $utilisateur->getCodePostalClient();
+        $ville = $utilisateur->getVilleClient();
+    
+    // ];
 
         // $etat = $commande->getEtat();
         // $etatLibelle = Commande::getEtatLibelle($etat);
@@ -154,6 +153,12 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
             'total' => $total,
             'quantiteTotal' => $quantiteTotal,
             'total' => $totalCom,
+            // 'adresse' => $adresse,
+            'rue' => $rue,
+            'cp' => $cp,
+            'ville' => $ville,
+
+
         ]);
     }
 

@@ -20,12 +20,12 @@ final class Version20241010122153 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        // $this->addSql('ALTER TABLE commande ADD status TINYINT(1) NOT NULL, ADD etat INT NOT NULL');
+        $this->addSql('ALTER TABLE commande ADD status TINYINT(1) NOT NULL, ADD etat INT NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        // $this->addSql('ALTER TABLE commande DROP status, DROP etat');
+        $this->addSql('ALTER TABLE commande DROP status, DROP etat');
     }
 }

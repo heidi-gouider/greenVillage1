@@ -10,34 +10,42 @@ use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
-#[ApiRessource]
+#[ApiResource]
 
 class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $libelle_produit = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $description_produit = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $prix_achat_ht = null;
 
     #[ORM\Column(type: 'integer', precision: 10, nullable: true)]
+    #[Groups(['read'])]
     private ?int $prix = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read', 'write'])]
     private ?string $photo = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $quantite_stock = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read'])]
     private ?int $total_ht = null;
 
 
@@ -52,22 +60,27 @@ class Produit
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read'])]
     private ?Categorie $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'produit')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read'])]
     private ?Categorie $parentCategorie = null;
 
     /**
      * @var Collection<int, Commande>
      */
     #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'produits')]
+    #[Groups(['read'])]
     private Collection $commandes;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read'])]
     private ?int $quantite_vendu = null;
 
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Detail::class)]
+    #[Groups(['read'])]
     private Collection $details;
 
     public function __construct()

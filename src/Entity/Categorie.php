@@ -7,54 +7,89 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
-#[ApiRessource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
+#[Vich\Uploadable]
 class Categorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read'])]
     private ?string $libelle_categorie = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read'])]
     private ?string $description_categorie = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
     // si une categorie parente est supprimée toutes les categories enfants le champ parent =null
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[Groups(['read'])]
     private ?self $parent_categorie = null;
 
     /**
      * @var Collection<int, self>
      */
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent_categorie')]
+    #[Groups(['read'])]
     private Collection $categories;
 
     /**
      * @var Collection<int, Produit>
      */
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie', cascade: ['persist'])]
+    #[Groups(['read'])]
     private Collection $produits;
 
     /**
      * @var Collection<int, Produit>
      */
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'parentCategorie')]
+    #[Groups(['read', 'write'])]
     private Collection $produit;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read'])]
     private ?string $image_categorie = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read'])]
+    private ?string $imagePath = null;
+
+    // Ce champ ne sera pas persisté dans la base de données, il est utilisé pour l'upload
+    #[Vich\UploadableField(mapping: 'image_categorie', fileNameProperty: 'imagePath')]
+    private ?File $imageFile = null;
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // Mettre à jour une propriété "updatedAt" pour forcer la mise à jour de l'entité
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->produits = new ArrayCollection();
         $this->produit = new ArrayCollection();
+        // $this->commandes = new ArrayCollection();
+        // $this->details = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,6 +100,11 @@ class Categorie
     public function getLibelleCategorie(): ?string
     {
         return $this->libelle_categorie;
+    }
+
+    public function __toString(): string
+    {
+        return $this->libelle_categorie ?: 'Catégorie sans nom'; // Retourne le libellé ou une chaîne par défaut
     }
 
     public function setLibelleCategorie(?string $libelle_categorie): static
@@ -174,6 +214,18 @@ class Categorie
     public function setImageCategorie($image_categorie): static
     {
         $this->image_categorie = $image_categorie;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImagePath(?string $imagePath): self
+    {
+        $this->imagePath = $imagePath;
 
         return $this;
     }

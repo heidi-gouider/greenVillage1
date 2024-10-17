@@ -55,7 +55,7 @@ class AccueilController extends AbstractController
         // dd($categories);
         return $this->render('accueil/categorie.html.twig', [
             // return $this->render('base.html.twig', [
-            // 'controller_name' => 'AccueilController',
+            'defaultImage' => 'default-image.jpg',
             'categories' => $categories
         ]);
     }
@@ -83,7 +83,7 @@ class AccueilController extends AbstractController
     }
 
     // page à propos
-    #[Route('/A propos}', name: 'app_a_propos')]
+    #[Route('/a propos}', name: 'app_a_propos')]
     public function aPropos(): Response
     {
 

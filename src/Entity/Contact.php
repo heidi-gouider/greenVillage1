@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
-#[ApiRessource]
+#[ApiResource]
 class Contact
 {
     #[ORM\Id]

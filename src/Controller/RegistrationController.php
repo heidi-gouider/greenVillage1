@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Repository\UtilisateurRepository;
 use App\Security\AppAutenticatorAuthenticator;
+use Symfony\Component\Mailer\MailerInterface;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -102,6 +103,17 @@ class RegistrationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        // Récupérer l'utilisateur actuellement authentifié
+    $utilisateur = $this->getUser();
+
+            // Vérifiez si le lien a expiré
+            if ($utilisateur->isVerified() || !$utilisateur || $utilisateur->isVerificationTokenExpired()) {
+                // Affichez un message d'erreur ou redirigez l'utilisateur
+                $this->addFlash('error', 'Le lien de vérification a expiré. Veuillez demander un nouvel e-mail de vérification.');
+                return $this->redirectToRoute('app_request_verification_email'); // Redirigez vers la page de demande de vérification
+            }
+        
+
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
@@ -112,6 +124,7 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_register');
         }
+
                 // @TODO Change the redirect on success and handle or remove the flash message in your templates
                 // $this->addFlash('success', 'Votre E-mail a bien été vérifié.');
 
@@ -120,4 +133,30 @@ class RegistrationController extends AbstractController
         // return $this->redirectToRoute('app_register');
 
     }
+
+    // demande de réinitialisation email quand le lien a expiré
+    #[Route('/request-verification-email', name:'app_request_verification_email')]
+ 
+public function requestVerificationEmail(Request $request, UtilisateurRepository $utilisateurRepository, MailerInterface $mailer)
+{
+    // Logique pour récupérer l'utilisateur par e-mail et envoyer un nouvel e-mail de vérification
+    $utilisateur = $utilisateurRepository->findOneBy(['email' => $request->request->get('email')]);
+
+    if ($utilisateur) {
+        // Générez un nouveau token de vérification et envoyez un e-mail
+        $utilisateur->setVerificationToken($tokenGenerator->generateToken());
+        $utilisateur->setVerificationTokenCreatedAt(new \DateTime()); // mettez à jour la date de création du token
+        $entityManager->flush();
+
+        // Envoyer l'e-mail de vérification
+        // ... (logique d'envoi de l'e-mail)
+        
+        $this->addFlash('success', 'Un nouvel e-mail de vérification a été envoyé.');
+    } else {
+        $this->addFlash('error', 'Aucun utilisateur trouvé avec cet e-mail.');
+    }
+
+    return $this->redirectToRoute('app_login'); // ou toute autre page de votre choix
+}
+
 }

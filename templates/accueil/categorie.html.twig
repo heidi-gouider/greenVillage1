@@ -33,13 +33,11 @@
 									{# Lien vers les sous-catégories  nom de la route,
 																je passe l'id de la categorie parent à la route #}
 									<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}">
-										{# href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.parentCategorie.id}) }}"> #}
-										{# {{ categorie.libelleCategorie}} #}
-										<img class="card-img-top mx-auto" src="{{ asset(categorie.imageCategorie) }}" alt="{{ categorie.imageCategorie }}"> <div class="card-body">
+										<img class="card-img-top mx-auto" src="{{ asset(categorie.imageCategorie ?? 'default-image.jpg') }}" alt="{{ categorie.imageCategorie }}"> <div class="card-body">
 											<h5 class="card-title mt-5">{{ categorie.libelleCategorie }}</h5>
 										</a>
 										<p class="card-text">
-											{{ categorie.descriptionCategorie}}</p>
+											{# {{ categorie.descriptionCategorie}}</p> #}
 									</div>
 								</div>
 							</div>

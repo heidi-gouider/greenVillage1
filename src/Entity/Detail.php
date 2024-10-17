@@ -7,7 +7,7 @@ use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DetailRepository::class)]
-#[ApiRessource]
+#[ApiResource]
 class Detail
 {
     #[ORM\Id]

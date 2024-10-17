@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[ApiRessource]
+#[ApiResource]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NOM', fields: ['nom'])]
 #[UniqueEntity(fields: ['nom'], message: 'There is already an account with this nom')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
@@ -63,6 +63,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     // private ?bool $is_verified = null;
     private ?bool $is_verified = false;
 
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $verificationTokenCreatedAt = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
 
     // #[ORM\Column(type: 'string', length: 100)]
     // private $resetToken;
@@ -80,6 +85,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->createdAt = new \DateTime(); // Initialise createdAt
+        // Définit la date et l'heure actuelle par défaut
+
+        $this->verificationTokenCreatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -87,6 +96,26 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function getVerificationTokenCreatedAt(): ?\DateTimeInterface
+    {
+    return $this->verificationTokenCreatedAt;
+    }
+
+    // Méthode pour vérifier si le token a expiré
+    public function isVerificationTokenExpired(): bool
+    {
+        if (!$this->verificationTokenCreatedAt) {
+            return true; // Si le token n'est pas créé, il est considéré comme expiré
+        }
+    $expirationDate = (clone $this->verificationTokenCreatedAt)->modify('+24 hours'); // durée d'expiration
+    return new \DateTime() > $expirationDate;
+    }
+
+    // Getter pour createdAt
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
 
     /**
      * A visual identifier that represents this user.

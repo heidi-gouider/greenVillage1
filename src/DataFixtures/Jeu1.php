@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Produit;
+use App\Entity\Utilisateur;
 use App\Entity\Fournisseur;
 use App\Entity\Categorie;
 
@@ -57,6 +58,18 @@ class Jeu1 extends Fixture
         // Récupère l'entité fournisseur
         // $fournisseurId = set
 
+        // Les utilisateurs
+        // $utilisateur = new Utilisateur();
+        // $utilisateur->setRoles();
+        // $utilisateur->setNom();
+        // $utilisateur->setPrenomClient();
+        // $utilisateur->setTelephoneClient();
+        // $utilisateur->setAdresseClient();
+        // $utilisateur->setCodePostalClient();
+        // $utilisateur->setVilleClient();
+        // $utilisateur->setEmail();
+        // $utilisateur->setPassword();
+        // $manager->persist($user);
 
         // Création de la catégorie parent
         $parentCategorie = new Categorie;
@@ -200,7 +213,7 @@ $manager->persist($categorie7);
     
             $produit3 = new Produit();
 
-        $produit3->setLibelleProduit("Saxo1");
+        $produit3->setLibelleProduit("Saxo3");
             $produit3->setDescriptionProduit("Voici un saxophone stylé");
             $produit3->setPrixAchatHt("2500");
             $produit3->setPhoto("IMG/saxophone.webp");
@@ -238,7 +251,7 @@ $manager->persist($categorie7);
             $produit5->setPrix("850");
             $produit5->setQuantiteStock("3");
             $produit5->setCategorie($categorie6);
-            $produit5->setParentCategorie($parentCategorie);
+            $produit5->setParentCategorie($parentCategorie2);
 
 
             $manager->persist($produit5);
@@ -252,7 +265,7 @@ $manager->persist($categorie7);
             $produit6->setPrix("430");
             $produit6->setQuantiteStock("3");
             $produit6->setCategorie($categorie6);
-            $produit6->setParentCategorie($parentCategorie);
+            $produit6->setParentCategorie($parentCategorie2);
 
 
             $manager->persist($produit6);
@@ -266,7 +279,7 @@ $manager->persist($categorie7);
             $produit7->setPrix("1100");
             $produit7->setQuantiteStock("3");
             $produit7->setCategorie($categorie6);
-            $produit7->setParentCategorie($parentCategorie);
+            $produit7->setParentCategorie($parentCategorie2);
 
 
             $manager->persist($produit7);

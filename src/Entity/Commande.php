@@ -10,7 +10,7 @@ use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
-#[ApiRessource]
+#[ApiResource]
 class Commande
 {
     // Déclaration des différents états de la commande

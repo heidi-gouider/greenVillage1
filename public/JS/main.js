@@ -1,3 +1,5 @@
+
+
 // addEventListener('DOMContentLoaded', function () {
 //     const passwordField = document.getElementById("passwordField");
 //     const confirmPasswordField = document.getElementById("confirmPasswordField");

@@ -32,9 +32,62 @@ body {
   margin-top: 21vh;
   height: 6vh;
   font-size: 1rem;
+  color: blue;
   /* font-size: 25%; */
 }
 
+/* Style pour masquer le menu déroulant par défaut */
+.dropdown-menu {
+  display: none; /* Cacher par défaut */
+  position: absolute; /* Positionner par rapport au parent */
+  background-color: #333; /* Couleur de fond */
+  list-style: none; /* Pas de style de liste */
+  padding: 0; /* Pas de padding */
+  margin: 0; /* Pas de margin */
+  border-radius: 4px; /* Coins arrondis */
+  top: 100%; /* Affiche juste en dessous de l'élément parent */
+  left: 0; /* Aligner à gauche */
+  z-index: 1000; /* Assurer que le menu est au-dessus */
+}
+
+/* Afficher le menu au survol du parent */
+.dropdown:hover .dropdown-menu {
+  display: block; /* Afficher le menu déroulant au survol */
+}
+
+
+/* Style pour masquer le menu déroulant par défaut */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  top: 100%; /* Afficher le menu juste en dessous de l'élément parent */
+  left: 0;
+  z-index: 1000;
+  width: 200px; /* Ajuste la largeur selon tes besoins */
+}
+
+/* Style pour chaque élément du menu déroulant */
+.dropdown-item {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Changer la couleur au survol */
+.dropdown-item:hover {
+  background-color: #555;
+}
+
+/* Afficher le menu au survol du parent */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
 .contenu_accueil {
 margin-top: 10vh;

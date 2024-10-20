@@ -42,11 +42,18 @@
 					{# <i class="bi bi-list"></i> #}
 					<span	class="navbar-toggler-icon"></span>
 				</button>
+				<a>
+					<a	class="nav-link text-orange " href="https://moncul.org/"	href="{{ path('app_categorie') }}" title="Liste des produits">
 
 				<div	class="collapse navbar-collapse {# text-white #} text-orange"	id="navbarSupportedContent">
-
+			<i class="bi bi-three-dots-vertical"></i>
 					{# <ul class="navbar-nav mr-auto"> #}
 					<ul	class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center text-sm text-white">
+					<li	class="nav-item active">
+					<a	class="nav-link text-orange " href="{{ path('app_categorie') }}" title="Liste des produits">
+						Nos Produits
+					</a>
+				</li>
 						<li	class="nav-item">
 							<a	class="nav-link nav-link-custom text-orange "	id="link-active"	aria-current="page"	href="{{ path('app_accueil') }}">
 								A propos
@@ -55,14 +62,10 @@
 						{# <a class="navbar-brand" href="{{ path('app_accueil') }}">Accueil</a> #}
 
 						<li	class="nav-item">
-							<a	class="nav-link text-orange "	href="{{ path('app_contact') }}">
-								Contact
+							<a	class="nav-link text-orange "	href="{{ path('app_contact') }}" title="Contact">
+								{# Contact #} <i class="bi bi-envelope-at"></i>
 							</a>
 						</li>
-						<li	class="nav-item active">
-							<a	class="nav-link text-orange "	href="{{ path('app_categorie') }}">
-								Notre catalogue
-							</a>
 
 						{# liste déroulante des categories #}
 						{# pour pouvoir avoir la liste fonctionnelle sur toutes mes vues
@@ -79,7 +82,7 @@
 							</a>
 							{% endfor %}
 						</div> #}
-						</li>
+						{# </li> #}
 						{# </li>
 							<li class="nav-item active">
 							<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
@@ -110,7 +113,7 @@
 						{% else %}
 							<li	class="nav-item">
 								<a	class="nav-link nav-link-custom text-orange "	href="{{ path('app_login') }}"	id="monCompteBtn"	title="Inscription/Connexion">
-									Connexion
+									{# Connexion #} <i class="bi bi-person"></i>
 								</a>
 							</li>
 						{% endif %}

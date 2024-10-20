@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac77b22b000da72fca828402d9e55627",
+    "content-hash": "9551386d53739a215f9bce0aafd5bc22",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "a11c21335297b6026aa2b12fbe11a77e888481d7"
+                "reference": "77d3ff3e8ddf88546eaf288a399d11f130553606"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/a11c21335297b6026aa2b12fbe11a77e888481d7",
-                "reference": "a11c21335297b6026aa2b12fbe11a77e888481d7",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/77d3ff3e8ddf88546eaf288a399d11f130553606",
+                "reference": "77d3ff3e8ddf88546eaf288a399d11f130553606",
                 "shasum": ""
             },
             "require": {
@@ -223,9 +223,9 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v3.4.3"
+                "source": "https://github.com/api-platform/core/tree/v3.4.4"
             },
-            "time": "2024-10-11T12:19:54+00:00"
+            "time": "2024-10-19T10:05:07+00:00"
         },
         {
             "name": "composer/semver",
@@ -1537,16 +1537,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v4.13.0",
+            "version": "v4.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "1ddaaf5bc0d1f5925ce0d9391784866939f4228f"
+                "reference": "6a6548edd70d4d26afa1b2b7acf60f78b600d1c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/1ddaaf5bc0d1f5925ce0d9391784866939f4228f",
-                "reference": "1ddaaf5bc0d1f5925ce0d9391784866939f4228f",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/6a6548edd70d4d26afa1b2b7acf60f78b600d1c9",
+                "reference": "6a6548edd70d4d26afa1b2b7acf60f78b600d1c9",
                 "shasum": ""
             },
             "require": {
@@ -1620,7 +1620,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.13.0"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v4.13.3"
             },
             "funding": [
                 {
@@ -1628,7 +1628,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-13T10:10:48+00:00"
+            "time": "2024-10-16T17:22:56+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2454,16 +2454,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v16.1.0",
+            "version": "v16.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "47c55a5a8414d1d7584e6bbfb3e8179f3c43d83a"
+                "reference": "524ae42483d7434dfaecb0076e32e5cb521f6bb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/47c55a5a8414d1d7584e6bbfb3e8179f3c43d83a",
-                "reference": "47c55a5a8414d1d7584e6bbfb3e8179f3c43d83a",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/524ae42483d7434dfaecb0076e32e5cb521f6bb7",
+                "reference": "524ae42483d7434dfaecb0076e32e5cb521f6bb7",
                 "shasum": ""
             },
             "require": {
@@ -2507,9 +2507,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v16.1.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v16.1.1"
             },
-            "time": "2024-10-03T22:48:28+00:00"
+            "time": "2024-10-18T18:42:52+00:00"
         },
         {
             "name": "symfony/asset",
@@ -8056,16 +8056,16 @@
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.17.0",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "f72af149070b39ef82a7095074378d0a98b4d2ef"
+                "reference": "c6b1431fc4a8f6483a1bbb7c781da229a82cca81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/f72af149070b39ef82a7095074378d0a98b4d2ef",
-                "reference": "f72af149070b39ef82a7095074378d0a98b4d2ef",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/c6b1431fc4a8f6483a1bbb7c781da229a82cca81",
+                "reference": "c6b1431fc4a8f6483a1bbb7c781da229a82cca81",
                 "shasum": ""
             },
             "require": {
@@ -8096,9 +8096,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.17.0"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.17.1"
             },
-            "time": "2024-03-17T02:29:53+00:00"
+            "time": "2024-10-18T20:06:04+00:00"
         },
         {
             "name": "twig/extra-bundle",

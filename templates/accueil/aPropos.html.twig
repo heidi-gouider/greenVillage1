@@ -5,10 +5,10 @@
 
 {% block body %}
 {# Banniere categories #}
-			<div class="row align-items-center bg-dark banniere mx-auto">
+			{# <div class="row align-items-center bg-dark banniere mx-auto">
 				{% for  categorie in categories %}
 					{# afficher uniquement les categories parent #}
-					{% if categorie.parentCategorie is null %}
+					{# {% if categorie.parentCategorie is null %}
 						<div class="col">
 							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
 								{{ categorie.libelleCategorie}}
@@ -16,7 +16,7 @@
 						</div>
 					{% endif %}
 				{% endfor %}
-			</div>
+			</div>  #}
 
 	<div class="contenu_accueil">
 
@@ -53,21 +53,22 @@
 																						</div> #}
 
 		<!-- Deuxième diapositive avec 3 images -->
-			<div class="carousel-item" data-bs-interval="2000"> <div class="row">
+			{# <div class="carousel-item" data-bs-interval="2000"> <div class="row">
 				<div class="col-4">
 					{% for produit in produitsAleatoires|slice(3, 3) %}
 						<div class="col-4">
 							<div class="card m-2" style="width: 15rem;">
 								<img class="card-img-top zoom-img" src="{{ asset('IMG/' ~ produit.photo) }}" alt="">
 								<div
-									class="card-body">{# <h5 class="card-title">{{ produit.libelle_produit }}</h5> #}
-								</div>
+									class="card-body">
+								{# <h5 class="card-title">{{ produit.libelle_produit }}</h5> #}
+								{# </div>
 							</div>
 						</div>
 					{% endfor %}
 				</div>
-			</div>
-
+			</div> 
+ #}
 			<!-- Troisième diapositive avec 3 images -->
 			{# <div class="carousel-item">
 																																<div class="row">

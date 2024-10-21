@@ -24,6 +24,10 @@ body {
       .text-orange {
         color: orange !important;
       }
+
+  .toffu{
+    color: rgb(17, 17, 68);
+  }
 /* ------------------------------------------------------------------------------------------------------------ */
       /* Bandeau */
 
@@ -32,8 +36,9 @@ body {
   margin-top: 21vh;
   height: 6vh;
   font-size: 1rem;
-  color: blue;
+  /* color: blue; */
   /* font-size: 25%; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
 }
 
 /* Style pour masquer le menu déroulant par défaut */
@@ -104,7 +109,7 @@ margin-top: 10vh;
   
   #menu {
       height: 20vh;
-      background-color: rgba(29, 28, 28, 0.7);
+      /* background-color: rgba(29, 28, 28, 0.7); */
           /* background-color: #222222; */
     /* background-image: url('../IMG/fond.webp'); 
     background-size: cover;  */
@@ -124,6 +129,13 @@ margin-top: 10vh;
   .nav-link{
     color: #d2571d;
   } */
+  /* .navbar-toggler {
+    box-shadow: 0 4px 8px rgba(255, 255, 0, 0.5); /* Ombre jaune */
+/* } */ */
+.navbar-toggler {
+  box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.5); /* Ombre jaune étendue à l'extérieur */
+}
+
   
       /* ----------------------------------------- */
           /*  PAGE ADMINISTRATION categories   */

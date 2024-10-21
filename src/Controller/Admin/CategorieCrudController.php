@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Categorie;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -29,9 +30,12 @@ class CategorieCrudController extends AbstractCrudController
                 // ->onlyOnForms(),
                 // >setBasePath('/uploads/images/categories') // Chemin d'accès pour l'affichage
                 // ->setUploadDir('public/uploads/images/categories') // Dossier de stockage des uploads
-                >setBasePath('/IMG') // Chemin d'accès pour l'affichage
-                ->setUploadDir('public/IMG') // Dossier de stockage des uploads
-
+                // >setBasePath('/IMG') // Chemin d'accès pour l'affichage
+                // ->setUploadDir('public/IMG') // Dossier de stockage des uploads
+                // Field::new('imageFile', 'photo')
+                ->setFormType(VichFileType::class)
+                ->onlyOnForms(),
+    
             
         ];
     }

@@ -31,6 +31,7 @@
 							<div class="card mt-5 w-25">
 								<a href="{{ path('app_detail_produit', {'id': produit.id}) }}">
 									<img class="card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
+									{# <img class="card-img-top mx-auto" src="{{ asset('images/products/' ~ produit.imageName) }}" alt="{{ produit.libelleProduit }}"> #}
 									<div class="card-body">
 										<h5 class="card-title">
 											<a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a>
@@ -38,7 +39,7 @@
 										<p class="content bg-body">
 											{{ produit.descriptionProduit}}</p>
 										<p class="content bg-body">
-											{{ produit.prix}}
+											{{ produit.prix / 100}}
 											euros</p>
 									</div>
 

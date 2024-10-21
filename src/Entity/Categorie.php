@@ -10,6 +10,8 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
@@ -63,25 +65,19 @@ class Categorie
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read'])]
-    private ?string $image_categorie = null;
+    private ?string $categorie_image = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['read'])]
     private ?string $imagePath = null;
 
     // Ce champ ne sera pas persisté dans la base de données, il est utilisé pour l'upload
-    #[Vich\UploadableField(mapping: 'image_categorie', fileNameProperty: 'imagePath')]
+    #[Vich\UploadableField(mapping: 'categorie_image', fileNameProperty: 'imagePath')]
     private ?File $imageFile = null;
 
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
+    // #[ORM\Column(type: 'datetime', nullable: true)]
+    // private ?\DateTimeImmutable $updatedAt = null;
 
-        if (null !== $imageFile) {
-            // Mettre à jour une propriété "updatedAt" pour forcer la mise à jour de l'entité
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
 
     public function __construct()
     {
@@ -206,14 +202,14 @@ class Categorie
     //     return $this->produit;
     // }
 
-    public function getImageCategorie()
+    public function getImageCategorie ()
     {
-        return $this->image_categorie;
+        return $this->categorie_image;
     }
 
-    public function setImageCategorie($image_categorie): static
+    public function setImageCategorie($categorie_image ): static
     {
-        $this->image_categorie = $image_categorie;
+        $this->categorie_image  = $categorie_image ;
 
         return $this;
     }
@@ -221,6 +217,22 @@ class Categorie
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+        //     if ($imageFile instanceof UploadedFile) {
+            // Met à jour une propriété "updatedAt" pour forcer la mise à jour de l'entité
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
     }
 
     public function setImagePath(?string $imagePath): self

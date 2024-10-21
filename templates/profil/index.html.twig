@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="contenu">
 
-		<h2 class="fst-italic text-white text-center">Mon profil</h2>
+		<h2 class="fst-italic text-center">Mon profil</h2>
 
 		{# <div class="container mx-auto text-white mt-5" id="formulaire"> #}
 
@@ -17,9 +17,9 @@
 						<div
 							class="card-header">
 							{# <h3 class="card-title">Profil de {{ app.user.username }}</h3> #}
-							<h3 class="card-title">Profil de
+							{# <h3 class="card-title">Profil de
 								{{ app.user.nom }}
-								{{ app.user.prenomClient }}</h3>
+								{{ app.user.prenomClient }}</h3> #}
 						</div>
 						<div class="card-body">
 							<div class="row mb-3"></div>
@@ -30,28 +30,34 @@
 								<div class="col-md-9">
 									{{ app.user.email }}
 								</div>
-
-								<div class="row mb-3">
-									<div class="col-md-3">
-										<strong>Adresse :</strong>
-									</div>
-									<div class="col-md-9">
-										{{ app.user.adresseClient }}
-									</div>
-									<div class="col-md-9">
-										{{ app.user.codePostalClient }}
-									</div>
-									<div class="col-md-9">
-										{{ app.user.villeClient }}
-									</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-md-3">
+									<strong>Adresse :</strong>
+								</div>
+								<div class="col-md-9">
+									{{ app.user.adresseClient }}
 								</div>
 							</div>
-							{# Ajoutez d'autres informations selon vos besoins (par exemple, nom, prénom, etc.) #}
-							{# Exemple avec un lien pour modifier le profil #}
-							<div class="row mt-4">
-								<div class="col-md-12">
-									<a href={# "{{ path('app_profil_edit') }}" #} class="btn btn-primary">Modifier le profil</a>
+
+							<div class="row mb-3">
+								<div class="col-md-3"></div>
+								<div class="col-md-3">
+									{{ app.user.codePostalClient }}
 								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-md-3"></div>
+								<div class="col-md-6">
+									{{ app.user.villeClient }}
+								</div>
+							</div>
+						</div>
+						{# Ajoutez d'autres informations selon vos besoins (par exemple, nom, prénom, etc.) #}
+						{# Exemple avec un lien pour modifier le profil #}
+						<div class="row mt-4">
+							<div class="col-md-12">
+								<a href= "{{ path('app_profil_modif') }}"  class="btn btn-primary">Modifier mon profil</a>
 							</div>
 						</div>
 					</div>
@@ -59,4 +65,4 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
+</div>{% endblock %}

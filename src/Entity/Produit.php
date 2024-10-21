@@ -5,12 +5,18 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+// use App\Entity\Groups;
+use Symfony\Component\Serializer\Annotation\Groups;
 // use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ApiResource]
+// #[SomeAttribute(Groups::class)]
+#[Vich\Uploadable]
 
 class Produit
 {
@@ -39,6 +45,14 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read', 'write'])]
     private ?string $photo = null;
+
+    
+    #[Vich\UploadableField(mapping: 'produit_image', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+     // La propriété qui stocke le nom du fichier
+     #[ORM\Column(type: 'string', nullable: true)]
+     private ?string $imageName = null;
 
     #[ORM\Column]
     #[Groups(['read'])]
@@ -158,6 +172,34 @@ class Produit
 
         return $this;
     }
+
+    // Getter et setter pour imageFile
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile) {
+            // Cette condition permet de définir la date de mise à jour si un fichier est téléchargé
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    // Getter et setter pour imageName
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
 
     public function getQuantiteStock(): ?int
     {

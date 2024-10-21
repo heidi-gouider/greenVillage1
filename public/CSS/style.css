@@ -160,6 +160,12 @@ margin-top: 10vh;
   height: auto;
 }
 
+        /* ----------------------------------------- */
+  
+      /*  CAROUSEL   */
+#carousel {
+background-color: #007bff;
+}
 
 
         /* ----------------------------------------- */
@@ -225,12 +231,13 @@ margin-top: 10vh;
 
       .card {
         background-color: transparent;
-        /* border: none; */
-        border-right: black;
+        border: none;
+        /* border-right: black; */
       }
 
       .card-body {
         padding: 0;
+    height: 100%; /* Prend toute la hauteur de la carte */
     }
 
     .card-title, .content {
@@ -240,7 +247,7 @@ margin-top: 10vh;
     }
 
     .card-footer {
-        border-top: none;
+        /* border-top: none; */
         background-color: transparent;
     }
 
@@ -248,6 +255,7 @@ margin-top: 10vh;
         border-radius: 0;
         max-width: 100%;
         height: auto;
+        object-fit: cover; /* Cela permet de couvrir la zone tout en coupant les parties qui dépassent */
     }
   /* .card-header {
     position: relative;

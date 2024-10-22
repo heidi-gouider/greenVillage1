@@ -50,5 +50,13 @@ class ProduitCrudController extends AbstractCrudController
         dd($produit);
         parent::persistEntity($entityManager, $entityInstance);
     }
+
+    // public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    // {
+    //      /** @var Produit $produit */
+    //      $produit = $entityInstance;
+    //     parent::updateEntity($entityManager, $entityInstance);
+    // }
+
     
 }

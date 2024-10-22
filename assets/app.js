@@ -3,6 +3,8 @@ import { Application } from '@hotwired/stimulus';
 import './bootstrap.js';
 import './styles/app.css';
 
+registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
+
 /*
  * Welcome to your app's main JavaScript file!
  *

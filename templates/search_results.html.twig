@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Résultats de recherche pour "{{ searchTerm }}"</h1>
+
+    <ul>
+        {% for produit in produits %}
+            <li>{{ produit.libelleProduit }}</li>
+        {% else %}
+            <li>Aucun produit trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

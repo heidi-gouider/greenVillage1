@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-<div data-controller="first-component"></div>
+{# <div data-controller="first-component"></div> #}
+<div id="root"></div>
 	{# Banniere categories #}
 	<div	class="row align-items-center bg-dark banniere mx-auto">
 		{% for  categorie in categories %}
@@ -65,6 +66,19 @@
 				Recherche
 			</button>
 		</form>
+{# test react filter pour la recherche #}
+<form onSubmit={handleSearch}>
+    <input
+        type="search"
+        placeholder="recherche"
+        aria-label="Search"
+        {# value={searchTerm} #}
+        onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <button type="submit">
+        Recherche
+    </button>
+</form>
 
 		{# Caroussel des produits far #}
 		<div	class="container mt-5">

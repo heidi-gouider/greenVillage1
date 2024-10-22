@@ -1,11 +1,18 @@
+import { registerReactControllerComponents } from '@symfony/ux-react';
+import { Application } from '@hotwired/stimulus';
 import './bootstrap.js';
+import './styles/app.css';
+
 /*
  * Welcome to your app's main JavaScript file!
  *
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
-import './styles/app.css';
+// assets/app.js
+
+// Créez une instance de l'application Stimulus
+const application = Application.start();
 // assets/app.js
 
 // import '@symfony/ux-toggle-password';
@@ -34,3 +41,7 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //     this.classList.toggle("bi bi-eye-slash");
 // });
 
+
+registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/), application);
+// registerReactControllerComponents();
+// registerReactControllerComponents(application);

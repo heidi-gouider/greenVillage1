@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<div data-controller="first-component"></div>
 	{# Banniere categories #}
 	<div	class="row align-items-center bg-dark banniere mx-auto">
 		{% for  categorie in categories %}
@@ -219,5 +220,7 @@
 			{# {% include "partials/socialIcons.php" %} #}
 
 			{# {% include "partials/footer.html.twig" %} #}
+			{# {{ encore_entry_script_tags('app') }} #}
+
 			{% endblock %}
 			

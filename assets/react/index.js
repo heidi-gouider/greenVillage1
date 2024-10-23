@@ -2,9 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 // import MonPremierComposant from "./jsx/MonPremierComposant";
 // import FirstComponent from "./FirstComponent.jsx";
-import App from './App';
-// import './index.css'
 
+// composant principal & style
+import App from './App.jsx';
+// import App from './App';
+
+// import './assets/styles/style.css'
+// console.log("test app-react")
+// chargement du composant App dans le dom
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         {/* <FirstComponen /> */}

@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row justify-content-end custom-line">
                 <div class="col-md-6 text-center mt-3">
-                    <h4 class="text-center">Pour nous suivre !</h4>
+                    {# <h4 class="text-center">Pour nous suivre !</h4> #}
                     <ul class="list-inline text-center">
                         <li class="list-inline-item">
                             <a href="#"><i class="bi bi-facebook"></i></a>
@@ -23,18 +23,24 @@
                         <li class="list-inline-item">
                             <a href="#"><i class="bi bi-instagram"></i></a>
                         </li>
+                        <li	class="list-inline-item">
+							<a		href="{{ path('app_contact') }}" title="Contact">
+								{# Contact #} <i class="bi bi-envelope-at"></i>
+							</a>
+						</li>
+
                     </ul>
                     <p class="mt-5">&copy; 2024 Green Village Record. Tous droits réservés.</p>
                 </div>
                 <div class="col-md-4">
-                    <!-- <ul class="text-end"> -->
-                        <!-- <li class="text-sm"> -->
+                    <ul class="text-end">
+                       <li class="text-sm">
                             <a {# href="{{ path('politique') }}" #}>Politique de confidentialité</a></li>
-                        <!-- <li class="text-sm"> -->
+                        <li class="text-sm"> 
                             <a {# href="{{ path ('conditions') }}" #}>>Conditions d'utilisation</a></li>
-                        <!-- <li class="text-sm"> -->
+                        <li class="text-sm">
                             <a {# href="{{ path ('accessibilite') }}" #}>>Accessibilité</a></li> <!-- Lien vers la page d'accessibilité -->
-                    <!-- </ul> -->
+                    </ul>
                 </div>
             </div>
         </div>

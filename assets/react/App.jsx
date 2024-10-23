@@ -1,81 +1,85 @@
-// import React from 'react';
+import React from 'react';
 // import FilterComponent from './FilterComponent';
+// import React, { useState, useEffect } from 'react';
+import FilterComponent from './components/FilterComponent';
+import ProduitList from './components/ProduitList';
 
-// const App = () => {
-//     return (
-//         <div>
-//             <h1>Bienvenue dans mon Application React !</h1>
-//             {/* Ajoutez vos autres composants ici */}
-//         </div>
-//     );
-// };
+const App = () => {
+
+    let prenom = "lili";
+    return (
+        <div>
+            {/* <h1> Bienvenue dans mon Application React{prenom}</h1> */}
+            <h1>Salut !</h1>
+            {/* Ajoutez vos autres composants ici */}
+            {prenom}
+        </div>
+    );
+};
 
 // export default App;
 
 // test
 
-import React, { useState, useEffect } from 'react';
-import FilterComponent from './components/FilterComponent';
-import ProduitList from './components/ProduitList'; // Assure-toi d'avoir ce composant
 
-const App = () => {
-    const [produits, setProduits] = useState([]);
-    const [produitsFiltres, setProduitsFiltres] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(''); // État pour le terme de recherche
+// const App = () => {
+//     const [produits, setProduits] = useState([]);
+//     const [produitsFiltres, setProduitsFiltres] = useState([]);
+//     const [searchTerm, setSearchTerm] = useState(''); // État pour le terme de recherche
 
-    useEffect(() => {
-        // Remplace cette URL par celle de ton API qui retourne les produits
-        fetch('/api/produits')
-            .then(response => response.json())
-            .then(data => {
-                setProduits(data);
-                setProduitsFiltres(data); // Initialiser les produits filtrés avec tous les produits
-            });
-    }, []);
+//     useEffect(() => {
+//         // Remplace cette URL par celle de ton API qui retourne les produits
+//         fetch('/api/produits')
+//             .then(response => response.json())
+//             .then(data => {
+//                 setProduits(data);
+//                 setProduitsFiltres(data); // Initialiser les produits filtrés avec tous les produits
+//             });
+//     }, []);
 
-    const handleFilterChange = (categorie, gammeDePrix) => {
-        let nouveauxProduitsFiltres = produits;
+//     const handleFilterChange = (categorie, gammeDePrix) => {
+//         let nouveauxProduitsFiltres = produits;
 
-        // Filtrer par catégorie
-        if (categorie) {
-            nouveauxProduitsFiltres = nouveauxProduitsFiltres.filter(produit => produit.categorie === categorie);
-        }
+//         // Filtrer par catégorie
+//         if (categorie) {
+//             nouveauxProduitsFiltres = nouveauxProduitsFiltres.filter(produit => produit.categorie === categorie);
+//         }
 
-        // Filtrer par prix
-        if (gammeDePrix) {
-            const [minPrix, maxPrix] = gammeDePrix.split('-').map(Number);
-            nouveauxProduitsFiltres = nouveauxProduitsFiltres.filter(produit => {
-                if (maxPrix) {
-                    return produit.prix >= minPrix && produit.prix <= maxPrix;
-                }
-                return produit.prix >= minPrix; // Plus de maxPrix
-            });
-        }
+//         // Filtrer par prix
+//         if (gammeDePrix) {
+//             const [minPrix, maxPrix] = gammeDePrix.split('-').map(Number);
+//             nouveauxProduitsFiltres = nouveauxProduitsFiltres.filter(produit => {
+//                 if (maxPrix) {
+//                     return produit.prix >= minPrix && produit.prix <= maxPrix;
+//                 }
+//                 return produit.prix >= minPrix; // Plus de maxPrix
+//             });
+//         }
 
-        setProduitsFiltres(nouveauxProduitsFiltres);
-    };
+//         setProduitsFiltres(nouveauxProduitsFiltres);
+//     };
 
-    const handleSearch = (e) => {
-        e.preventDefault(); // Empêche le rechargement de la page
-        // Filtrer les produits en fonction du terme de recherche
-        const produitsFiltres = produits.filter(produit =>
-            produit.libelleProduit.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setProduitsFiltres(produitsFiltres);
-    };
+//     const handleSearch = (e) => {
+//         e.preventDefault(); // Empêche le rechargement de la page
+//         // Filtrer les produits en fonction du terme de recherche
+//         const produitsFiltres = produits.filter(produit =>
+//             produit.libelleProduit.toLowerCase().includes(searchTerm.toLowerCase())
+//         );
+//         setProduitsFiltres(produitsFiltres);
+//     };
 
-    return (
-        <div>
-            <h1>Bienvenue dans mon Application React !</h1>
-            <FilterComponent
-                onFilterChange={handleFilterChange}
-                searchTerm={searchTerm} 
-                setSearchTerm={setSearchTerm} 
-                handleSearch={handleSearch} 
-                />
-            <ProduitList produits={produitsFiltres} />
-        </div>
-    );
-};
+    // return (
+    //     <div>
+    //         <h1>Bienvenue dans mon Application React !</h1>
+    //         { {<FilterComponent}
+    //             onFilterChange={handleFilterChange}
+    //             searchTerm={searchTerm} 
+    //             setSearchTerm={setSearchTerm} 
+    //             handleSearch={handleSearch} 
+    //             />
+    //         <ProduitList produits={produitsFiltres} /> }
+    //     </div>
+    // );
+// };
 
 export default App;

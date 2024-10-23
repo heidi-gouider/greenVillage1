@@ -339,7 +339,6 @@ background-color: #007bff;
   /* margin: 0; Supprime la marge par défaut */
   display: flex; /* Utilise Flexbox pour aligner les icônes horizontalement */
   gap: 50px; /* Espacement entre les icônes */
-  z-index: 1;
 }
 
 /* .social-icon { */
@@ -353,9 +352,9 @@ background-color: #007bff;
   text-decoration: none; /* Supprime la décoration du lien */
 }
 
-/* .social-icon-link:hover {
-  color: #007bff; 
-} */
+.social-icon-link:hover {
+  color: #007bff; /* Couleur au survol (changez selon votre thème) */
+}
 
     /* ------------------------------------------------------------------------------------------------------------ */
   
@@ -367,7 +366,6 @@ background-color: #007bff;
       bottom: 0;
       /* background-color: #f8f9fa; */
       /* opacity: 0.9; */
-      border-top: #333;
       position: relative; /* Assurez-vous que cela ne soit pas fixed ou absolute */
       z-index: 1;
     }
@@ -386,14 +384,16 @@ background-color: #007bff;
     }
     
     .footer ul li a {
-      /* color: #50565c; */
+      color: #50565c;
       font-size: 24px;
       text-decoration: none;
     }
     
-    /* .footer ul li a:hover {
+    .footer ul li a:hover {
+      /* color: #007bff; */
       color: #ff8400;
-    } */
+  
+    }
     
     /* .link-external i:hover{
     afficher le nom en texte du lien

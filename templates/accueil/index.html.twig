@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block body %}
+{# {{ encore_entry_link_tags('app') }} #}
+	{# <div id="root"></div> #}
+{# {{ encore_entry_script_tags('app-react') }} #}
 {# <div data-controller="first-component"></div> #}
-<div id="root"></div>
 	{# Banniere categories #}
 	<div	class="row align-items-center bg-dark banniere mx-auto">
 		{% for  categorie in categories %}
+			{# {% for  categorie in sous_categories %} #}
 			{# afficher uniquement les categories parent #}
 			{% if categorie.parentCategorie is null %}
 				<div	class="col d-flex justify-content-center">
@@ -34,6 +37,7 @@
 			{% endif %}
 		{% endfor %}
 	</div>
+{# {{ encore_entry_script_tags('app-react') }} #}
 
 	{# liste déroulante des categories #}
 	{# pour pouvoir avoir la liste fonctionnelle sur toutes mes vues
@@ -229,6 +233,8 @@
 					{# <div class="text-center">
 					<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}
 					</div>
+								{% include "partials/footer.html.twig" %}
+
 				</div>
 
 			{# {% include "partials/socialIcons.php" %} #}

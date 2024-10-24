@@ -6,13 +6,30 @@
 
 {% block body %}
 {# {{ encore_entry_link_tags('app') }} #}
+{# {{ encore_entry_link_tags('app1') }} #}
+
 	{# <div id="root"></div> #}
-{# {{ encore_entry_script_tags('app-react') }} #}
 {# <div data-controller="first-component"></div> #}
+
 	{# Banniere categories #}
+
+				<div class="row align-items-center bg-dark banniere mx-auto text-center">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+	<div class="contenu">
+
 	<div	class="row align-items-center bg-dark banniere mx-auto">
 		{% for  categorie in categories %}
-			{# {% for  categorie in sous_categories %} #}
 			{# afficher uniquement les categories parent #}
 			{% if categorie.parentCategorie is null %}
 				<div	class="col d-flex justify-content-center">
@@ -21,7 +38,7 @@
 							{{ categorie.libelleCategorie }}
 						</a>
 						{# Afficher les sous-catégories si elles existent #}
-						{% if categorie.categories is not empty %}
+						{# {% if categorie.categories is not empty %}
 							<ul	class="dropdown-menu">
 								{% for sousCategories in categorie.categories %}
 									<li>
@@ -31,13 +48,12 @@
 									</li>
 								{% endfor %}
 							</ul>
-						{% endif %}
+						{% endif %} #}
 					</div>
 				</div>
 			{% endif %}
 		{% endfor %}
 	</div>
-{# {{ encore_entry_script_tags('app-react') }} #}
 
 	{# liste déroulante des categories #}
 	{# pour pouvoir avoir la liste fonctionnelle sur toutes mes vues
@@ -229,6 +245,7 @@
 									Tous nos  instruments
 								</a>
 							</div>
+						</div>
 						</div>
 					{# <div class="text-center">
 					<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}

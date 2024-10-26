@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Repository\UtilisateurRepository;
 use App\Security\AppAutenticatorAuthenticator;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -106,13 +107,28 @@ class RegistrationController extends AbstractController
         // Récupérer l'utilisateur actuellement authentifié
     $utilisateur = $this->getUser();
 
+        
+        // Si l'utilisateur a le rôle d'administrateur, redirection vers le tableau de bord admin (ou une autre page spécifique)
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin'); // Remplacez par la route de votre choix
+        }
+
+                // Si l'utilisateur a le rôle d'administrateur/commerciale ou autre..., redirection vers le tableau de bord admin (ou une autre page spécifique)
+                // if ($this->isGranted('ROLE_ADMIN')) {
+                //     return $this->redirectToRoute('admin_com'); // Remplacez par la route de votre choix
+                // }
+        
+
+            // Vérifiez si l'utilisateur est de la classe User (ou une autre classe qui supporte la vérification)
+        if ($utilisateur instanceof Utilisateur) {
+
             // Vérifiez si le lien a expiré
             if ($utilisateur->isVerified() || !$utilisateur || $utilisateur->isVerificationTokenExpired()) {
                 // Affichez un message d'erreur ou redirigez l'utilisateur
                 $this->addFlash('error', 'Le lien de vérification a expiré. Veuillez demander un nouvel e-mail de vérification.');
                 return $this->redirectToRoute('app_request_verification_email'); // Redirigez vers la page de demande de vérification
             }
-        
+        }
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
@@ -137,7 +153,8 @@ class RegistrationController extends AbstractController
     // demande de réinitialisation email quand le lien a expiré
     #[Route('/request-verification-email', name:'app_request_verification_email')]
  
-public function requestVerificationEmail(Request $request, UtilisateurRepository $utilisateurRepository, MailerInterface $mailer)
+public function requestVerificationEmail(Request $request, UtilisateurRepository $utilisateurRepository, MailerInterface $mailer,EntityManagerInterface $entityManager,
+TokenGeneratorInterface $tokenGenerator)
 {
     // Logique pour récupérer l'utilisateur par e-mail et envoyer un nouvel e-mail de vérification
     $utilisateur = $utilisateurRepository->findOneBy(['email' => $request->request->get('email')]);

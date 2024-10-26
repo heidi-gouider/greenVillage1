@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Categorie;
 use App\Entity\Produit;
+use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -53,6 +55,7 @@ class DashboardController extends AbstractDashboardController
     {
         // la méthode yield permet de retourner un élément comme un tableau sans le mot clé return
         // yield MenuItem::section('E-commerce');
+
         // je recrée une section 'produit'
         yield MenuItem::section('Produits');
         yield MenuItem::section('Actions');
@@ -72,7 +75,21 @@ class DashboardController extends AbstractDashboardController
                     MenuItem::linkToCrud('Afficher les catégories', 'fa fa-eye', Categorie::class),
                     // Ajoutez d'autres actions ici
                 ]);
+                // je crée une liste d'actions pour les utilisateurs
+        yield MenuItem::subMenu('Utilisateurs', 'fa fa-user')->setSubItems([
+            // MenuItem::linkToCrud('Ajouter un utilisateur', 'fa fa-plus', Utilisateur::class)->setAction('new'),
+            MenuItem::linkToCrud('Afficher les utilisateurs', 'fa fa-eye', Utilisateur::class),
+            // Ajoutez d'autres actions ici
+        ]);
+
+                // je crée une liste d'actions pour les admin
+                yield MenuItem::subMenu('Admin', 'fa fa-user-circle')->setSubItems([
+                    MenuItem::linkToCrud('Ajouter un admin', 'fa fa-plus', Admin::class)->setAction('new'),
+                    MenuItem::linkToCrud('Afficher les admin', 'fa fa-eye', Admin::class),
+                    // Ajoutez d'autres actions ici
+                ]);
         
+
 
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

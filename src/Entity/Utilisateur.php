@@ -81,6 +81,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'Utilisateur')]
     private Collection $commandes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse_livraison = null;
+
 
     public function __construct()
     {
@@ -321,6 +324,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $commande->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresseLivraison(): ?string
+    {
+        return $this->adresse_livraison;
+    }
+
+    public function setAdresseLivraison(?string $adresse_livraison): static
+    {
+        $this->adresse_livraison = $adresse_livraison;
 
         return $this;
     }

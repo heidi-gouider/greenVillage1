@@ -29,8 +29,8 @@ class CategorieCrudController extends AbstractCrudController
                 // ->onlyOnForms(),
                 // >setBasePath('/uploads/images/categories') // Chemin d'accès pour l'affichage
                 // ->setUploadDir('public/uploads/images/categories') // Dossier de stockage des uploads
-                >setBasePath('/IMG') // Chemin d'accès pour l'affichage
-                ->setUploadDir('public/IMG') // Dossier de stockage des uploads
+                // >setBasePath('/IMG') // Chemin d'accès pour l'affichage
+                // ->setUploadDir('public/IMG') // Dossier de stockage des uploads
 
             
         ];

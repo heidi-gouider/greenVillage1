@@ -31,7 +31,7 @@ class ProduitCrudController extends AbstractCrudController
             TextField::new('libelle_produit'),
             TextEditorField::new('description_produit'),
             Field::new('imageFile', 'photo')
-            ->setFormType(VichFileType::class)
+            // ->setFormType(VichFileType::class)
             ->onlyOnForms(),
             MoneyField::new('prix_achat_ht')
             ->setCurrency('EUR'),

@@ -24,6 +24,7 @@ class AppAutenticatorAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
+    private $userProvider;
 
     public function __construct(private UrlGeneratorInterface $urlGenerator, UserProviderInterface $userProvider)
     {

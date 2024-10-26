@@ -15,8 +15,10 @@ class SecurityController extends AbstractController
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
+        $utilisateur = $this->getUser();
         // Si l'utilisateur est connecté, vérifier son statut de vérification
-            if ($this->getUser() && !$this->getUser()->isVerified()) {
+        if ($utilisateur && $utilisateur instanceof \App\Entity\Utilisateur && !$utilisateur->isVerified()) {
+            // if ($this->getUser() && !$this->getUser()->isVerified()) {
             $this->addFlash('error', 'Vous devez vérifier votre e-mail avant de vous connecter.');
         return $this->redirectToRoute('app_logout');
         }

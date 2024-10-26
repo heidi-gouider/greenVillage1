@@ -101,15 +101,18 @@
 						</li> #}
 						{# la ligne du dessous donne la permission à l'utilisateur doit être authentifié pour accéder à une page,
 						mais aucun rôle spécifique n'est nécessaire.  #}
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% if is_granted('IS_AUTHENTICATED_FULLY')and app.user %}
 							<li	class="nav-item">
 								<a	class="nav-link nav-link-custom text-orange "	href="{{ path('app_profil') }}">
 									<i	class="bi bi-person-fill"></i>
+									{# conecté #}
+									{# {{ app.utilisateur.prenomClient|first|upper }} #}
 								</a>
 							</li>
 							<li	class="nav-item">
 								<a	class="nav-link nav-link-custom text-orange "	href="{{ path('app_logout') }}">
-									Déconnexion
+								{# deconnexion #}
+									<i	class="bi bi-person-fill-slash"></i>
 								</a>
 							</li>
 						{% else %}
@@ -138,7 +141,7 @@
 						</li>
 						<li>
 						<a	class="dropdown-item"	href="{{ path('app_logout') }}">
-						<i	class="bi bi-box-arrow-right"></i>
+						<i	class="bi bi-person-fill-slash"></i>
 						Déconnexion
 						</a>
 						</li>
@@ -147,7 +150,7 @@
 						{% endif %}
 					</li> #}
 					{# Vérifie si l'utilisateur est authentifié #}
-					{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 						<li class="nav-item dropdown">
 						<a
 						class="nav-link dropdown-toggle nav-link-custom text-orange"
@@ -157,7 +160,7 @@
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 						>
-						<i class="bi bi-person-fill"></i> Mon compte
+						<i class="bi bi-person-fill"></i> 
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li>
@@ -170,20 +173,21 @@
 						</li>
 						<li>
 						<a class="dropdown-item" href="{{ path('app_logout') }}">
-						<i class="bi bi-box-arrow-right"></i> Déconnexion
+						<i	class="bi bi-person-fill-slash"></i>
+					<i	class="fa fa-user-times"></i>
 						</a>
 						</li>
 						</ul>
 						</li>
-					{% else %} #}
+					{% else %} 
 					{# Affiche le lien de connexion si l'utilisateur n'est pas connecté #}
-					{# <li class="nav-item">
+					<li class="nav-item">
 						<a class="nav-link nav-link-custom text-orange" href="{{ path('app_login') }}">
-						<i class="bi bi-person-fill"></i> Connexion
+						<i class="bi bi-person-fill"></i>
 						</a>
 						</li>
-						{% endif %}
-					#}
+						{% endif %} 
+					
 
 						<li	class="nav-item"	style="position = relative">	{# Vérifier si le panier contient des articles et afficher le total#}
 						{# {% if quantiteTotal> 0 %}

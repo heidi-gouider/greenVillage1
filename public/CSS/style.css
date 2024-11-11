@@ -193,6 +193,12 @@ margin-top: 10vh;
   height: auto;
 }
 
+        /* ----------------------------------------- */
+  
+      /*  CAROUSEL   */
+#carousel {
+background-color: #007bff;
+}
 
 
         /* ----------------------------------------- */
@@ -258,12 +264,13 @@ margin-top: 10vh;
 
       .card {
         background-color: transparent;
-        /* border: none; */
-        border-right: black;
+        border: none;
+        /* border-right: black; */
       }
 
       .card-body {
         padding: 0;
+    height: 100%; /* Prend toute la hauteur de la carte */
     }
 
     .card-title, .content {
@@ -273,7 +280,7 @@ margin-top: 10vh;
     }
 
     .card-footer {
-        border-top: none;
+        /* border-top: none; */
         background-color: transparent;
     }
 
@@ -281,6 +288,7 @@ margin-top: 10vh;
         border-radius: 0;
         max-width: 100%;
         height: auto;
+        object-fit: cover; /* Cela permet de couvrir la zone tout en coupant les parties qui dépassent */
     }
   /* .card-header {
     position: relative;
@@ -364,6 +372,7 @@ margin-top: 10vh;
   /* margin: 0; Supprime la marge par défaut */
   display: flex; /* Utilise Flexbox pour aligner les icônes horizontalement */
   gap: 50px; /* Espacement entre les icônes */
+  z-index: 1;
 }
 
 /* .social-icon { */
@@ -377,9 +386,9 @@ margin-top: 10vh;
   text-decoration: none; /* Supprime la décoration du lien */
 }
 
-.social-icon-link:hover {
-  color: #007bff; /* Couleur au survol (changez selon votre thème) */
-}
+/* .social-icon-link:hover {
+  color: #007bff; 
+} */
 
     /* ------------------------------------------------------------------------------------------------------------ */
   
@@ -391,6 +400,7 @@ margin-top: 10vh;
       bottom: 0;
       /* background-color: #f8f9fa; */
       /* opacity: 0.9; */
+      border-top: #333;
       position: relative; /* Assurez-vous que cela ne soit pas fixed ou absolute */
       z-index: 1;
     }
@@ -409,16 +419,14 @@ margin-top: 10vh;
     }
     
     .footer ul li a {
-      color: #50565c;
+      /* color: #50565c; */
       font-size: 24px;
       text-decoration: none;
     }
     
-    .footer ul li a:hover {
-      /* color: #007bff; */
+    /* .footer ul li a:hover {
       color: #ff8400;
-  
-    }
+    } */
     
     /* .link-external i:hover{
     afficher le nom en texte du lien

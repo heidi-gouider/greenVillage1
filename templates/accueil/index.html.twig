@@ -5,7 +5,29 @@
 {% endblock %}
 
 {% block body %}
+{# {{ encore_entry_link_tags('app') }} #}
+{# {{ encore_entry_link_tags('app1') }} #}
+
+	{# <div id="root"></div> #}
+{# <div data-controller="first-component"></div> #}
+
 	{# Banniere categories #}
+
+				<div class="row align-items-center bg-dark banniere mx-auto text-center">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+								{{ categorie.libelleCategorie}}
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+	<div class="contenu">
+
 	<div	class="row align-items-center bg-dark banniere mx-auto">
 		{% for  categorie in categories %}
 			{# afficher uniquement les categories parent #}
@@ -16,7 +38,7 @@
 							{{ categorie.libelleCategorie }}
 						</a>
 						{# Afficher les sous-catégories si elles existent #}
-						{% if categorie.categories is not empty %}
+						{# {% if categorie.categories is not empty %}
 							<ul	class="dropdown-menu">
 								{% for sousCategories in categorie.categories %}
 									<li>
@@ -26,7 +48,7 @@
 									</li>
 								{% endfor %}
 							</ul>
-						{% endif %}
+						{% endif %} #}
 					</div>
 				</div>
 			{% endif %}
@@ -64,10 +86,23 @@
 			 <i class="bi bi-question-lg"></i>
 			</button>
 		</form>
+{# test react filter pour la recherche #}
+<form onSubmit={handleSearch}>
+    <input
+        type="search"
+        placeholder="recherche"
+        aria-label="Search"
+        {# value={searchTerm} #}
+        onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <button type="submit">
+        Recherche
+    </button>
+</form>
 
 		{# Caroussel des produits far #}
-		<div	class="container mt-5>
-		<div id="	carousel" class="	carousel	slide" data-bs-ride="	carousel">
+		<div	class="container mt-5">
+		<div id="carousel" class="carousel carousel slide" data-bs-ride="carousel">
 			<div	class="carousel-inner">
 				{# {% set produitsAleatoires = produits|shuffle %} #}
 
@@ -159,9 +194,9 @@
 				{# <div class="mt-5"> #}
 
 				{# Affichage des top ventes #}
-					<h2	class="text-center"	mt-5>	Nos catégories
+					<h2	class="text-center	mt-5">	Nos catégories
 				</h2>
-				<div	class="row"	mt-4>
+				<div	class="row	mt-4">
 					<div	class="d-flex flex-wrap justify-content-around">
 						{% for  categorie in categories %}
 							{# ici je vais mettre une condition pour afficher uniquement les categories parent #}
@@ -211,13 +246,18 @@
 								</a>
 							</div>
 						</div>
+						</div>
 					{# <div class="text-center">
 					<a href="{{ path('app_easter') }}">  <img  src="{{ asset('img/tape.webp') }}" alt="k7"></a> #}
 					</div>
+								{% include "partials/footer.html.twig" %}
+
 				</div>
 
 			{# {% include "partials/socialIcons.php" %} #}
 
 			{# {% include "partials/footer.html.twig" %} #}
+			{# {{ encore_entry_script_tags('app') }} #}
+
 			{% endblock %}
 			

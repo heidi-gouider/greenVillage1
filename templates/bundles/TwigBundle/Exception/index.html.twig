@@ -1,0 +1,44 @@
+{# {% extends 'base.html.twig' %} #}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}
+				Green Village
+			{% endblock %}
+		</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+	{# {{ encore_entry_link_tags('app') }} #}
+
+		{# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+	</head>
+</html>
+{% block stylesheets %}
+	{# {{ parent() }} #}
+	<link rel="stylesheet" href="{{ asset('CSS/error.css') }}">
+{% endblock %}
+
+{# pour accéder aux pages d'erreur nom de domaine serveur local/-error/404 ou 403.... #}
+
+{% block body %}
+	<div class="m-5 py-5 error-page">
+		<h1>
+			{% block message %}{% endblock %}
+		</h1>
+		<h2>
+			{% block description %}{% endblock %}
+		</h2>
+		<div>
+        {# Retour #}
+			<button class="btn btn-outline-success" href="{{ path('app_accueil') }}">
+				<i class="bi bi-house"></i>
+			</button>
+		</div>
+	</div>
+{% endblock %}

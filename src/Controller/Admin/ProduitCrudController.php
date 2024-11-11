@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Produit;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -40,5 +41,22 @@ class ProduitCrudController extends AbstractCrudController
             IntegerField::new('quantite_stock'),
         ];
     }
+
+    public function persitEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        /** @var Produit $produit */
+        $produit = $entityInstance;
+
+        dd($produit);
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    // public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    // {
+    //      /** @var Produit $produit */
+    //      $produit = $entityInstance;
+    //     parent::updateEntity($entityManager, $entityInstance);
+    // }
+
     
 }

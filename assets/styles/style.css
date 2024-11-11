@@ -1,0 +1,417 @@
+body {
+    /* background-color: #222222; */
+    /* background-image: url('../IMG/fond.webp');  */
+    height: 100%;
+    min-height: 100vh;
+    /* opacity: 0.5; */
+    /* background-size: cover;  */
+
+
+  }
+      h1 *{
+          /* color: #C9C9C9; */
+          @font-face {
+            font-family: "Ubuntu Light";
+            src: url("public/fonts/Ubuntu-Light.ttf") format(ttf);
+        }
+        
+      }   
+  a {
+          text-decoration: none;
+          color: black;
+      }
+
+      .text-orange {
+        color: orange !important;
+      }
+/* ------------------------------------------------------------------------------------------------------------ */
+      /* Bandeau */
+
+
+.banniere {
+  margin-top: 21vh;
+  height: 6vh;
+  font-size: 1rem;
+  color: blue;
+  /* font-size: 25%; */
+}
+
+/* Style pour masquer le menu déroulant par défaut */
+.dropdown-menu {
+  display: none; /* Cacher par défaut */
+  position: absolute; /* Positionner par rapport au parent */
+  background-color: #333; /* Couleur de fond */
+  list-style: none; /* Pas de style de liste */
+  padding: 0; /* Pas de padding */
+  margin: 0; /* Pas de margin */
+  border-radius: 4px; /* Coins arrondis */
+  top: 100%; /* Affiche juste en dessous de l'élément parent */
+  left: 0; /* Aligner à gauche */
+  z-index: 1000; /* Assurer que le menu est au-dessus */
+}
+
+/* Afficher le menu au survol du parent */
+.dropdown:hover .dropdown-menu {
+  display: block; /* Afficher le menu déroulant au survol */
+}
+
+
+/* Style pour masquer le menu déroulant par défaut */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  top: 100%; /* Afficher le menu juste en dessous de l'élément parent */
+  left: 0;
+  z-index: 1000;
+  width: 200px; /* Ajuste la largeur selon tes besoins */
+}
+
+/* Style pour chaque élément du menu déroulant */
+.dropdown-item {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Changer la couleur au survol */
+.dropdown-item:hover {
+  background-color: #555;
+}
+
+/* Afficher le menu au survol du parent */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.contenu_accueil {
+margin-top: 10vh;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------ */
+      /* Page base */
+
+  /* LE HEADER INCLU DANS TOUTES LES PAGES  */
+  
+  /* penser à ajouter une 'box-shadow' au bottom de la .nav et voir pour le bg 
+  vérifier s'il n'est pas plus judicieux de nommer des classes perso au cas où il y aurait pls nav hors le header*/
+  
+  #menu {
+      height: 20vh;
+      background-color: rgba(29, 28, 28, 0.7);
+          /* background-color: #222222; */
+    /* background-image: url('../IMG/fond.webp'); 
+    background-size: cover;  */
+    /* height: 200px; Ajuste la hauteur du header selon tes besoins */
+      /* box-shadow: 0px 5px 10px #42031f; */
+      z-index: 2;
+      /* opacity: 0.2; */
+      box-shadow: 0 10px 10px black;
+    }
+  /* #navbarSupportedContent{
+    background-color: #222222;
+  } */
+  
+  /* .navbar-nav a{
+    color: #d2571d;
+  }
+  .nav-link{
+    color: #d2571d;
+  } */
+  
+      /* ----------------------------------------- */
+          /*  PAGE ADMINISTRATION categories   */
+  
+      .btn-delete {
+        color: red;
+        background: none;
+        border: none;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    
+    /* .btn-delete:hover {
+        color: darkred;
+    } */
+          /* ----------------------------------------- */
+  
+      /*  PAGE ACCUEIL   */
+
+/* .category-banner {
+  background-color: #75797e;
+  
+} */
+/* ----------------------------------------- */
+
+      /*  PAGE PANIER   */
+
+    
+/****** image banniere **********/
+
+
+#img-promo {
+  width: 100%;
+  height: auto;
+}
+
+        /* ----------------------------------------- */
+  
+      /*  CAROUSEL   */
+#carousel {
+background-color: #007bff;
+}
+
+
+        /* ----------------------------------------- */
+  
+      /*  PAGES form    */
+      .form {
+        padding-top: 200px;
+      }
+      
+      /* ******** toute les pages */
+      .contenu {
+        /* background-color: #222222; */
+        /* padding-top: 100px; */
+        margin-top: 30vh;
+        margin-right: 10vh;
+        margin-left: 10vh;
+
+        min-height: 100vh;
+        /* background-image: url("IMG/fond/bg3.jpeg"); */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        z-index: 1;
+        /* filter: blur(5px); */
+      }
+      .zoom-img {
+        /* background-color: #50565c; */
+        transition: transform 0.3s ease-in-out;
+      }
+      .zoom-img:hover {
+        transform: scale(1.1);
+        /* translate: 1s; */
+        border: none;
+        transition: 1s ease-in-out;
+        /* border-radius: 50%; */
+      }
+      /* .contenu::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("/dist/assets/bg3.jpeg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        z-index: 0;
+        filter: blur(5px); 
+      } */
+      
+      /* ------------------------------------------------------------------------------------------------------------ */
+      .img-centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%; /* ou toute autre valeur de largeur souhaitée */
+        height: auto; /* pour garder les proportions de l'image */
+    }
+  
+/* ------------------------------------------------------------------------------------------------------------ */
+      /*  LES CARTES AVEC PRODUITS    */
+
+      .card {
+        background-color: transparent;
+        border: none;
+        /* border-right: black; */
+      }
+
+      .card-body {
+        padding: 0;
+    height: 100%; /* Prend toute la hauteur de la carte */
+    }
+
+    .card-title, .content {
+        text-align: center;
+        /* color: white; */
+
+    }
+
+    .card-footer {
+        /* border-top: none; */
+        background-color: transparent;
+    }
+
+    .card-img-top {
+        border-radius: 0;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover; /* Cela permet de couvrir la zone tout en coupant les parties qui dépassent */
+    }
+  /* .card-header {
+    position: relative;
+  } */
+  
+  .card-header button {
+    /* z-index: 1; */
+    position: absolute;
+  }
+  
+      /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  PAGE FORMULAIRE  */
+  form{
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    box-sizing: border-box;
+    padding: 2%;
+  }
+  
+  /* Styles for custom form inputs */
+  .custom-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* color: black; */
+    }
+    
+    /* Styles for form errors */
+    .form-error {
+      color: red;
+    }
+    
+    /* Styles for the submit button */
+    /* .btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    } */
+    .submit{
+      margin-top: 10%;
+      background-color: #41666C;
+      cursor: pointer;
+      color: #FFF;
+    }
+    .submit:hover{
+      filter: brightness(1.1);
+    }
+    /* #formulaire {
+      background-color: rgba(36, 38, 41, 0.6);
+    } */
+    .text-orange {
+      color: #c04b14; /* Code couleur pour le texte blanc */
+      font-size: large;
+  }
+  
+    .text-white {
+      color: #ffffff; /* Code couleur pour le texte blanc */
+  }
+  
+    #formulaire label {
+      /* color: #f3e5e5; */
+      color: black;
+      /* background-color: rgba(178, 181, 187, 0.3); */
+    }
+  
+    /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  LES ICONES RESEAUX SOCIAUX  */
+
+  /* Styles pour les icônes de réseaux sociaux */
+.social-icon {
+  position: fixed; /* Fixe les icônes en bas de la page */
+  bottom: 10VH; /* Espacement depuis le bas de la fenêtre */
+  right: 10VH; /* Espacement depuis le bord droit de la fenêtre */
+  list-style: none; /* Supprime les puces */
+  /* padding: 0; Supprime le padding par défaut */
+  /* margin: 0; Supprime la marge par défaut */
+  display: flex; /* Utilise Flexbox pour aligner les icônes horizontalement */
+  gap: 50px; /* Espacement entre les icônes */
+}
+
+/* .social-icon { */
+  /* Style des éléments de liste, si nécessaire */
+/* } */
+
+.social-icon-link {
+  display: block;
+  color: #1b25b4; /* Couleur des icônes (changez selon votre thème) */
+  font-size: 100px; /* Taille des icônes */
+  text-decoration: none; /* Supprime la décoration du lien */
+}
+
+.social-icon-link:hover {
+  color: #007bff; /* Couleur au survol (changez selon votre thème) */
+}
+
+    /* ------------------------------------------------------------------------------------------------------------ */
+  
+  /*  LE FOOTER  */
+
+  .footer {
+    background-color: rgba(29, 28, 28, 0.7);
+    /* height: 10vh; */
+      bottom: 0;
+      /* background-color: #f8f9fa; */
+      /* opacity: 0.9; */
+      position: relative; /* Assurez-vous que cela ne soit pas fixed ou absolute */
+      z-index: 1;
+    }
+    
+    .footer ul {
+      margin-bottom: 0;
+    }
+    
+    .footer ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .footer ul li:last-child {
+      margin-right: 0;
+    }
+    
+    .footer ul li a {
+      color: #50565c;
+      font-size: 24px;
+      text-decoration: none;
+    }
+    
+    .footer ul li a:hover {
+      /* color: #007bff; */
+      color: #ff8400;
+  
+    }
+    
+    /* .link-external i:hover{
+    afficher le nom en texte du lien
+    } */
+    
+    /* ////////////////menu déroulant mobile/////////// */
+    @media (max-width: 767px) {
+      .collapse.navbar-collapse {
+          /* background-color: rgba(226, 226, 226, 0.7);  */
+          /* Ajoutez votre couleur de fond ici */
+          background-color: rgba(226, 226, 226); 
+          box-shadow: 0px 5px 10px #bf7113; /* Conservez votre ombre si nécessaire */
+      }
+  
+      .navbar-nav {
+        margin-left: auto; /* Aligne les éléments du menu à droite */
+    }
+  
+    .navbar-toggler {
+        margin-left: auto; /* Aligne le bouton de menu à droite */
+    }  }

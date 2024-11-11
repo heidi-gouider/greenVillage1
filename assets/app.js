@@ -1,5 +1,5 @@
-import { registerReactControllerComponents } from '@symfony/ux-react';
-import { Application } from '@hotwired/stimulus';
+// import { registerReactControllerComponents } from '@symfony/ux-react';
+// import { Application } from '@hotwired/stimulus';
 import './bootstrap.js';
 import './styles/app.css';
 

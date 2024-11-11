@@ -1,5 +1,5 @@
-import { startStimulusApp } from '@symfony/stimulus-bundle';
-import '@symfony/ux-react';
+// import { startStimulusApp } from '@symfony/stimulus-bundle';
+// import '@symfony/ux-react';
 
 // Démarre l'application Stimulus et charge tous les contrôleurs automatiquement
 const app = startStimulusApp();

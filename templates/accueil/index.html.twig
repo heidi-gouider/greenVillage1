@@ -6,9 +6,9 @@
 
 {% block body %}
 {# {{ encore_entry_link_tags('app') }} #}
-{# {{ encore_entry_link_tags('app1') }} #}
+{# {{ encore_entry_link_tags('app1') }}
 
-	{# <div id="root"></div> #}
+	<div id="root"></div> #}
 {# <div data-controller="first-component"></div> #}
 
 	{# Banniere categories #}
@@ -18,7 +18,7 @@
 					{# afficher uniquement les categories parent #}
 					{% if categorie.parentCategorie is null %}
 						<div class="col">
-							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="font-weight-bold">
 								{{ categorie.libelleCategorie}}
 							</a>
 						</div>
@@ -34,7 +34,7 @@
 			{% if categorie.parentCategorie is null %}
 				<div	class="col d-flex justify-content-center">
 					<div	class="dropdown">
-						<a	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}"	class="text-white font-weight-bold">
+						<a	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}"	class="font-weight-bold">
 							{{ categorie.libelleCategorie }}
 						</a>
 						{# Afficher les sous-catégories si elles existent #}

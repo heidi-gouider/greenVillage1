@@ -1,6 +1,6 @@
 // import { registerReactControllerComponents } from '@symfony/ux-react';
 // import { Application } from '@hotwired/stimulus';
-import './bootstrap.js';
+// import './bootstrap.js';
 import './styles/app.css';
 
 registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));

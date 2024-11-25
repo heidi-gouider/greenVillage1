@@ -20,11 +20,17 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+
+    // ajouter des fichiers d'entrée pour le JavaScript
     .addEntry('app', './assets/app.js')
-    // .addEntry('app1', './react/app1/index.js')
+    .addEntry('app1', './react/app1/index.js')
 
     // .addEntry('app-react', './react/my_react_app/index.js')
-    .addEntry('app-react', './assets/react/index.js')
+    // .addEntry('app-react', './assets/react/index.js')
+
+    // ajouter un fichier CSS
+    // .addStyleEntry('app_styles', './assets/styles/app.css')
+    .addStyleEntry('app_styles', './assets/styles/styles.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

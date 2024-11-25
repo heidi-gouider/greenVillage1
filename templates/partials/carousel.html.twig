@@ -1,0 +1,59 @@
+		{# Caroussel des produits far #}
+		<div	class="container mt-5">
+		<div id="carousel" class="carousel carousel slide" data-bs-ride="carousel">
+			<div	class="carousel-inner">
+				{# {% set produitsAleatoires = produits|shuffle %} #}
+
+				<!-- Première diapositive active avec 3 images -->
+					<div	class="carousel-item active mx-auto"	data-bs-interval="7200">	<div	class="row">
+						{% for produit in produitsAleatoires|slice(0, 3) %}
+							<div	class="col-4 d-flex justify-content-center">
+								<div	class="card m-2"	style="width: 10rem;">
+									<img	class="card-img-top zoom-img"	src="{{ produit.photo }}"	alt="">
+										<div	class="card-body">
+											<h5	class="card-title">
+												{{ produit.libelleProduit }}
+											</h5>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+
+					<!-- Deuxième diapositive avec 3 images -->
+					<div	class="carousel-item"	data-bs-interval="7200">
+						<div	class="row">
+							{% for produit in produitsAleatoires|slice(3, 3) %}
+								<div	class="col-4 d-flex justify-content-center">
+									<div	class="card m-2"	style="width: 10rem;">
+										<img	class="card-img-top zoom-img"	src="{{ produit.photo }}"	alt="">
+
+											<div	class="card-body">
+												<h5	class="card-title">
+													{{ produit.libelleProduit }}
+												</h5>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+
+						<!-- Troisième diapositive avec 3 images -->
+						<!-- Contrôles précédent et suivant -->
+						<button	class="carousel-control-prev"	type="button"	data-bs-target="#carousel"	data-bs-slide="prev">
+							<span	class="carousel-control-prev-icon"	aria-hidden="true"></span>
+							<span	class="visually-hidden">
+								Previous
+							</span>
+						</button>
+						<button	class="carousel-control-next"	type="button"	data-bs-target="#carousel"	data-bs-slide="next">
+							<span	class="carousel-control-next-icon"	aria-hidden="true"></span>
+							<span	class="visually-hidden">
+								Next
+							</span>
+						</button>
+					</div>
+				</div>
+

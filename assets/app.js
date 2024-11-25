@@ -1,6 +1,6 @@
 // import { registerReactControllerComponents } from '@symfony/ux-react';
 // import { Application } from '@hotwired/stimulus';
-// import './bootstrap.js';
+import './bootstrap.js';
 import './styles/app.css';
 
 registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
@@ -15,6 +15,7 @@ registerReactControllerComponents(require.context('./react/controllers', true, /
 
 // Créez une instance de l'application Stimulus
 const application = Application.start();
+// import'./styles/app.css';
 // assets/app.js
 
 // import '@symfony/ux-toggle-password';
@@ -32,6 +33,7 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //     this.classList.toggle("bi bi-eye");
 //     this.classList.toggle("bi bi-eye-slash");
 // });
+import './bootstrap.js';
 
 // document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
 //     const confirmPasswordField = document.getElementById("confirmPasswordField");
@@ -42,8 +44,11 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //     this.classList.toggle("bi bi-eye");
 //     this.classList.toggle("bi bi-eye-slash");
 // });
+import './styles/app.css';
 
+console.log('Ce log provient de assets/app.js - bienvenue sur AssetMapper! 🎉');
 
-registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/), application);
+// registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/), application);
+
 // registerReactControllerComponents();
 // registerReactControllerComponents(application);

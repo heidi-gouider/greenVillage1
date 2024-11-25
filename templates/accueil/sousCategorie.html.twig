@@ -5,7 +5,7 @@
 
 {% block body %}
 {# {% include "partials/banniere.html.twig" %} #}
-			<div class="row align-items-center bg-dark banniere mx-auto text-white">
+			<div class="row align-items-center bg-dark banniere mx-auto text-center">
 				{% for  categorie in categories %}
 					{% if categorie.parentCategorie is null %}
 						<div class="col">
@@ -17,7 +17,9 @@
 				{% endfor %}
 			</div>
 
+
 	<div class="contenu">
+
 		{# <h1 class="fst-italic mb-5">Notre super catalogue</h1> #}
 		<main class="container">
 			<div class="row">

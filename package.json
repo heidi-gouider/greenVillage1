@@ -3,6 +3,7 @@
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.16.0",
         "@babel/preset-react": "^7.25.7",
+        "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
         "@symfony/webpack-encore": "^5.0.1",
         "core-js": "^3.23.0",
         "regenerator-runtime": "^0.14.1",

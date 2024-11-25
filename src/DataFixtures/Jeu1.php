@@ -100,6 +100,15 @@ class Jeu1 extends Fixture
         $manager->persist($parentCategorie3);
         $manager->flush();
         
+                // Création de la catégorie parent3
+                $parentCategorie4 = new Categorie;
+                // $parentCategorie2->setParentCategorie($parentCategorie2);
+                $parentCategorie4->setLibelleCategorie("Accessoires");
+                $parentCategorie4->setImageCategorie("IMG/instrument_a_vent.webp");
+                
+                $manager->persist($parentCategorie4);
+                $manager->flush();
+        
 // Création de catégories enfants
 
 $categorie1 = new Categorie();

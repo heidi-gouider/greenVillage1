@@ -6,9 +6,10 @@ security:
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         # app_user_provider:
-        #     entity:
-        #         class: App\Entity\Admin
-        #         property: username
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: username
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
         # user_provider:
@@ -35,6 +36,15 @@ security:
                 # by default, the feature is enabled by checking a checkbox in the
                 # login form, uncomment the following line to always enable it.
                 #always_remember_me: true
+
+        admin:
+            pattern: ^/admin
+            lazy: true
+            provider: app_admin_provider
+            custom_authenticator: App\Security\AdminAuthenticator
+            logout:
+                path: admin_logout
+                target: /admin/login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

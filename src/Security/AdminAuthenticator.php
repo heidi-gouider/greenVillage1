@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Repository\AdminRepository; 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
-use Symfony\Component\Security\Core\User\UserBadge;
+// use Symfony\Component\Security\Core\User\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
 class AdminAuthenticator extends AbstractAuthenticator
 {
@@ -24,7 +26,7 @@ class AdminAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->getPathInfo() === '/admin/login' && $request->isMethod('POST');
+        return $request->getPathInfo() === '/login/admin' && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
@@ -38,18 +40,18 @@ class AdminAuthenticator extends AbstractAuthenticator
 
         return new SelfValidatingPassport(
             new UserBadge($username, function ($userIdentifier) {
-                return $this->adminProvider->loadUserByUsername($userIdentifier);
+                return $this->adminProvider->loadUserByIdentifier($userIdentifier);
             })
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse('/admin/dashboard'); // Redirection après succès
+        return new RedirectResponse('/admin'); 
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new RedirectResponse('/admin/login?error=1'); // Redirection après échec
+        return new RedirectResponse('/login/admin?error=1');
     }
 }

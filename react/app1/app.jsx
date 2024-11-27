@@ -13,8 +13,24 @@ const App1 = () => {
             .then(response => response.json())
             // .then(data => setCategories(data));
             .then(data => {
-                console.log("Catégories récupérées :", data.member); 
+            //     console.log("Catégories récupérées :", data); 
 
+                // .then(data => {
+                //     console.log("Données récupérées : ", data);  // Log des données pour vérifier le format
+                //     if (Array.isArray(data.member)) {
+                //         const formattedData = data.member.map(cat => ({
+                //             nom: cat.libelle_categorie,
+                //             description: cat.description_categorie,
+                //         }));
+                //         setCategories(formattedData);
+                //     } else {
+                //         console.error("Erreur : 'data.member' n'est pas un tableau");
+                //         setCategories([]);
+                //     }
+                // });
+                
+
+                // Formater les données récupérées
                 const formattedData = data.member.map(cat => ({
                 //     // garder l'id si nécessaire pour les clés
                     nom: cat.libelle_categorie,
@@ -22,9 +38,10 @@ const App1 = () => {
                 })
             );
 
+                // Mettre à jour l'état avec les catégories formatées
                 setCategories(formattedData);
                 // setFilteredCategories(formattedData); // Initialisation avec toutes les catégories
-                setCategories(Array.isArray(data.member) ? data.member : []);
+                // setCategories(Array.isArray(data.member) ? data.member : []);
             })
             .catch(error => console.error("Erreur de récupération des données :", error));
 

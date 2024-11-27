@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion!
+{% endblock %}
+
+{% block body %}
+	<div class="contenu">
+		<div class="container">
+
+			<div class="row text-center">
+				<div class="col-4 mx-auto">
+
+					<form class="admin" method="post" action="{{ path('admin_login') }}">
+						<h1 class="h3 mb-5 font-weight-normal">Connexion Administrateur</h1>
+
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						<label class="mb-3" for="inputUsername">Nom d'utilisateur</label>
+						<input type="text" id="inputUsername" name="username" class="form-control" required autofocus>
+
+						<label class="mb-3 mt-3" for="inputPassword">Mot de passe</label>
+						<input type="password" id="inputPassword" name="password" class="form-control" required>
+
+						{# <button type="submit" class="btn btn-primary">Se connecter</button> #}
+                        <div class="row ">
+						<div class="d-grid gap-3 col-4 mx-auto mb-3">
+							<button class="submit" type="submit">
+								Connexion
+							</button>
+						</div>
+					</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -29,8 +29,8 @@ Encore
     // .addEntry('app-react', './assets/react/index.js')
 
     // ajouter un fichier CSS
-    // .addStyleEntry('app_styles', './assets/styles/app.css')
-    .addStyleEntry('app_styles', './assets/styles/style.css')
+    .addStyleEntry('app_styles', './assets/styles/app.css')
+    // .addStyleEntry('app_styles', './assets/styles/style.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

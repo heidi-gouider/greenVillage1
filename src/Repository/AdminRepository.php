@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @extends ServiceEntityRepository<Admin>
@@ -57,4 +58,12 @@ class AdminRepository extends ServiceEntityRepository implements PasswordUpgrade
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    // public function loadUserByIdentifier(string $identifier): ?Admin
+    // {
+    //     return $this->createQueryBuilder('a')
+    //         ->andWhere('a.username = :username')
+    //         ->setParameter('username', $identifier)
+    //         ->getQuery()
+    //         ->getOneOrNullResult();
+    // }
 }

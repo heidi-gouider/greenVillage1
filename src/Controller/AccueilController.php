@@ -7,6 +7,7 @@ use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AccueilController extends AbstractController
 {
@@ -26,7 +27,7 @@ class AccueilController extends AbstractController
     
         // affichage des catégories et caroussel de produits
     #[Route('/', name: 'app_accueil')]
-    public function index(): Response
+    public function index(AuthenticationUtils $authenticationUtils): Response
     {
          //on appelle la fonction `findAll()` du repository de la classe `Categorie` afin de récupérer toutes les categories de la base de données;
         //  $categories = $this->categorieRepository->findAll();
@@ -38,6 +39,9 @@ class AccueilController extends AbstractController
         shuffle($produitsAleatoires);
         // $sousCategories = $categories->getCategories();
 
+        // pour la modal
+        $error = $authenticationUtils->getLastAuthenticationError();
+    $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('accueil/index.html.twig', [
             // return $this->render('base.html.twig', [
@@ -46,6 +50,8 @@ class AccueilController extends AbstractController
             'produitsAleatoires' => $produitsAleatoires,
             // 'sous_categories' => $sousCategories,
             // 'parent_categorie' => $parentCategorie,
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 

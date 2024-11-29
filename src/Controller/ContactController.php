@@ -26,7 +26,7 @@ class ContactController extends AbstractController
     }
 
    #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, MailerInterface $mailer, AuthenticationUtils $authenticationUtils): Response
     {
 
         // Récupérer les catégories parentes pour la dropdown de la base sur la page contact
@@ -68,12 +68,18 @@ class ContactController extends AbstractController
             // Ajouter un message flash
             $this->addFlash('success', 'Votre message a bien été envoyé !');
             // return $this->redirectToRoute('app_accueil');
+
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+        
         }
         return $this->render('contact/index.html.twig', [
             //'controller_name' => 'ContactController',
             'form' => $form,
             // Passer les catégories au template
             'categories' => $categories,
+            'error' => $error,
+            'last_username' => $lastUsername,
 
         ]);
     }

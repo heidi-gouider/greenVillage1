@@ -47,27 +47,36 @@
 							{% endif %}
 
 								{# test pour modale connexion admin #}
-							    <!-- Fenêtre modale de connexion -->
-							{# <li class="nav-item active">
-								<a class="nav-link text-orange" href="{{ path('admin_login') }}" title="Connexion Admin">
-									<i class="bi bi-gear"></i>
-								</a>
-							</li> #}
 							<li class="nav-item active">
-								<a href="#" id="openModalButton" class="nav-link text-orange" >
-									modal <i class="bi bi-gear"></i>
+								<a href="#" id="openModalButton" class="nav-link text-orange" title="Admin" >
+									{# modal #} <i class="bi bi-gear"></i>
 								</a>
 							</li>
 
-							    {% include "security/modal_login_admin.html.twig" with {'error': error, 'last_username': last_username} %}
+{# Menu de navigation avec uniquement les sous-catégories #}
+<li class="nav-item active mx-3">
+    <div class="dropdown">
+        <a class="nav-link text-orange" href="{{ path('app_categorie') }}" title="Liste des produits"
+            id="dropdownCatalogue" data-bs-toggle="dropdown" aria-expanded="false">
+            Catalogue
+        </a>
+        {% if sous_categories is not empty %}
+            <ul class="dropdown-menu" aria-labelledby="dropdownCatalogue">
+                {% for sousCategorie in sous_categories %}
+                    {% if sousCategorie.parentCategorie is not null %}
+                        <li class="dropdown-item">
+                            <a class="dropdown-item" href="{{ path('app_sous_categorie', {'parent_categorie_id': sousCategorie.parentCategorie.id, 'sous_categorie_id': sousCategorie.id}) }}">
+                                {{ sousCategorie.libelleCategorie }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-							
+    </div>
+</li>
 
-							<li class="nav-item active mx-3">
-								<a class="nav-link text-orange " href="{{ path('app_categorie') }}" title="Liste des produits">
-									Catalogue
-								</a>
-							</li>
 
 							{# Vérifie si l'utilisateur est authentifié #}
 								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -133,6 +142,10 @@
 				</div>
 			</nav>
 							</div>
+														<div>
+							    {% include "security/modal_login_admin.html.twig" with {'error': error, 'last_username': last_username} %}
+							</div>
+
 
 							{% block body %}
 				{% endblock %}

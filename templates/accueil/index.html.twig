@@ -9,7 +9,7 @@
 {# {{ encore_entry_script_tags('app') }} #}
 {{ encore_entry_script_tags('app1') }}
 
-	<div class="contenu">
+	{# <div class="contenu"> #}
 
 	{# Banniere categories #}
 
@@ -18,9 +18,27 @@
 					{# afficher uniquement les categories parent #}
 					{% if categorie.parentCategorie is null %}
 						<div class="col">
-							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="font-weight-bold">
+						<div class="dropdown">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold"
+							id="dropdown{{ categorie.id }}" 
+                        data-bs-toggle="dropdown" aria-expanded="false">
 								{{ categorie.libelleCategorie}}
 							</a>
+						{# Afficher les sous-catégories si elles existent "code en comment" #}
+						{% if categorie.categories is not empty %}
+							<ul	class="dropdown-menu">
+								{% for sousCategorie in sous_categories %}
+									<li>
+										<a	class="dropdown-item"	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id, 'sous_categorie_id': sousCategorie.id}) }}"	class="dropdown-item">
+											{# {{ categorie.libelleCategorie }} #}
+											{{ sousCategorie.libelleCategorie }}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+
+                </div>
 						</div>
 					{% endif %}
 				{% endfor %}
@@ -31,81 +49,8 @@
 <div id="app1-root"></div>
 
 
-	{# <div class="contenu"> #}
-
-	{# <div	class="row align-items-center bg-dark banniere mx-auto">
-		{% for  categorie in categories %}
-			{% if categorie.parentCategorie is null %}
-				<div	class="col d-flex justify-content-center">
-					<div	class="dropdown">
-						<a	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}"	class="font-weight-bold">
-							{{ categorie.libelleCategorie }}
-						</a> #}
-
-						{# Afficher les sous-catégories si elles existent "code en comment" #}
-						{# {% if categorie.categories is not empty %}
-							<ul	class="dropdown-menu">
-								{% for sousCategories in categorie.categories %}
-									<li>
-										<a	class="dropdown-item"	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id, 'sous_categorie_id': categorie.id}) }}"	class="dropdown-item">
-											{{ categorie.libelleCategorie }}
-										</a>
-									</li>
-								{% endfor %}
-							</ul>
-						{% endif %} #}
-
-					{# </div>
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div> #}
-
-	{# liste déroulante des categories #}
-	{# pour pouvoir avoir la liste fonctionnelle sur toutes mes vues
-		et éviter une répétition du code dans tous les controlleurs
-	je crée un service qui fournit les catégories paent que j'injecte dans mes controlleurs #}
-	{# <li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle text-orange" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		Catalogue
-	</a> #}
-	{# <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		{% for categorie in categories %}
-		<a class="dropdown-item" href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}">
-		{{ categorie.libelleCategorie }}
-		</a>
-		{% endfor %}
-	</div> #}
-	{# </li> #}
-	{# </li>
-		
-		</div>
-		
-		<div class="contenu_accueil">
-		
-		<h1 class="text-center mt-5">Village Green</h2>
-		
-	{# Barre de recherche #}
-		{# <form	class="form-inline my-2 my-lg-0 text-center">	<input	class="form-control-sm mr-sm-2"	type="search"	placeholder="recherche"	aria-label="Search">
-			<button	class="btn btn-outline-success my-2 my-sm-0"	type="submit">
-			 <i class="bi bi-question-lg"></i>
-			</button>
-		</form> #}
-
-{# test react filter pour la recherche #}
-{# <form onSubmit={handleSearch}>
-    <input
-        type="search"
-        placeholder="recherche"
-        aria-label="Search"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <button type="submit">
-        Recherche
-    </button>
-</form> #}
-
+	<div class="contenu">
+				
 		{# Caroussel des produits far #}
 		<div	class="container mt-5">
 		<div id="carousel" class="carousel carousel slide" data-bs-ride="carousel">

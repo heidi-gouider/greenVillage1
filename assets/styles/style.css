@@ -113,6 +113,7 @@ margin-top: 10vh;
       z-index: 2;
       /* opacity: 0.2; */
       box-shadow: 0 10px 10px black;
+      /* box-shadow: 0 10px 10px rgb(57, 83, 40); */
     }
   /* #navbarSupportedContent{
     background-color: #222222;

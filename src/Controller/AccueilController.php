@@ -18,7 +18,7 @@ class AccueilController extends AbstractController
         private $categorieRepository;
         private $produitRepository;
     
-        public function __construct(CategorieRepository $categorieRepository, ProduitRepository $produitRepository)
+        public function __construct(CategorieRepository $categorieRepository, ProduitRepository $produitRepository, AuthenticationUtils $authenticationUtils)
         {
             $this->categorieRepository = $categorieRepository;
             $this->produitRepository = $produitRepository;
@@ -29,15 +29,20 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
-         //on appelle la fonction `findAll()` du repository de la classe `Categorie` afin de récupérer toutes les categories de la base de données;
-        //  $categories = $this->categorieRepository->findAll();
+        // Récupérer les catégories principales (parent_categorie est null)
          $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
-        //  $categorie = $this->categorieRepository->find($parent_categorie_id);
-         $produitsAleatoires = $this->produitRepository->findAll();
+        // Utilisation du QueryBuilder pour récupérer les sous-catégories
+        //  $sousCategories = $this->categorieRepository->find(['parent_categorie' => ['neq' => null]]);
+         $sousCategories = $this->categorieRepository->createQueryBuilder('c')
+        ->where('c.parent_categorie IS NOT NULL')
+        ->getQuery()
+        ->getResult();
 
+        // Produits aléatoires
+         $produitsAleatoires = $this->produitRepository->findAll();
         // mélange les produits
         shuffle($produitsAleatoires);
-        // $sousCategories = $categories->getCategories();
+
 
         // pour la modal
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -48,7 +53,7 @@ class AccueilController extends AbstractController
             // 'controller_name' => 'AccueilController',
             'categories' => $categories,
             'produitsAleatoires' => $produitsAleatoires,
-            // 'sous_categories' => $sousCategories,
+            'sous_categories' => $sousCategories,
             // 'parent_categorie' => $parentCategorie,
             'error' => $error,
             'last_username' => $lastUsername,
@@ -57,25 +62,31 @@ class AccueilController extends AbstractController
 
     // les categories parent
     #[Route('/categorie', name: 'app_categorie')]
-    public function categorie(): Response
+    public function categorie(AuthenticationUtils $authenticationUtils): Response
     {
         // Récupérer les catégories parentes
         $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
         // $categories = $this->categorieRepository->findAll();
         // dd($categories);
+                // pour la modal
+                $error = $authenticationUtils->getLastAuthenticationError();
+                $lastUsername = $authenticationUtils->getLastUsername();
+            
         return $this->render('accueil/categorie.html.twig', [
             // return $this->render('base.html.twig', [
             'defaultImage' => 'default-image.jpg',
-            'categories' => $categories
+            'categories' => $categories,
+            'error' => $error,
+            'last_username' => $lastUsername,
+
         ]);
     }
 
     // les sous-categories
     #[Route('/sous_categorie/{parent_categorie_id}', name: 'app_sous_categorie')]
-    public function sousCategorie(int $parent_categorie_id): Response
+    public function sousCategorie(int $parent_categorie_id, AuthenticationUtils $authenticationUtils): Response
     {
         // je récupère la categorie parent
-        // $categories = $this->categorieRepository->find($parent_categorie_id);
         $categories = $this->categorieRepository->find($parent_categorie_id);
         //dd($parentCategorie);
 
@@ -83,12 +94,18 @@ class AccueilController extends AbstractController
         $sousCategories = $categories->getCategories();
         // dd($categories);
         // dd($sousCategories);
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
 
         return $this->render('accueil/sousCategorie.html.twig', [
             // 'controller_name' => 'AccueilController',
             'categories' => $categories,
             'sous_categories' => $sousCategories,
             // 'parent_categorie' => $parentCategorie,
+            'error' => $error,
+            'last_username' => $lastUsername,
+
         ]);
     }
 

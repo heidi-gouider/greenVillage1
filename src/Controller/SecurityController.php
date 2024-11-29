@@ -28,9 +28,15 @@ class SecurityController extends AbstractController
         $email = $authenticationUtils->getLastUsername();
         // $email = $authenticationUtils->getLastEmail();
 
+                // pour la modal
+                $lastUsername = $authenticationUtils->getLastUsername();
+            
+
         return $this->render('security/login.html.twig', [
             'last_email' => $email,
-            'error' => $error
+            'error' => $error,
+            'last_username' => $lastUsername,
+
         ]);
     }
 

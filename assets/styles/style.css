@@ -29,7 +29,8 @@ body {
 
 
 .banniere {
-  margin-top: 21vh;
+  /* margin-top: 21vh; */
+  margin-top: 19vh;
   height: 6vh;
   font-size: 1rem;
   color: blue;
@@ -104,7 +105,8 @@ margin-top: 10vh;
   
   #menu {
       height: 20vh;
-      background-color: rgba(29, 28, 28, 0.7);
+      /* background-color: rgba(29, 28, 28, 0.7); */
+      background-color: rgba(102, 97, 97, 0.7);
           /* background-color: #222222; */
     /* background-image: url('../IMG/fond.webp'); 
     background-size: cover;  */
@@ -112,8 +114,7 @@ margin-top: 10vh;
       /* box-shadow: 0px 5px 10px #42031f; */
       z-index: 2;
       /* opacity: 0.2; */
-      box-shadow: 0 10px 10px black;
-      /* box-shadow: 0 10px 10px rgb(57, 83, 40); */
+      /* box-shadow: 0 10px 10px black; */
     }
   /* #navbarSupportedContent{
     background-color: #222222;

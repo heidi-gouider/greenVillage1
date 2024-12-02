@@ -55,12 +55,12 @@
 
 {# Menu de navigation avec uniquement les sous-catégories #}
 <li class="nav-item active mx-3">
-    <div class="dropdown">
-        <a class="nav-link text-orange" href="{{ path('app_categorie') }}" title="Liste des produits"
-            id="dropdownCatalogue" data-bs-toggle="dropdown" aria-expanded="false">
+    {# <div class="dropdown"> #}
+        <a class="nav-link text-orange" href="{{ path('app_categorie') }}" title="Liste des produits">
+            {# id="dropdownCatalogue" data-bs-toggle="dropdown" aria-expanded="false"> #}
             Catalogue
         </a>
-        {% if sous_categories is not empty %}
+        {# {% if sous_categories is not empty %}
             <ul class="dropdown-menu" aria-labelledby="dropdownCatalogue">
                 {% for sousCategorie in sous_categories %}
                     {% if sousCategorie.parentCategorie is not null %}
@@ -72,9 +72,9 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-        {% endif %}
+        {% endif %} #}
 
-    </div>
+    {# </div> #}
 </li>
 
 

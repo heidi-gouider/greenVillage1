@@ -13,8 +13,15 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
-    #esi: true
-    #fragments: true
+    # Pour éviter les problèmes liés à une sérialisation trop profonde
+    # serializer:
+    #     enabled: true
+    #     default_context:
+    #         enable_max_depth: true
+
+
+    esi: true
+    fragments: true
     php_errors:
         log: true
 

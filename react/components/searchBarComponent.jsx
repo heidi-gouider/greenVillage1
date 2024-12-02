@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 const SearchBar = ({ categories = [], onSearch }) => {
+
   // Stocke la valeur de recherche de l'utilisateur.
   const [query, setQuery] = useState("");
   // contient les categories correspondant à la requête de recherche.
@@ -26,7 +29,7 @@ const SearchBar = ({ categories = [], onSearch }) => {
 
     setFilteredCategories(results);
     // Vérification du résultat de la recherche dans la console
-    // console.log("Résultat de recherche :", results);
+    console.log("Résultat de recherche :", results);
   };
 
   // Fonction appelée lors du clic sur l'icône de recherche
@@ -39,6 +42,7 @@ const SearchBar = ({ categories = [], onSearch }) => {
   };
 
   return (
+    // <Router>
     <div>
     <form onSubmit={handleSubmit}
     //  style={{ display: 'flex', alignItems: 'center' }}
@@ -49,8 +53,10 @@ const SearchBar = ({ categories = [], onSearch }) => {
         //   backgroundColor: "black",
           backgroundColor: "white",
           color: "black",
-          padding: "10px 40px 10px 20px",
+          // padding: "10px 40px 10px 20px",
           borderRadius: "5px",
+          // width: "5vh",
+          width: "200px",
         //   border: "none",
         }}
         value={query}
@@ -83,14 +89,17 @@ const SearchBar = ({ categories = [], onSearch }) => {
           <li className="list-group-item">Aucune catégorie trouvée</li>
         ) : null}
 
-        {/* Si `query` est non vide, afficher les résultats filtrés */}
+
+         {/* Si `query` est non vide, afficher les résultats filtrés  */}
         {query &&
-          filteredCategories.map((categorie) => (
-            // {filteredCategories.map((categorie) => (
+          filteredCategories.map((categorie) => ( 
             <li key={categorie.id} className="list-group-item">
+            {/* <Link to={`/produits/${categorie.id}`} className="text-decoration-none"> */}
               {categorie.libelle_categorie}
+              {/* </Link> */}
             </li>
           ))}
+          
       </ul>
       </div>
   );

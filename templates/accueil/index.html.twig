@@ -45,20 +45,22 @@
 			</div>
 
     {# <p>barre de recherche et un tableau de app2</p> #}
+	<p>barre de recherche de app1</p>
 {# <div id="search-component-root"></div> #}
+{# <div id="app-root"></div> #}
 <div id="app1-root"></div>
 
 
 	<div class="contenu">
 				
 		{# Caroussel des produits far #}
-		<div	class="container mt-5">
-		<div id="carousel" class="carousel carousel slide" data-bs-ride="carousel">
-			<div	class="carousel-inner">
+		{# <div	class="container mx-auto"> #}
+		<div id="carousel" class="carousel carousel slide" {#data-bs-ride="carousel" #} data-bs-touch="false">
+			<div	class="carousel-inner mb-5">
 				{# {% set produitsAleatoires = produits|shuffle %} #}
 
 				<!-- Première diapositive active avec 3 images -->
-					<div	class="carousel-item active mx-auto"	data-bs-interval="7200">	<div	class="row">
+					<div	class="carousel-item active mx-auto"	{# data-bs-interval="7200" #}>	<div	class="row">
 						{% for produit in produitsAleatoires|slice(0, 3) %}
 							<div	class="col-4 d-flex justify-content-center">
 								<div	class="card m-2"	style="width: 10rem;">
@@ -75,7 +77,7 @@
 					</div>
 
 					<!-- Deuxième diapositive avec 3 images -->
-					<div	class="carousel-item"	data-bs-interval="7200">
+					<div	class="carousel-item"	{# data-bs-interval="7200" #}>
 						<div	class="row">
 							{% for produit in produitsAleatoires|slice(3, 3) %}
 								<div	class="col-4 d-flex justify-content-center">
@@ -96,7 +98,8 @@
 						<!-- Troisième diapositive avec 3 images -->
 						<!-- Contrôles précédent et suivant -->
 						<button	class="carousel-control-prev"	type="button"	data-bs-target="#carousel"	data-bs-slide="prev">
-							<span	class="carousel-control-prev-icon"	aria-hidden="true"></span>
+							{# <span	class="carousel-control-prev-icon"	aria-hidden="true"></span> #}
+							<i class="bi bi-arrow-left-circle-fill" style="font-size: 2rem; color: black;"></i>
 							<span	class="visually-hidden">
 								Previous
 							</span>
@@ -109,6 +112,9 @@
 						</button>
 					</div>
 				</div>
+				    			<hr style="border: none; border-top: 2px solid #000; margin: 20px 0;">
+
+		<div	class="container mx-auto">
 
 				{# Barre de recherche #}
 
@@ -145,7 +151,7 @@
 				{# <div class="mt-5"> #}
 
 				{# Affichage des top ventes #}
-					<h2	class="text-center	mt-5">	Nos catégories
+					<h2	class="text-center	mt-8">	Nos catégories
 				</h2>
 				<div	class="row	mt-4">
 					<div	class="d-flex flex-wrap justify-content-around">

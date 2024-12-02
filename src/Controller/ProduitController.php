@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ProduitController extends AbstractController
 {
@@ -35,15 +36,20 @@ class ProduitController extends AbstractController
     #[Route('/produit', name: 'app_produit')]
 
 
-    public function index(): Response
+    public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $produits = $this->produitRepository->findAll();
 
+        // pour la modal
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+            
         
         return $this->render('produit/index.html.twig', [
             'controller_name' => 'ProduitController',
             'produits' => $produits,
-
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 
@@ -104,13 +110,17 @@ class ProduitController extends AbstractController
 
             // les instruments par categorie
     #[Route('/produits/{id}', name: 'app_produits_categorie')]
-    public function produitsCategorie(int $id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository): Response
+    public function produitsCategorie(int $id, CategorieRepository $categorieRepository, ProduitRepository $produitRepository, AuthenticationUtils $authenticationUtils): Response
     {
         // je récupère la categorie correspondant à l'id
         $categorie = $this->categorieRepository->find($id);
         // $categorie = $this->categorieRepository->findAll();
-
         // dd($categorie);
+
+        // pour la modal
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+        
 
     // Vérifier la catégorie existe
     // if (!$categorie) {
@@ -123,16 +133,24 @@ class ProduitController extends AbstractController
             'categories' => $categorie,
             'libelle_categorie' => $categorie->getLibelleCategorie(),
             'produits' => $produits,
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 
         // le détail d'un produit
         #[Route('/detail_produit/{id}', name: 'app_detail_produit')]
-        public function detailProduit(int $id, ProduitRepository $produitRepository): Response
+        public function detailProduit(int $id, ProduitRepository $produitRepository, AuthenticationUtils $authenticationUtils): Response
         {
             // $produits = $this->produitRepository->findAll();
             $produit = $this->produitRepository->find($id);
             // dd($produits);
+
+            // pour la modal
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+
+
             // S'assurer que le produit existe
             if (!$produit) {
                 throw $this->createNotFoundException('Le produit n\'existe pas.');
@@ -140,6 +158,8 @@ class ProduitController extends AbstractController
             return $this->render('accueil/detailProduit.html.twig', [
                 // 'controller_name' => 'AccueilController',
                 'produit' => $produit,
+                'error' => $error,
+                'last_username' => $lastUsername,    
             ]);
         }
     

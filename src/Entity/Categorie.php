@@ -13,9 +13,12 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 #[ApiResource(
+    forceEager: false,
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
 )]
@@ -36,31 +39,34 @@ class Categorie
     #[Groups(['read'])]
     private ?string $description_categorie = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories', fetch: 'EAGER')]
     // si une categorie parente est supprimée toutes les categories enfants le champ parent =null
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     #[Groups(['read'])]
+    #[MaxDepth(1)]
     private ?self $parent_categorie = null;
 
     /**
      * @var Collection<int, self>
      */
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent_categorie')]
-    #[Groups(['read'])]
+    #[Groups(['read', 'read_categories'])]
+    #[MaxDepth(1)]
     private Collection $categories;
 
     /**
      * @var Collection<int, Produit>
      */
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie', cascade: ['persist'])]
-    #[Groups(['read'])]
+    #[Groups(['read', 'read_produits'])]
+    #[MaxDepth(1)]
     private Collection $produits;
 
     /**
      * @var Collection<int, Produit>
      */
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'parentCategorie')]
-    #[Groups(['read', 'write'])]
+    // #[Groups(['read'])]
     private Collection $produit;
 
     #[ORM\Column(length: 255, nullable: true)]

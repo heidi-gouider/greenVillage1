@@ -33,7 +33,6 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //     this.classList.toggle("bi bi-eye");
 //     this.classList.toggle("bi bi-eye-slash");
 // });
-import './bootstrap.js';
 
 // document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
 //     const confirmPasswordField = document.getElementById("confirmPasswordField");
@@ -44,9 +43,7 @@ import './bootstrap.js';
 //     this.classList.toggle("bi bi-eye");
 //     this.classList.toggle("bi bi-eye-slash");
 // });
-import './styles/app.css';
 
-console.log('Ce log provient de assets/app.js - bienvenue sur AssetMapper! 🎉');
 
 // registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/), application);
 

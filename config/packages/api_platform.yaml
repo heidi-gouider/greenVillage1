@@ -1,25 +1,32 @@
 api_platform:
     title: Hello API Platform
     version: 1.0.0
-    formats:
-        jsonld: ['application/ld+json']
-        json: ['application/json']
-        html: ['text/html']
-    docs_formats:
-        jsonld: ['application/ld+json']
-        jsonopenapi: ['application/vnd.openapi+json']
-        html: ['text/html']
+    # formats:
+    #     jsonld: ['application/ld+json']
+    #     json: ['application/json']
+    #     html: ['text/html']
+    # docs_formats:
+    #     jsonld: ['application/ld+json']
+    #     jsonopenapi: ['application/vnd.openapi+json']
+    #     html: ['text/html']
     defaults:
         stateless: true
+        # stateless: false
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
-        extra_properties:
-            standard_put: true
-            rfc_7807_compliant_errors: true
-    keep_legacy_inflector: false
-    use_symfony_listeners: true
+    #     extra_properties:
+    #         standard_put: true
+    #         rfc_7807_compliant_errors: true
+    # keep_legacy_inflector: false
+    # use_symfony_listeners: true
+        serialization_groups: ['read', 'write']
 
+    #  définir un maximum de jointures autorisées par requête :
+    eager_loading:
+        max_joins: 100
+        # fetch_partial: true
+        # enabled: false
     # Ajout du mapping des entités
-    mapping:
-        paths:
-            - '%kernel.project_dir%/src/Entity'
+    # mapping:
+    #     paths:
+    #         - '%kernel.project_dir%/src/Entity'

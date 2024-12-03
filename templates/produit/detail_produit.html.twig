@@ -4,18 +4,54 @@
 {% endblock %}
 
 {% block body %}
+	{{ encore_entry_script_tags('app1') }}
+
+		{% include "partials/banniere.html.twig" %}
+
+	{# Banniere categories #}
+
+	{# <div class="row align-items-center bg-dark banniere mx-auto text-center">
+		{% for  categorie in categories %}
+			{% if categorie.parentCategorie is null %}
+				<div class="col">
+					<div class="dropdown">
+						<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold" id="dropdown{{ categorie.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+							{{ categorie.libelleCategorie}}
+						</a>
+						{% if categorie.categories is not empty %}
+							<ul class="dropdown-menu">
+								{% for sousCategorie in sous_categories %}
+									<li>
+										<a
+											class="dropdown-item" href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id, 'sous_categorie_id': sousCategorie.id}) }}" class="dropdown-item">
+											{{ sousCategorie.libelleCategorie }}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	<div id="app1-root"></div> #}
+
+
 	<div class="contenu">
+
 		<h1 class="row col-12 text-center">{{ produit.libelleProduit }}</h1>
 
+		<div class="container mx-auto">
 
 
 			<!-- <a href="add_form.php" class="btn btn-primary float-end">Ajouter</a> -->
-				{# <div class="col-md-6 mb-4">  #}
-				<div class="col-10 mx-auto"> 
+			{# <div class="col-md-6 mb-4">  #}
+				<div class="col-10 mx-auto"> <div class="d-flex flex-wrap justify-content-around">
 
-				<div class="d-flex flex-wrap justify-content-around">
-
-					{% for produit in produits %}
+					{# {% for produit in produits %} #}
 
 						<div class="card m-2" style="width: 18rem;">
 							<img class="w-50 card-img-top mx-auto" src="{{ asset(produit.photo) }}" alt="{{ produit.libelleProduit }}">
@@ -24,36 +60,40 @@
 									{{ produit.libelleProduit }}</h5>
 								<p class="content bg-body">
 									{{ produit.prixAchatHt}}€
-						{# </form> #}
-						{% if produit.quantiteStock > 0 %}
-							{# <button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3"  href="{{ path('commande_ajout', {id: produit.produit.id})}}" >
-								Ajouter à la commande #}
-									{# vers panier #}
-									<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('panier_ajout', {id: produit.id})}}"> ajouter au panier
-									{# <i class="bi bi-basket"> #}
-									</button>
+									{# </form> #}
+									{% if produit.quantiteStock > 0 %}
+										{# <button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3"  href="{{ path('commande_ajout', {id: produit.produit.id})}}" >
+																		Ajouter à la commande #}
+										{# vers panier #}
+											<button type="submit" class=" d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('panier_ajout', {id: produit.id})}}"> ajouter au panier
+											{# <i class="bi bi-basket"> #}
+										</button>
 
-								 {# <a class="d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('commande_ajout', { 'id': produit.id }) }}">
-                                Ajouter à la commande
-                            </a> #}
-								{# <i class="bi bi-basket"></i> #}
-							</button>
-							{% else %}
-                                        <p class="text-danger text-center">Dsl stock Epuisé ...</p>
-                                    {% endif %}
-							{# </form> #}
+										{# <a class="d-block mt-5 btn btn-success mx-auto mb-3" href="{{ path('commande_ajout', { 'id': produit.id }) }}">
+										                                Ajouter à la commande
+										                            </a> #}
+										{# <i class="bi bi-basket"></i> #}
+									</button>
+								{% else %}
+									<p class="text-danger text-center">Dsl stock Epuisé ...</p>
+								{% endif %}
+								{# </form> #}
+							</div>
 						</div>
+					{# {% endfor %} #}
 				</div>
-			{% endfor %}
-		</div>
 
 				<li class="nav-item text-orange">
-		<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
-	</li>
+					<a class="nav-link text-center" href="{{ path('app_categorie') }}">Retour au catalogue</a>
+				</li>
 
+
+			</div>
 
 		</div>
-	{# </div> #}
-{# </main> #}
-</div>
-{# {% include "partials/footer.php" %}{% endblock %} #}
+		{# </main> #}
+
+	</div>
+			{% include "partials/footer.html.twig" %}
+
+{% endblock %}

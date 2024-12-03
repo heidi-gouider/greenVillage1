@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 // import App1 from './app.jsx';
 // import App1 from './app1';
 import App1 from '../app1/app.jsx';
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 
 import SearchBar from '../components/searchBarComponent.jsx';
 
@@ -38,9 +38,9 @@ const categories = []; // charger les catégories depuis l'API
 // Créez votre application principale ici
 ReactDOM.createRoot(document.getElementById('app1-root')).render(
     <React.StrictMode>
-        <BrowserRouter>
+        {/* <BrowserRouter> */}
         <App1 categories={categories} /> {/* Passez les catégories ici si nécessaire */}
-        </BrowserRouter>
+        {/* </BrowserRouter> */}
     </React.StrictMode>
 
 );

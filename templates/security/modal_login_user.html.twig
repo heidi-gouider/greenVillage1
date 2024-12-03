@@ -1,0 +1,66 @@
+{% block body %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      						<h1 class="h3 mb-5 font-weight-normal">Connectez vous</h1>
+
+        						<label class="mb-3" for="inputEmail">Email</label>
+						<input type="email" {#value="{{ last_email }}"#} name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						<label class="mt-4 mb-3" for="inputPassword">Mot de passe</label>
+						<div class="input-group mb-4">
+							<input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+							<span class="input-group-text">
+								<i class="bi bi-eye-slash" name="pass" type="text" id="pass" style="cursor: pointer" OnClick="changer"></i>
+						 	</span>
+					 	</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+						<div class="checkbox mb-3 text-start">
+							<label>
+								<input type="checkbox" name="_remember_me">
+								Se souvenir de moi
+							</label>
+						</div>
+						<div>
+							<a class="text-decoration-underline"  href="{{ path('app_forgot_password_request') }}">
+								Mot de passe oublié ?
+							</a>
+						</div>
+						{# <hr class="my-2"> <!-- Ligne horizontale --> #}
+					<div class="row ">
+						<div class="d-grid gap-3 col-4 mx-auto mb-3">
+							<button class="submit" type="submit">
+								Connexion
+							</button>
+						</div>
+					</div>
+					<hr class="my-2"> <!-- Ligne horizontale -->
+						<div class="d-grid  col-6 mx-auto mb-5">
+							Je n'ai pas de compte ?
+							{# <a class="submit" href="{{ path('app_register') }}">
+								Créer un compte
+							</a> #}
+							<a  href="{{ path('app_register') }}" class="text-decoration-underline mt-3">
+							Créer un compte
+						</a>
+						</div>
+                        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

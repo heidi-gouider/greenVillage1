@@ -9,7 +9,7 @@
 		{% endblock %} -->
 
 {# <body> #}
-    <footer class="sticky-bottom footer text-white">
+    <footer class="sticky-bottom footer">
         <div class="container">
             <div class="row justify-content-end custom-line">
                 <div class="col-md-6 text-center mt-3">
@@ -29,22 +29,33 @@
 								{# Contact #} <i class="bi bi-envelope-at"></i>
 							</a>
 						</li>
+                        {# test pour modale connexion admin #}
+						<li class="nav-item active">
+							<a href="#" id="openModalButton" class="nav-link text-orange" title="Admin" >
+								{# modal #} <i class="bi bi-gear"></i>
+							</a>
+						</li>
 
-                    </ul>
-                    <p class="mt-5">&copy; 2024 Green Village Record. Tous droits réservés.</p>
-                </div>
-                <div class="col-md-4">
-                    <ul class="text-end">
-                       <li class="text-sm">
-                            <a {# href="{{ path('politique') }}" #}>Politique de confidentialité</a></li>
-                        <li class="text-sm"> 
-                            <a {# href="{{ path ('conditions') }}" #}>>Conditions d'utilisation</a></li>
-                        <li class="text-sm">
-                            <a {# href="{{ path ('accessibilite') }}" #}>>Accessibilité</a></li> <!-- Lien vers la page d'accessibilité -->
+
                     </ul>
                 </div>
             </div>
-        </div>
+                <div class="col-md-4">
+                    {# <ul style="width: 30%"> #}
+                    <ul>
+                       <li>
+                            <a style="font-size: 20px, width: 25%"{# href="{{ path('politique') }}" #}>Politique de confidentialité</a></li>
+                        <li> 
+                            <a style="font-size: 20px"{# href="{{ path ('conditions') }}" #}>Conditions d'utilisation</a></li>
+                        <li>
+                            <a style="font-size: 20px"{# href="{{ path ('accessibilite') }}" #}>Accessibilité</a></li> <!-- Lien vers la page d'accessibilité -->
+                    </ul>
+                </div>
+                <p class="mt-5 text-end">&copy; 2024 Green Village Record. Tous droits réservés.</p>
+            {# </div> #}
+        {# </div> #}
+
+
         <!-- <script type="module" src="main.js"></script> -->
 
         <!-- <h4>Nous contacter</h4> -->
@@ -66,6 +77,8 @@
         </div>
 
     </footer> -->
+    							    {% include "security/modal_login_admin.html.twig" with {'error': error, 'last_username': last_username} %}
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     

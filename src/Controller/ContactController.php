@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class ContactController extends AbstractController
 {
@@ -73,6 +75,9 @@ class ContactController extends AbstractController
             $lastUsername = $authenticationUtils->getLastUsername();
         
         }
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('contact/index.html.twig', [
             //'controller_name' => 'ContactController',
             'form' => $form,

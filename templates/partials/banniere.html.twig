@@ -1,6 +1,5 @@
-			<div class="row align-items-center bg-dark banniere mx-auto text-white">
+			{# <div class="row align-items-center bg-dark banniere mx-auto text-white">
 				{% for  categorie in categories %}
-					{# afficher uniquement les categories parent #}
 					{% if categorie.parentCategorie is null %}
 						<div class="col">
 							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold">
@@ -9,5 +8,43 @@
 						</div>
 					{% endif %}
 				{% endfor %}
+			</div> #}
+{{ encore_entry_script_tags('app1') }}
+
+
+	{# Banniere categories #}
+
+				<div class="row align-items-center bg-dark banniere mx-auto text-center">
+				{% for  categorie in categories %}
+					{# afficher uniquement les categories parent #}
+					{% if categorie.parentCategorie is null %}
+						<div class="col">
+						<div class="dropdown">
+							<a href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id}) }}" class="text-white font-weight-bold"
+							id="dropdown{{ categorie.id }}" 
+                        data-bs-toggle="dropdown" aria-expanded="false">
+								{{ categorie.libelleCategorie}}
+							</a>
+						{# Afficher les sous-catégories si elles existent "code en comment" #}
+						{% if categorie.categories is not empty %}
+							<ul	class="dropdown-menu">
+								{% for sousCategorie in sous_categories %}
+									<li>
+										<a	class="dropdown-item"	href="{{ path('app_sous_categorie', {'parent_categorie_id': categorie.id, 'sous_categorie_id': sousCategorie.id}) }}"	class="dropdown-item">
+											{# {{ categorie.libelleCategorie }} #}
+											{{ sousCategorie.libelleCategorie }}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+
+                </div>
+						</div>
+					{% endif %}
+				{% endfor %}
 			</div>
+
+<div id="app1-root"></div>
+
 

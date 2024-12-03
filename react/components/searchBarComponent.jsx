@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 const SearchBar = ({ categories = [], onSearch }) => {
 
@@ -42,67 +42,80 @@ const SearchBar = ({ categories = [], onSearch }) => {
   };
 
   return (
-    // <Router>
-    <div>
-    <form onSubmit={handleSubmit}
-    //  style={{ display: 'flex', alignItems: 'center' }}
-     >
-      <input
-        type="text"
-        style={{
-        //   backgroundColor: "black",
-          backgroundColor: "white",
-          color: "black",
-          // padding: "10px 40px 10px 20px",
-          borderRadius: "5px",
-          // width: "5vh",
-          width: "200px",
-        //   border: "none",
-        }}
-        value={query}
-        onChange={handleSearch}
-        placeholder="Recherche"
-        className="form-control"
-      />
+    <>
+      {/* Conteneur avec flexbox pour centrer */}
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',  // Centrer horizontalement
+      alignItems: 'center',      // Centrer verticalement
+      // height: '100vh'             // Prendre toute la hauteur de la fenêtre
+    }}>
+        <form onSubmit={handleSubmit} style={{ position: "relative", width: "250px" }}>
+          {/* <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> */}
 
-{/* <i className="bi bi-search"></i> */}
+          {/* Input avec un bouton intégré */}
+          <div style={{ position: "relative" }}>
+            <input
+              type="text"
+              style={{
+                //   backgroundColor: "black",
+                backgroundColor: "white",
+                color: "black",
+                padding: "10px 40px 10px 10px",
+                borderRadius: "5px",
+                // width: "5vh",
+                width: "200px",
+                // border: "none",
+              }}
+              value={query}
+              onChange={handleSearch}
+              placeholder="Recherche"
+              className="form-control"
+            />
 
-<button 
-                type="submit" 
-                style={{ 
-                    background: "transparent", 
-                    border: "none", 
-                    cursor: "pointer", 
-                    // marginLeft: "-40px" // Ajustez pour qu'il soit collé à l'input
-                }}
-                aria-label="Rechercher"
-                
+            {/* Bouton de recherche positionné à l'intérieur de l'input */}
+            <button
+              type="submit"
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+              }}
+              aria-label="Rechercher"
             >
-                {/* <i className="fa fa-search" aria-hidden="true" style={{ fontSize: "20px" }}></i> */}
-                <i className="bi bi-search"></i>
+              <i className="bi bi-search" aria-hidden="true" style={{ fontSize: "16px" }}></i>
             </button>
+          </div>
+
         </form>
+        </div>
 
-      <ul className="list-group mt-3">
-        {/* Si `query` est présent mais qu'il n'y a pas de résultats, afficher un message  */}
-        {query && filteredCategories.length === 0 ? (
-          <li className="list-group-item">Aucune catégorie trouvée</li>
-        ) : null}
+        <ul className="list-group mt-3">
+          {/* <ul className="dropdown-menu show" style={{ position: "absolute", width: "100%", zIndex: 1000 }}> */}
+
+          {/* Si `query` est présent mais qu'il n'y a pas de résultats, afficher un message  */}
+          {query && filteredCategories.length === 0 ? (
+            <li className="list-group-item">Aucune catégorie trouvée</li>
+          ) : null}
 
 
-         {/* Si `query` est non vide, afficher les résultats filtrés  */}
-        {query &&
-          filteredCategories.map((categorie) => ( 
-            <li key={categorie.id} className="list-group-item">
-            {/* <Link to={`/produits/${categorie.id}`} className="text-decoration-none"> */}
-              {categorie.libelle_categorie}
-              {/* </Link> */}
-            </li>
-          ))}
-          
-      </ul>
-      </div>
-  );
+          {/* Si `query` est non vide, afficher les résultats filtrés  */}
+          {query &&
+            filteredCategories.map((categorie) => (
+              <a key={categorie.id} className=" dropdown-item"
+
+                href={`https://127.0.0.1:8000/produits/${categorie.id}`}>
+                {/* </a> */}
+                {categorie.libelle_categorie}
+              </a>
+            ))}
+        </ul>
+      </>
+      );
 };
 
-export default SearchBar;
+      export default SearchBar;

@@ -145,7 +145,13 @@ class ProduitController extends AbstractController
             // $produits = $this->produitRepository->findAll();
             $produit = $this->produitRepository->find($id);
             // dd($produits);
-
+            $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+            // Utilisation du QueryBuilder pour récupérer les sous-catégories
+             $sousCategories = $this->categorieRepository->createQueryBuilder('c')
+            ->where('c.parent_categorie IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    
             // pour la modal
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
@@ -156,8 +162,11 @@ class ProduitController extends AbstractController
                 throw $this->createNotFoundException('Le produit n\'existe pas.');
             }
             return $this->render('accueil/detailProduit.html.twig', [
+                // return $this->render('produit/detail_produit.html.twig', [
                 // 'controller_name' => 'AccueilController',
                 'produit' => $produit,
+                'categories' => $categories,
+                'sous_categories' => $sousCategories,
                 'error' => $error,
                 'last_username' => $lastUsername,    
             ]);

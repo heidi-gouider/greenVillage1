@@ -59,7 +59,10 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::section('Produits');
         // yield MenuItem::section('Clients');
         // yield MenuItem::section('Admin');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
+        // Ajouter un lien vers l'accueil du site
+        yield MenuItem::linkToUrl('Retour à l\'accueil', 'fas fa-arrow-left', $this->generateUrl('app_accueil'));
 
          // Création d'une section unique pour les produits et les catégories
     yield MenuItem::section('Produits & Catégories');

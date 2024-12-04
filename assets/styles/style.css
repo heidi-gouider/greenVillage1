@@ -33,9 +33,20 @@ a {
   /* Or */
   color: #ffd700 !important;
 }
-.navbar-nav .nav-link:hover {
-  color: #ffcc00 !important; /* Jaune foncé au survol */
-}
+
+/* Couleur fond */
+  /* Gris-bleu clair transparent */
+  /* background-color: rgba(70, 130, 180, 0.7); */
+  /* gris clair*/
+  /* background-color: rgba(102, 97, 97, 0.7); */
+  /* violet */
+  /* background-color: rgba(148, 0, 211, 0.6); */
+  /* grid foncé */
+  /* background-color: rgba(45, 45, 45, 0.8); */
+  /* Beige clair */
+  /* background-color: rgba(245, 245, 220, 0.9); */
+
+
 /* ******** toute les pages */
 .contenu {
   /* background-color: #222222; */
@@ -165,60 +176,68 @@ a {
 
 
 /* ------------------------------------------------------------------------------------------------------------ */
-/* Page base */
+/* NAVIGATION */
 
 /* LE HEADER INCLU DANS TOUTES LES PAGES  */
-
-/* penser à ajouter une 'box-shadow' au bottom de la .nav et voir pour le bg 
-  vérifier s'il n'est pas plus judicieux de nommer des classes perso au cas où il y aurait pls nav hors le header*/
 
 #menu {
   height: 15vh;
   /* Charcoal avec transparence */
-  background-color: rgba(54, 69, 79, 0.8);
-  /* Gris-bleu clair transparent */
-  /* background-color: rgba(70, 130, 180, 0.7); */
-  /* gris clair*/
-  /* background-color: rgba(102, 97, 97, 0.7); */
-  /* violet */
-  /* background-color: rgba(148, 0, 211, 0.6); */
-  /* grid foncé */
-  /* background-color: rgba(45, 45, 45, 0.8); */
-  /* Beige clair */
-  /* background-color: rgba(245, 245, 220, 0.9); */
+  /* background-color: rgba(54, 69, 79, 0.8); */
+
+  /* background-color: rgba(221, 234, 243, 0.8); */
+  background-color: rgba(238, 244, 250, 0.8);
+
+
+    /* background-color: rgba(102, 97, 97, 0.7); */
+  /* background-color: rgba(243, 243, 225, 0.9); */
+
+  /* background-color: rgba(22, 80, 14, 0.8); */
   /* box-shadow: 0px 5px 10px #42031f; */
   z-index: 2;
   /* opacity: 0.2; */
-  /* box-shadow: 0 10px 10px black; */
+  box-shadow: 0 5px 10px black;
 }
 
 /* #navbarSupportedContent{
     background-color: #222222;
   } */
-  .navbar-nav {
-    width: 100%; /* Ajustez selon vos besoins */
-    margin: 0 auto; /* Centre l'élément */
+.navbar-nav {
+  width: 100%;
+  /* Ajustez selon vos besoins */
+  margin: 0 auto;
+  /* Centre l'élément */
 }
+
 /* .navbar-nav {
   max-width: 800px;  */
-  /* Réduit la largeur max */
-  /* margin: 0 auto;  */
-  /* Centre le contenu */
+/* Réduit la largeur max */
+/* margin: 0 auto;  */
+/* Centre le contenu */
 /* } */
 
-  /* .navbar-nav a{
+/* .navbar-nav a{
     color: #d2571d;
   } */
-  /* .nav-link{
+/* .nav-link{
     color: #d2571d;
   } */
-  .navbar-nav .nav-item {
-    margin: 0 10px; /* Évite que les éléments soient trop collés */
+
+  .navbar-nav .nav-link:hover {
+    /* color: #ffcc00 !important; */
+    color: #29492e !important;
+    /* Jaune foncé au survol */
+  }
+  
+.navbar-nav .nav-item {
+  margin: 0 10px;
+  /* Évite que les éléments soient trop collés */
 }
 
 .navbar-brand img {
-    max-width: 100%; /* Limite la taille du logo */
-    height: auto;
+  max-width: 100%;
+  /* Limite la taille du logo */
+  height: auto;
 }
 
 /* ----------------------------------------- */
@@ -242,6 +261,24 @@ a {
   height: auto;
 } */
 
+/* ------------------------------------------------------------------------------------------------------------ */
+/* SEARCHBAR */
+
+.list-group {
+  position: absolute;
+  /* top: 100%; */
+  left: 40%;
+  /* right: 0; */
+  background-color: rgb(72, 92, 65);
+  /* border: 1px solid #ccc; */
+  max-height: auto;
+  /* max-height: 200px; */
+  width: 20%;
+  overflow-y: auto;
+  z-index: 10; 
+}
+
+
 /* ----------------------------------------- */
 
 /*  CAROUSEL   */
@@ -250,20 +287,99 @@ a {
 background-color: #007bff;
 } */
 .carousel {
-  margin-bottom: 50px; /* Ajoute de l'espace en bas du carousel */
+  margin-bottom: 50px;
+  /* Ajoute de l'espace en bas du carousel */
 }
-.carousel-control-prev-icon,
+
+/* .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: rgba(0, 0, 0, 0.5);
-  /* Couleur pour les rendre visibles */
   background-size: 100%;
-  /* Assurez-vous qu'elles occupent tout l'espace */
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  /* Forme ronde */
+} */
+
+/* Style des contrôles */
+/* .carousel-controls {
+/* Cacher par défaut 
+  display: none; 
+} */
+
+/* Affiche les contrôles au survol du carousel */
+/* .carousel:hover .carousel-controls { */
+/* Affiche les contrôles uniquement au survol */
+/* display: block;
+} */
+
+/* Boutons sous le carousel */
+/* .carousel-controls button {
+  background-color: green;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+} */
+
+/* .carousel-controls button i {
+  font-size: 1.5rem;
+} */
+
+/* Boutons au centre sous le carousel */
+/* .carousel-controls {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+} */
+
+/* Ajout d'effets au survol des boutons */
+/* .carousel-controls button:hover {
+  background-color: darkgreen;
+  cursor: pointer;
+} */
+
+/* test bouttons */
+/* Positionnement des boutons à côté de l'image centrale */
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  /* Centré verticalement */
+  transform: translateY(-50%);
+  z-index: 2;
+  /* Devant les images */
+  background-color: transparent;
+  /* Pas de fond pour une meilleure intégration */
+  border: none;
+  font-size: 2rem;
+  color: green;
+  /* Couleur des icônes */
 }
 
+/* Bouton gauche */
+.carousel-control-prev {
+  left: 20%;
+  /* Ajustez pour placer le bouton à gauche de l'image centrale */
+}
+
+/* Bouton droit */
+.carousel-control-next {
+  right: 20%;
+  /* Ajustez pour placer le bouton à droite de l'image centrale */
+}
+
+/* Effet au survol */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  color: darkgreen;
+  cursor: pointer;
+}
 
 /* ----------------------------------------- */
 
@@ -480,10 +596,12 @@ form {
 /*  LE FOOTER  */
 
 .footer {
-    /* Gris */
+  /* Gris */
   /* background-color: rgba(29, 28, 28, 0.7); */
-    /* Beige clair */
-  background-color: rgba(245, 245, 220, 0.9);
+  /* Beige clair */
+  /* background-color: rgba(245, 245, 220, 0.9); */
+  background-color: rgba(238, 244, 250, 0.8);
+
 
   /* height: 30vh; */
   bottom: 0;
@@ -523,43 +641,109 @@ form {
     afficher le nom en texte du lien
     } */
 
-/* ////////////////menu déroulant mobile/////////// */
+/* ////////////////responsive petits écrans/////////// */
+
 @media (max-width: 767px) {
+
+  /* --------------------------------navbar------------------------------------ */
   .collapse.navbar-collapse {
+  /* .collapse { */
     /* background-color: rgba(226, 226, 226, 0.7);  */
     background-color: rgba(226, 226, 226);
     box-shadow: 0px 5px 10px #bf7113;
-    width: 60%;
+    width: 80%;
     /* transition: all 0.3s ease-in-out;    */
   }
 
   .navbar-nav .nav-link {
-    padding: 10px 15px; 
+    padding: 10px 15px;
     color: #333 !important;
     font-size: 16px;
   }
 
 
-.navbar-nav .nav-link:hover {
-  color: #ff5722 !important;
-  text-decoration: underline;
-}
+  .navbar-nav .nav-link:hover {
+    color: #ff5722 !important;
+    text-decoration: underline;
+  }
 
   .navbar-nav {
     /* margin-left: auto; */
-    margin: 0 auto; /* Centre la navigation horizontalement */
+    margin: 0 auto;
+    /* Centre la navigation horizontalement */
     text-align: end;
   }
 
   .navbar-toggler {
     margin-left: auto;
     /* Aligne le bouton de menu à droite */
-    padding: 10px;     /* Agrandit la zone cliquable */
-    border: none;      /* Supprime les bordures */
+    padding: 10px;
+    /* Agrandit la zone cliquable */
+    border: none;
+    /* Supprime les bordures */
   }
 
   .navbar-nav .nav-item {
     /* display: flex; */
-    align-items: center; /* Centre le texte et les icônes verticalement */
+    /* Centre le texte et les icônes verticalement */
+    align-items: center;
+  }
+
+  /* .navbar-nav .nav--item:hover {
+    color: #ff5722 !important;
+    text-decoration: underline;
+  } */
+
+  /* ---------------------------carousel------------------------------------------- */
+  .carousel-control-prev {
+    left: 5%;
+    /* Rapproche les boutons sur les petits écrans */
+  }
+
+  .carousel-control-next {
+    right: 5%;
+  }
+
+  .card {
+    max-width: 8rem;
+    /* Réduit la taille des cartes sur mobile */
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    /* Réduction de la taille du texte */
+  }
+
+  /* Affiche seulement 2 images par diapositive sur les écrans < 768px */
+  .carousel-item .col-sm-4:nth-child(3) {
+    display: none; /* Cache la 3e image */
+}
+
+}
+
+/* Pour les très petits écrans (téléphones) */
+@media (max-width: 576px) {
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    left: 3%;
+    /* Boutons encore plus rapprochés */
+    right: 3%;
+  }
+
+  .card {
+    max-width: 6rem;
+    /* Plus petite carte pour téléphones */
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    /* Réduction supplémentaire pour les titres */
+  }
+
+  /* Affiche seulement 1 image par diapositive sur les écrans < 576px */
+  .carousel-item .col-sm-4:nth-child(2),
+  .carousel-item .col-sm-4:nth-child(3) {
+      display: none; /* Cache la 2e et 3e image */
   }
 }

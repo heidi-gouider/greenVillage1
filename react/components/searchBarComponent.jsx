@@ -94,7 +94,7 @@ const SearchBar = ({ categories = [], onSearch }) => {
         </form>
         </div>
 
-        <ul className="list-group mt-3">
+        <ul className="list-group mt-3 text-center" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           {/* <ul className="dropdown-menu show" style={{ position: "absolute", width: "100%", zIndex: 1000 }}> */}
 
           {/* Si `query` est présent mais qu'il n'y a pas de résultats, afficher un message  */}
@@ -106,7 +106,7 @@ const SearchBar = ({ categories = [], onSearch }) => {
           {/* Si `query` est non vide, afficher les résultats filtrés  */}
           {query &&
             filteredCategories.map((categorie) => (
-              <a key={categorie.id} className=" dropdown-item"
+              <a key={categorie.id} 
 
                 href={`https://127.0.0.1:8000/produits/${categorie.id}`}>
                 {/* </a> */}

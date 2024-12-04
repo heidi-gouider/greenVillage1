@@ -50,14 +50,16 @@
 				
 		{# Caroussel des produits far #}
 		{# <div	class="container mx-auto"> #}
-		<div id="carousel" class="carousel carousel slide" {#data-bs-ride="carousel" #} data-bs-touch="false">
+		<div id="carousel" class="carousel carousel slide" {#data-bs-ride="carousel" #} {#data-bs-touch="false"#}>
 			<div	class="carousel-inner mb-5">
 				{# {% set produitsAleatoires = produits|shuffle %} #}
 
 				<!-- Première diapositive active avec 3 images -->
-					<div	class="carousel-item active mx-auto"	{# data-bs-interval="7200" #}>	<div	class="row">
+					<div	class="carousel-item active mx-auto"	{# data-bs-interval="7200" #}>	
+					<div	class="row">
 						{% for produit in produitsAleatoires|slice(0, 3) %}
-							<div	class="col-4 d-flex justify-content-center">
+							{# <div	class="col-4 d-flex justify-content-center"> #}
+							<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
 								<div	class="card m-2"	style="width: 10rem;">
 									<img	class="card-img-top zoom-img"	src="{{ produit.photo }}"	alt="">
 										<div	class="card-body">
@@ -68,6 +70,18 @@
 									</div>
 								</div>
 							{% endfor %}
+						<!-- Boutons de navigation -->
+                <button class="carousel-control-prev position-absolute" type="button" data-bs-target="#carousel"
+                    data-bs-slide="prev">
+                    <i class="bi bi-arrow-left-circle-fill"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next position-absolute" type="button" data-bs-target="#carousel"
+                    data-bs-slide="next">
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
 						</div>
 					</div>
 
@@ -75,7 +89,8 @@
 					<div	class="carousel-item"	{# data-bs-interval="7200" #}>
 						<div	class="row">
 							{% for produit in produitsAleatoires|slice(3, 3) %}
-								<div	class="col-4 d-flex justify-content-center">
+								{# <div	class="col-4 d-flex justify-content-center"> #}
+								<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
 									<div	class="card m-2"	style="width: 10rem;">
 										<img	class="card-img-top zoom-img"	src="{{ produit.photo }}"	alt="">
 
@@ -87,24 +102,36 @@
 										</div>
 									</div>
 								{% endfor %}
+								  <!-- Boutons de navigation -->
+                <button class="carousel-control-prev position-absolute" type="button" data-bs-target="#carousel"
+                    data-bs-slide="prev">
+                    <i class="bi bi-arrow-left-circle-fill"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next position-absolute" type="button" data-bs-target="#carousel"
+                    data-bs-slide="next">
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
 							</div>
 						</div>
 
 						<!-- Troisième diapositive avec 3 images -->
 						<!-- Contrôles précédent et suivant -->
+						{# <div class="carousel-controls text-center mt-3">
 						<button	class="carousel-control-prev"	type="button"	data-bs-target="#carousel"	data-bs-slide="prev">
-							{# <span	class="carousel-control-prev-icon"	aria-hidden="true"></span> #}
-							<i class="bi bi-arrow-left-circle-fill" style="font-size: 2rem; color: black;"></i>
+							<i class="bi bi-arrow-left-circle-fill" style="font-size: 2rem; color: green"></i>
 							<span	class="visually-hidden">
 								Previous
 							</span>
 						</button>
 						<button	class="carousel-control-next"	type="button"	data-bs-target="#carousel"	data-bs-slide="next">
-							<span	class="carousel-control-next-icon"	aria-hidden="true"></span>
+							<i class="bi bi-arrow-right-circle-fill" style="font-size: 2rem; color: green"></i>
 							<span	class="visually-hidden">
 								Next
 							</span>
 						</button>
+						</div> #}
 					</div>
 				</div>
 				    			<hr style="border: none; border-top: 2px solid #000; margin: 20px 0;">
@@ -206,9 +233,19 @@
 
 				</div>
 
-			{# {% include "partials/socialIcons.php" %} #}
+			{# {% include "partials/.php" %} #}
 
 			{# {{ encore_entry_script_tags('app') }} #}
+			<script>var myCarousel = document.getElementById('carousel');
+
+// Empêche le défilement automatique
+var carouselInstance = new bootstrap.Carousel(myCarousel, {
+    interval: false,  // Désactive l'intervalle automatique
+    ride: false,      // Aucun défilement automatique
+    touch: false      // Désactive les glissements tactiles
+});
+</script>
+
 
 			{% endblock %}
 			

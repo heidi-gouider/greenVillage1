@@ -485,7 +485,7 @@ form {
     /* Beige clair */
   background-color: rgba(245, 245, 220, 0.9);
 
-  /* height: 10vh; */
+  /* height: 30vh; */
   bottom: 0;
   /* background-color: #f8f9fa; */
   /* opacity: 0.9; */
@@ -494,7 +494,7 @@ form {
   z-index: 1;
 }
 
-.footer ul {
+/* .footer ul {
   margin-bottom: 0;
 }
 
@@ -505,10 +505,10 @@ form {
 
 .footer ul li:last-child {
   margin-right: 0;
-}
+} */
 
 .footer ul li a {
-  color: #50565c;
+  /* color: #50565c; */
   font-size: 24px;
   text-decoration: none;
 }
@@ -527,22 +527,28 @@ form {
 @media (max-width: 767px) {
   .collapse.navbar-collapse {
     /* background-color: rgba(226, 226, 226, 0.7);  */
-    /* Ajoutez votre couleur de fond ici */
     background-color: rgba(226, 226, 226);
     box-shadow: 0px 5px 10px #bf7113;
-    /* Conservez votre ombre si nécessaire */
-    transition: all 0.3s ease-in-out;   
+    width: 60%;
+    /* transition: all 0.3s ease-in-out;    */
   }
 
   .navbar-nav .nav-link {
-    padding: 10px 15px; /* Espace autour des liens */
-    color: #333;        /* Couleur du texte pour contraste */
-    font-size: 16px;    /* Taille du texte adaptée pour mobile */
+    padding: 10px 15px; 
+    color: #333 !important;
+    font-size: 16px;
   }
 
+
+.navbar-nav .nav-link:hover {
+  color: #ff5722 !important;
+  text-decoration: underline;
+}
+
   .navbar-nav {
-    margin-left: auto;
-    /* Aligne les éléments du menu à droite */
+    /* margin-left: auto; */
+    margin: 0 auto; /* Centre la navigation horizontalement */
+    text-align: end;
   }
 
   .navbar-toggler {
@@ -553,7 +559,7 @@ form {
   }
 
   .navbar-nav .nav-item {
-    display: flex;
+    /* display: flex; */
     align-items: center; /* Centre le texte et les icônes verticalement */
   }
 }

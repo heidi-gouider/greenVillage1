@@ -18,7 +18,8 @@
 			{{ encore_entry_script_tags('app1') }}
 
 			{# Barre de navigation #}
-			<nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center pr-5">
+			{# <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center pr-5"> #}
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div
 					class="container-fluid m-auto fixed-top mb-5" id="menu">
 
@@ -27,19 +28,9 @@
 					</a>
 
 					 <!-- Toggle button pour les petits écrans -->
-        {# <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> #}
 					<!-- Bouton de menu avec icône du menu -->
 					<button
-						class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						{# <i class="bi bi-list"></i> #}
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -125,15 +116,15 @@
 									</a>
 								</li>
 
-							<li class="nav-item active">
+							{# <li class="nav-item active">
 								<a href="#" id="exampleModal" class="nav-link text-orange" title="login modal" >
 									mopdal login
 								</a>
-							</li>
+							</li> #}
 							<!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+								{# <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   								Login modal user test 
-								</button>
+								</button> #}
 
 							{% endif %}
 

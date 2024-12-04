@@ -4,17 +4,17 @@
 
 {% block head %}
     <style>
-        /* Styles pour la fenêtre modale
+        /* Styles pour la fenêtre modale */
         .modal {
-            display: none; /* Masquer la modale par défaut 
+            display: none;
             position: fixed;
             z-index: 1;
             height: 100%;
             overflow: auto;
-             top: 50%;  /* Centrer verticalement 
-            right: 0;  /* Positionner la modale à droite 
-            transform: translateY(-50%);  /* Ajuste la position verticale 
-            width: 600px; /* Largeur de la modale 
+             top: 50%;  
+            right: 0; 
+            transform: translateY(-50%);  
+            width: 600px; 
             height: auto;
         }
 
@@ -22,11 +22,11 @@
             background-color: #fefefe;
             /*background-color: rgb(57, 83, 40);*/
             /*background-color: rgb(105, 145, 75);*/
-            /*margin: 15% auto;
+            /*margin: 15% auto;*/
             margin: 0;
             padding: 20px;
             border: 1px solid #888;
-            width: 70%; /* Ajuster la largeur de la modale 
+            width: 70%; 
         }
 
         .close {
@@ -41,7 +41,7 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
-        }*/
+        }
     </style>
 {% endblock %}
 
@@ -59,9 +59,10 @@
 {% set error = error ?? null %}
 
     <!-- Fenêtre modale de connexion -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div id="myModal" class="modal">
+    {# <div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"> #}
     {# ajout pour bs #}
-    <div class="modal-dialog">
+    {# <div class="modal-dialog"> #}
         <div class="modal-content">
             <span class="close" id="closeModalButton">&times;</span>
             <h1>Connexion Administrateur</h1>
@@ -91,7 +92,7 @@
 					</form> 
 				</div>
 
-        </div>
+        {# </div> #}
     </div>
 
 {% endblock %}
@@ -100,7 +101,7 @@
     <script>
         // Récupérer les éléments de la modale et des boutons
         var modal = document.getElementById("myModal");
-        var openModalButton = document.getElementById("openModalButton");
+        const openModalButton = document.getElementById("openModalButton");
         var closeModalButton = document.getElementById("closeModalButton");
 
         // Lorsque l'utilisateur clique sur le lien "Connexion Admin", ouvrir la modale
@@ -110,8 +111,8 @@
         });
 
         // Utilisation de Bootstrap pour afficher la modale
-            var modal = new bootstrap.Modal(document.getElementById('myModal'));
-            modal.show();
+            {# var modal = new bootstrap.Modal(document.getElementById('myModal'));
+            modal.show(); #}
 
         // Lorsque l'utilisateur clique sur le bouton de fermeture (×), fermer la modale
         closeModalButton.onclick = function() {

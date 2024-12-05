@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
+use App\Form\ContactFormType;
+use App\Entity\Contact;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -43,20 +46,21 @@ class AccueilController extends AbstractController
         // mélange les produits
         shuffle($produitsAleatoires);
 
+        $form = $this->createForm(ContactFormType::class);
 
         // pour la modal
         $error = $authenticationUtils->getLastAuthenticationError();
     $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('accueil/index.html.twig', [
-            // return $this->render('base.html.twig', [
-            // 'controller_name' => 'AccueilController',
             'categories' => $categories,
             'produitsAleatoires' => $produitsAleatoires,
             'sous_categories' => $sousCategories,
             // 'parent_categorie' => $parentCategorie,
             'error' => $error,
             'last_username' => $lastUsername,
+            'form' => $form->createView(),
+            // 'form' => $form,
         ]);
     }
 
@@ -68,6 +72,9 @@ class AccueilController extends AbstractController
         $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
         // $categories = $this->categorieRepository->findAll();
         // dd($categories);
+
+        $form = $this->createForm(ContactFormType::class);
+
                 // pour la modal
                 $error = $authenticationUtils->getLastAuthenticationError();
                 $lastUsername = $authenticationUtils->getLastUsername();
@@ -78,7 +85,7 @@ class AccueilController extends AbstractController
             'categories' => $categories,
             'error' => $error,
             'last_username' => $lastUsername,
-
+            'form' => $form->createView(),
         ]);
     }
 
@@ -94,6 +101,8 @@ class AccueilController extends AbstractController
         $sousCategories = $categories->getCategories();
         // dd($categories);
         // dd($sousCategories);
+        $form = $this->createForm(ContactFormType::class);
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -105,6 +114,7 @@ class AccueilController extends AbstractController
             // 'parent_categorie' => $parentCategorie,
             'error' => $error,
             'last_username' => $lastUsername,
+            'form' => $form->createView(),
 
         ]);
     }

@@ -46,7 +46,8 @@ const SearchBar = ({ categories = [], onSearch }) => {
       {/* Conteneur avec flexbox pour centrer */}
     <div style={{
       display: 'flex',
-      justifyContent: 'center',  // Centrer horizontalement
+      justifyContent: 'center',  
+      // Centrer horizontalement
       alignItems: 'center',      // Centrer verticalement
       // height: '100vh'             // Prendre toute la hauteur de la fenêtre
     }}>

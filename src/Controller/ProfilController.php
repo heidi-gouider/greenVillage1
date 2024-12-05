@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Repository\UtilisateurRepository;
 use App\Form\ProfilFormType;
+use App\Form\ContactFormType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;

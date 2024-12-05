@@ -8,6 +8,9 @@
 				Green Village
 			{% endblock %}
 		</title>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 		<link
@@ -21,10 +24,20 @@
 			{# Barre de navigation #}
 			{# <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center pr-5"> #}
 				<nav class="navbar navbar-expand-lg navbar-light bg-light"> <div class="container-fluid m-auto fixed-top mb-5" id="menu">
+
 					<!-- Logo -->
-					<a class="navbar-brand logo d-flex col-3 mx-2 py-3 justify-content-center" href="{{ path('app_accueil') }}">
+					<a class="navbar-brand logo d-flex col-3 mx-2 mt-4 py-3 justify-content-center" href="{{ path('app_accueil') }}">
 						<img src="{{ asset('IMG/logo.webp') }}" alt="logo" style="width: 50%; border-radius: 60%;">
 					</a>
+
+					<!-- Lien Catalogue -->
+					<div
+					class="nav-item active mx-auto"> 
+					<a class="nav-link fs-5 text-dark" href="{{ path('app_categorie') }}" title="Liste des produits">
+					Catalogue <i class="bi bi-music-note"></i><i class="fa fa-guitar"></i>
+					</a>
+					</div>
+
 
 					<!-- Champ de recherche entre le logo et les onglets -->
 					<div id="app1-root"></div>
@@ -35,9 +48,9 @@
 					</button>
 					
 					<!-- Liens de navigation avec collapse pour mobile first-->
-					<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="collapse navbar-collapse" id="navbarNav" style="max-width: 300px; margin: 0 auto">
 						<div class="card card-body">
-							<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center" style=" gap: 50px; font-size: 25px">
+							<ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-center" style=" gap: 40px; font-size: 25px">
 								{# <ul class="navbar-nav ms-auto"> #}
 
 								{% if app.user %}
@@ -58,13 +71,14 @@
 								</li> #}
 
 								{# Menu de navigation avec uniquement les sous-catégories #}
-									<li
-									class="nav-item active mx-3"> {# <div class="dropdown"> #}
-									<a
-										class="nav-link" href="{{ path('app_categorie') }}" title="Liste des produits">
-										{# id="dropdownCatalogue" data-bs-toggle="dropdown" aria-expanded="false"> #}
-										Catalogue
-									</a>
+									{# <li
+									class="nav-item active mx-3">  #}
+									{# <div class="dropdown"> #}
+									{# <a
+										class="nav-link" href="{{ path('app_categorie') }}" title="Liste des produits"> #}
+										{# uniquement si dropdwn !!! id="dropdownCatalogue" data-bs-toggle="dropdown" aria-expanded="false"> #}
+										{# Catalogue <i class="bi bi-music-note"></i><i class="fa fa-guitar"></i>
+									</a> #}
 									{# {% if sous_categories is not empty %}
 									            <ul class="dropdown-menu" aria-labelledby="dropdownCatalogue">
 									                {% for sousCategorie in sous_categories %}
@@ -80,7 +94,7 @@
 									        {% endif %} #}
 
 									{# </div> #}
-								</li>
+								{# </li> #}
 
 
 								{# Vérifie si l'utilisateur est authentifié #}
@@ -121,21 +135,21 @@
 										</a>
 									</li> #} 
 								<!-- Button trigger modal -->
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+									{# <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 									  								Login modal user test 
-																	</button>
+																	</button> #}
 
 								{% endif %}
 								<!-- Button contact modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   contact modal
-</button>
+</button> #}
 
-								<li class="nav-item mx-3">
+								{# <li class="nav-item mx-3">
 									<a class="nav-link" href="{{ path('app_contact') }}" title="Contact">
 										<i class="bi bi-envelope-at"></i>
 									</a>
-								</li>
+								</li> #}
 
 								<li class="nav-item mx-3" style="position = relative">
 									{# Vérifier si le panier contient des articles et afficher le total#}

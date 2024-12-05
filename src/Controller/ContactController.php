@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ContactFormType;
-//pour ajouter des contraintes de validation des données automatiquement
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Contact;
 use App\Service\MailService;
@@ -79,9 +78,7 @@ class ContactController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('contact/index.html.twig', [
-            //'controller_name' => 'ContactController',
             'form' => $form,
-            // Passer les catégories au template
             'categories' => $categories,
             'error' => $error,
             'last_username' => $lastUsername,

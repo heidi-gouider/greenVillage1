@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
-// use App\Repository\RechercheRepository;
+use App\Form\ContactFormType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Form\RechercheType;
 use APP\Entity\Produit;

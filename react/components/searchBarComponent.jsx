@@ -54,7 +54,8 @@ const SearchBar = ({ categories = [], onSearch }) => {
           {/* <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}> */}
 
           {/* Input avec un bouton intégré */}
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative", boxshadow: "0 15px 40px rgba(0, 0, 0, 0.8)"
+ }}>
             <input
               type="text"
               style={{

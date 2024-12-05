@@ -63,9 +63,10 @@ const SearchBar = ({ categories = [], onSearch }) => {
                 backgroundColor: "white",
                 color: "black",
                 padding: "10px 40px 10px 10px",
-                borderRadius: "5px",
+                borderRadius: "45px",
                 // width: "5vh",
                 width: "200px",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", 
                 // border: "none",
               }}
               value={query}

@@ -16,21 +16,24 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> {% block stylesheets %}{% endblock %}
 		</head>
 		<body>
-			{# {{ encore_entry_script_tags('app1') }} #}
+			{{ encore_entry_script_tags('app1') }}
 
 			{# Barre de navigation #}
 			{# <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center pr-5"> #}
 				<nav class="navbar navbar-expand-lg navbar-light bg-light"> <div class="container-fluid m-auto fixed-top mb-5" id="menu">
-
+					<!-- Logo -->
 					<a class="navbar-brand logo d-flex col-3 mx-2 py-3 justify-content-center" href="{{ path('app_accueil') }}">
 						<img src="{{ asset('IMG/logo.webp') }}" alt="logo" style="width: 50%; border-radius: 60%;">
 					</a>
+
+					<!-- Champ de recherche entre le logo et les onglets -->
+					<div id="app1-root"></div>
 
 					<!-- Toggle button pour les petits écrans -->
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
+					
 					<!-- Liens de navigation avec collapse pour mobile first-->
 					<div class="collapse navbar-collapse" id="navbarNav">
 						<div class="card card-body">
@@ -123,6 +126,10 @@
 																	</button>
 
 								{% endif %}
+								<!-- Button contact modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  contact modal
+</button>
 
 								<li class="nav-item mx-3">
 									<a class="nav-link" href="{{ path('app_contact') }}" title="Contact">
@@ -165,7 +172,8 @@
 {% block body %}{% endblock %}
 
 <!-- Importation de la modale -->
-{% include 'security/modal_login_admin.html.twig' %}
+{# {% include 'security/modal_login_admin.html.twig' %} #}
+{% include 'partials/modal_contact.html.twig' %}
 
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

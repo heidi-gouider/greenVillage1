@@ -114,9 +114,17 @@ class ProduitController extends AbstractController
     {
         // je récupère la categorie correspondant à l'id
         $categorie = $this->categorieRepository->find($id);
+        $categories =$this->categorieRepository->findBy(['parent_categorie' => null]);
+
         // $categorie = $this->categorieRepository->findAll();
         // dd($categorie);
 
+        // Utilisation du QueryBuilder pour récupérer les sous-catégories
+        $sousCategories = $this->categorieRepository->createQueryBuilder('c')
+        ->where('c.parent_categorie IS NOT NULL')
+        ->getQuery()
+        ->getResult();
+        
         // pour la modal
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -128,9 +136,12 @@ class ProduitController extends AbstractController
     // }
         $produits = $categorie->getProduits();
         return $this->render('accueil/produitsCategorie.html.twig', [
-            // return $this->render('base.html.twig', [
-            // 'controller_name' => 'CatalogueController',
-            'categories' => $categorie,
+            // Catégorie spécifique pour la page
+            'categorie' => $categorie,
+            // 'categories' => $categorie,
+            // Liste des catégories parent
+            'categories' => $categories,
+            'sous_categories' => $sousCategories,
             'libelle_categorie' => $categorie->getLibelleCategorie(),
             'produits' => $produits,
             'error' => $error,

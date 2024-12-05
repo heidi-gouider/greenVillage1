@@ -20,7 +20,7 @@ const App1 = () => {
             .then(response => response.json())
             // .then(data => setCategories(data));
             .then(data => {
-                console.log("Catégories récupérées :", data);                 
+                // console.log("Catégories récupérées :", data);                 
                 // setCategories(data["hydra:member"] || []);
 
                 // Formater les données récupérées

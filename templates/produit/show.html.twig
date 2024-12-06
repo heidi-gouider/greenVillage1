@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Green Village
+{% endblock %}
+
+{% block body %}
+	<div class="contenu">
+		<h1 class="row col-12 text-center">Tous nos instruments</h1>
+
+<h1>{{ produit.nom }}</h1>
+<p>{{ produit.description }}</p>
+<!-- Autres informations sur le produit -->
+
+<!-- Lien pour ajouter aux favoris -->
+<a href="{{ path('add_to_favorites', { id: produit.id }) }}" class="btn btn-primary">
+    Ajouter aux favoris
+</a>
+		</div>
+
+	</div>
+			{% include "partials/footer.html.twig" %}
+
+{% endblock %}

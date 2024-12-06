@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FavoriteController!
+{% endblock %}
+
+{% block body %}
+
+	<div
+		class="contenu">
+
+		{# <h1 class="fst-italic mb-5 mt-5">Mes Favoris</h1> #}
+
+		<div
+			class="container mx-auto my-auto">
+
+			{# <h1>Hello {{ user }}! ✅</h1> #}
+
+			<h3 class="fst-italic mb-5 mt-5 text-center">Mes Favoris</h3>
+			<div class="row">
+				{% for favorite in favorites %}
+					<!-- Première rangée avec image et titre -->
+					<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+						<div class="text-center">
+							<img class="" src="{{ favorite.produit.photo }}" alt="">
+							<div>
+								{{ favorite.produit.libelleProduit }}
+							</div>
+						</div>
+					</div>
+					<!-- Ligne horizontale séparant les produits -->
+					<div class="w-100">
+						<hr style="border: none; border-top: 2px solid #000; margin: 20px 0;">
+					</div>
+					<!-- Deuxième rangée avec le lien "Retirer" -->
+					<div class="col-12 text-center mb-4">
+						<a href="{{ path('remove_from_favorites', { id: favorite.produit.id }) }}">
+							Retirer
+						</a>
+					</div>
+
+				{% endfor %}
+			</div>
+		</div>
+		{% include "partials/footer.html.twig" %}
+	{% endblock %}

@@ -21,6 +21,11 @@
 										{# <a href="{{ path('app_detail_produit', {'id': produit.id}) }}"></a> #}
 										{{ produit.libelleProduit }}
 									</h5>
+										<a class="nav-link nav-link-custom" href="{{ path('add_to_favorites', { id: produit.id }) }}" id="favorite" title="Ajouter aux favoris">
+										<i class="bi bi-star"></i>									
+									</a>
+
+
 									<p	class="content bg-body">
 										{{ produit.prix }}
 										euros

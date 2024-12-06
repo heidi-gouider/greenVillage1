@@ -5,26 +5,27 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
             # Provider pour les utilisateurs
-        # app_user_provider:
-        #     entity:
-        #         class: App\Entity\Utilisateur
-        #         property: email
+        app_user_provider:
+            entity:
+                class: App\Entity\Utilisateur
+                property: email
 
         # Provider pour les administrateurs
-        app_admin_provider:
-            entity:
-                class: App\Entity\Admin
-                property: username
+        # app_admin_provider:
+        #     entity:
+        #         class: App\Entity\Admin
+        #         property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            # provider: app_user_provider
-            # custom_authenticator: App\Security\AppAutenticatorAuthenticator
-            provider: app_admin_provider
-            custom_authenticator: App\Security\AdminAuthenticator
+            provider: app_user_provider
+            custom_authenticator: App\Security\AppAutenticatorAuthenticator
+            # anonymous: true
+            # provider: app_admin_provider
+            # custom_authenticator: App\Security\AdminAuthenticator
 
             logout:
                 path: app_logout
@@ -59,6 +60,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profil, roles: ROLE_USER }
+        # - { path: ^/verify/email, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

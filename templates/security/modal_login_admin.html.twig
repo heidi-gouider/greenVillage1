@@ -101,14 +101,17 @@
     <script>
         // Récupérer les éléments de la modale et des boutons
         var modal = document.getElementById("myModal");
-        const openModalButton = document.getElementById("openModalButton");
+        var openModalButton = document.getElementById("openModalButton");
         var closeModalButton = document.getElementById("closeModalButton");
+        {# console.log(openModalButton); #}
 
         // Lorsque l'utilisateur clique sur le lien "Connexion Admin", ouvrir la modale
-        openModalButton.addEventListener("click", function(event) {
-            event.preventDefault();  // Empêche la redirection
-            modal.style.display = "block";  // Ouvre la modale
-        });
+        {# openModalButton.addEventListener("click", function(event) { #}
+             // Empêche la redirection
+            {# event.preventDefault();  #}
+              // Ouvre la modale
+            {# modal.style.display = "block"; #}
+        {# }); #}
 
         // Utilisation de Bootstrap pour afficher la modale
             {# var modal = new bootstrap.Modal(document.getElementById('myModal'));

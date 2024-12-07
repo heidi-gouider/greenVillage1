@@ -43,6 +43,11 @@ class SecurityController extends AbstractController
     #[Route(path: '/login/admin', name: 'admin_login')]
     public function adminLogin(AuthenticationUtils $authenticationUtils): Response
     {
+        // if ($this->getUser()) {
+            // Rediriger l'utilisateur déjà connecté vers une page appropriée (ex. tableau de bord admin)
+            // return $this->redirectToRoute('admin_dashboard'); 
+        // }
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

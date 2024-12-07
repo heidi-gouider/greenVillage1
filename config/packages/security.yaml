@@ -30,7 +30,7 @@ security:
             custom_authenticator: App\Security\AdminAuthenticator
             logout:
                 path: admin_logout
-                target: /admin/login    
+                target: /admin
         main:
             lazy: true
             # pour permettre a admin et user de se connecter sur un seul form avec 2 property distinctes
@@ -38,8 +38,6 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\AppAutenticatorAuthenticator
             # anonymous: true
-            # provider: admin_user_provider
-            # custom_authenticator: App\Security\AdminAuthenticator
 
             logout:
                 path: app_logout

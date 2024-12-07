@@ -4,27 +4,41 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-            # Provider pour les utilisateurs
+        # chain:
+        #     providers: [admin_user_provider, app_user_provider]
+        # Provider pour les utilisateurs
         app_user_provider:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
 
         # Provider pour les administrateurs
-        # app_admin_provider:
-        #     entity:
-        #         class: App\Entity\Admin
-        #         property: username
+        admin_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # Firewall pour les administrateurs
+        admin:
+            lazy: true
+            pattern: ^/admin
+            provider: admin_user_provider
+            custom_authenticator: App\Security\AdminAuthenticator
+            logout:
+                path: admin_logout
+                target: /admin/login    
         main:
             lazy: true
+            # pour permettre a admin et user de se connecter sur un seul form avec 2 property distinctes
+            # provider: chain_provider
             provider: app_user_provider
             custom_authenticator: App\Security\AppAutenticatorAuthenticator
             # anonymous: true
-            # provider: app_admin_provider
+            # provider: admin_user_provider
             # custom_authenticator: App\Security\AdminAuthenticator
 
             logout:
@@ -40,14 +54,6 @@ security:
                 # login form, uncomment the following line to always enable it.
                 #always_remember_me: true
 
-        # admin:
-        #         pattern: ^/admin
-        #         lazy: true
-        #         provider: app_admin_provider
-        #         custom_authenticator: App\Security\AdminAuthenticator
-        #         logout:
-        #             path: admin_logout
-        #             target: /admin/login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -65,7 +71,10 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
+# services:
+#     App\Security\AppAuthenticatorAuthenticator:
+#         arguments:
+#             $userProvider: '@security.user.provider.concrete.app_user_provider'
 when@test:
     security:
         password_hashers:

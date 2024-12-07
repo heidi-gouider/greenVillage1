@@ -30,13 +30,16 @@ class AppAutenticatorAuthenticator extends AbstractLoginFormAuthenticator
     {
         $this->urlGenerator = $urlGenerator;
         $this->userProvider = $userProvider;
+        // $this->adminProvider = $adminProvider;
     }
 
     public function authenticate(Request $request): Passport
     {
         $email = $request->getPayload()->getString('email');
+        // $email = $request->request->get('email');
         //
         $password = $request->get('password');
+        // $password = $request->request->get('password');
         $csrfToken = $request->get('_csrf_token');
         //
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);

@@ -26,17 +26,21 @@
 								{{ favorite.produit.libelleProduit }}
 							</div>
 						</div>
+						<a href="{{ path('remove_from_favorites', { id: favorite.produit.id }) }}">
+					<i class="bi bi-trash3-fill"></i>
+					</a>
+
 					</div>
 					<!-- Ligne horizontale séparant les produits -->
-					<div class="w-100">
+					{# <div class="w-100">
 						<hr style="border: none; border-top: 2px solid #000; margin: 20px 0;">
-					</div>
+					</div> #}
 					<!-- Deuxième rangée avec le lien "Retirer" -->
-					<div class="col-12 text-center mb-4">
+					{# <div class="col-12 text-center mb-4">
 						<a href="{{ path('remove_from_favorites', { id: favorite.produit.id }) }}">
 							Retirer
 						</a>
-					</div>
+					</div> #}
 
 				{% endfor %}
 			</div>

@@ -59,7 +59,6 @@ class FavoriteController extends AbstractController
         if ($existingFavorite) {
             $this->addFlash('info', 'Ce produit est déjà dans vos favoris.');
             // return $this->redirectToRoute('produit_show', ['id' => $product->getId()]);
-            // return new JsonResponse(['status' => 'info', 'message' => 'Ce produit est déjà dans vos favoris.']);
         }
 
         $favorite = new Favorite();
@@ -100,8 +99,8 @@ class FavoriteController extends AbstractController
             $this->addFlash('error', 'Ce produit n\'est pas dans vos favoris.');
         }
 
-        // return $this->redirectToRoute('product_show', ['id' => $product->getId()]);
-        return $this->redirectToRoute('app_detail_produit', ['id' => $product->getId()]);
+        // return $this->redirectToRoute('app_detail_produit', ['id' => $product->getId()]);
+        return $this->redirectToRoute('app_favorite');
     }
 
     // #[Route('/favorites', name: 'favorites_list')]

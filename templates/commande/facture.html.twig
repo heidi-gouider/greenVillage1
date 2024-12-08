@@ -32,7 +32,7 @@
             <tbody>
                 {% for detail in commande.details %}
                     <tr>
-                        <td>{{ detail.produit.nom }}</td>
+                        <td>{{ detail.produit.libelleProduit }}</td>
                         <td>{{ detail.quantite }}</td>
                         <td>{{ detail.produit.prix|number_format(2, ',', ' ') }}</td>
                         <td>{{ (detail.quantite * detail.produit.prix)|number_format(2, ',', ' ') }}</td>
@@ -50,4 +50,6 @@
 
     <footer class="text-center mt-5">
         <p>Merci pour votre commande !</p>
+        </footer>
    
+{% endblock %}

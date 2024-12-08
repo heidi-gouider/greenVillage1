@@ -131,6 +131,14 @@
 												</a>
 											</li>
 
+											<li>
+												{# <a class="dropdown-item" href="{{ path('app_commande_show') }}"> #}
+											<a href="{{ path('app_commande_show', { id: commande.id }) }}">Voir la commande</a>
+													<i class="bi bi-star"></i>
+													Mes cammandes							
+												</a>
+											</li>
+
 										</ul>
 									</li>
 								{% else %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture - Commande #{{ commande.id }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header class="text-center my-4">
+        <h1>Facture</h1>
+        <h2>Commande #{{ commande.id }}</h2>
+    </header>
+
+    <section class="mb-4">
+        <h3>Détails du client</h3>
+        <p>
+            <strong>Nom :</strong> {{ commande.utilisateur.nom }}<br>
+            <strong>Email :</strong> {{ commande.utilisateur.email }}<br>
+            <strong>Adresse :</strong> {{ commande.utilisateur.adresseClient }}, {{ commande.utilisateur.codePostalClient }} {{ commande.utilisateur.villeClient }}
+        </p>
+    </section>
+
+    <section>
+        <h3>Détails de la commande</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire (€)</th>
+                    <th>Total (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in commande.details %}
+                    <tr>
+                        <td>{{ detail.produit.nom }}</td>
+                        <td>{{ detail.quantite }}</td>
+                        <td>{{ detail.produit.prix|number_format(2, ',', ' ') }}</td>
+                        <td>{{ (detail.quantite * detail.produit.prix)|number_format(2, ',', ' ') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" class="text-right">Total HT :</th>
+                    <th>{{ commande.totalHt|number_format(2, ',', ' ') }} €</th>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <footer class="text-center mt-5">
+        <p>Merci pour votre commande !</p>
+   

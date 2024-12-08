@@ -10,6 +10,9 @@ use App\Repository\UtilisateurRepository;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Service\EmailService;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,6 +22,14 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/commande', name: 'app_commande_')]
 class CommandeController extends AbstractController
 {
+    // Injection du service d'email
+    private $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+    
     #[isGranted('ROLE_USER', message: "Vous devez avoir un compte pour accèder à cette page!")]
 
     #[Route('/ajout', name: 'ajout')]
@@ -75,6 +86,27 @@ $commande->setModeReglement('Stripe'); // Exemple : mode de paiement
   // On persiste et on flush
   $em->persist($commande);
   $em->flush();
+
+    //    / Vérifie si l'utilisateur connecté est valide
+   $user = $this->getUser();
+   if (!$user instanceof \App\Entity\Utilisateur) {
+       throw new \LogicException('L\'utilisateur connecté n\'est pas valide ou non connecté.');
+   }
+
+   // Générer la facture en PDF (exemple basique avec Dompdf)
+   $pdfContent = $this->generatePdf($commande);
+
+   // Sauvegarder le fichier PDF temporaire
+   $invoicePath = '/tmp/facture_' . $commande->getId() . '.pdf';
+   file_put_contents($invoicePath, $pdfContent);
+
+   
+   // Récupération de l'email
+   $email = $user->getEmail();
+
+   // Envoi de l'email avec la facture en pièce jointe
+//    $this->emailService->sendInvoice($this->getUser()->getEmail(), $invoicePath);
+   $this->emailService->sendInvoice($email, $invoicePath);
 
   $session->remove('panier');
 
@@ -157,30 +189,47 @@ return $this->redirectToRoute('app_commande_show', ['id' => $commande->getId()])
             'rue' => $rue,
             'cp' => $cp,
             'ville' => $ville,
-
-
         ]);
     }
+    // Génération du PDF de la facture
+    private function generatePdf(Commande $commande)
+    {
+        $dompdf = new Dompdf();
 
+        // Options pour Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf->setOptions($options);
+
+        // Préparation du contenu HTML pour la facture
+        $html = $this->renderView('commande/facture.html.twig', [
+            'commande' => $commande,
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        return $dompdf->output();
+    }
 
     // je recupère la méthode et le query builder du repo detail 
     // #[Route('/top_discs', name: 'top_discs')]
-    #[Route('/', name: 'top_produits')]
-private $detailRepo;
-public function __construct(DetailRepository $detailRepo)
-{
-    $this->detailRepo = $detailRepo;
-}
-    public function topProduits(): Response
-    {
+//     #[Route('/', name: 'top_produits')]
+// private $detailRepo;
+// public function __construct(DetailRepository $detailRepo)
+// {
+//     $this->detailRepo = $detailRepo;
+// }
+//     public function topProduits(): Response
+//     {
     
         // j'utilise la méthode créer dans le repo findByTopVente()
         // $topProduits = $this->detailRepo->findByTopVente();
 
         // je passe le résultat à ma vue
-        return $this->render('accueil/index.html.twig', [
+        // return $this->render('accueil/index.html.twig', [
             // 'topProduits' => $topProduits,
-        ]);
-    }
+        // ]);
+    // }
 
 }

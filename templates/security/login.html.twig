@@ -26,6 +26,14 @@
 						{% endif %}
 
 						<h1 class="h3 mb-5 font-weight-normal">Connectez vous</h1>
+						 <!-- Affichage des messages flash ici -->
+						 {% for message in app.flashes('success') %}
+						<div class="alert alert-success">{{ message }}</div>
+					{% endfor %}
+
+					{% for message in app.flashes('error') %}
+						<div class="alert alert-danger">{{ message }}</div>
+					{% endfor %}
 
 						{# test different visuel des input #}
 						{# <div class="form-floating mb-3">

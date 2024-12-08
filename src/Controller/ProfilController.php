@@ -54,6 +54,7 @@ class ProfilController extends AbstractController
         // $entityManager = $this->getDoctrine()->getManager();
         $this->entityManager->flush();
         // $entityManager->flush();
+        $this->addFlash('success', 'Votre profil a bien été modifié.');
 
         // $this->getDoctrine()->getManager()->flush();
 

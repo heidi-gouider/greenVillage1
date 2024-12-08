@@ -30,7 +30,9 @@ security:
             custom_authenticator: App\Security\AdminAuthenticator
             logout:
                 path: admin_logout
-                target: /admin
+                target: /
+             # Permettre aux utilisateurs non connectés d'accéder à certaines routes (optionnel)
+            # anonymous: true
         main:
             lazy: true
             # pour permettre a admin et user de se connecter sur un seul form avec 2 property distinctes
@@ -69,10 +71,7 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-# services:
-#     App\Security\AppAuthenticatorAuthenticator:
-#         arguments:
-#             $userProvider: '@security.user.provider.concrete.app_user_provider'
+
 when@test:
     security:
         password_hashers:

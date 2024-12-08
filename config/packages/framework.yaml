@@ -15,7 +15,7 @@ framework:
 
     # Pour éviter les problèmes liés à une sérialisation trop profonde
     # serializer:
-    #     enabled: true
+        enabled: true
     #     default_context:
     #         enable_max_depth: true
 

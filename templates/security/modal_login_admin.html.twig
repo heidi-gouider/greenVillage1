@@ -67,6 +67,13 @@
             <span class="close" id="closeModalButton">&times;</span>
             <h1>Connexion Administrateur</h1>
 
+                <div id="errorMessages">
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+</div>
+
+
             <form id="adminLoginForm" method="post" action="{{ path('admin_login') }}">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

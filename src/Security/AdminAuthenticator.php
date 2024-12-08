@@ -12,21 +12,26 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 // use Symfony\Component\Security\Core\User\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
 class AdminAuthenticator extends AbstractAuthenticator
 {
     private UserProviderInterface $adminProvider;
+    private SessionInterface $session;
 
     public function __construct(UserProviderInterface $adminProvider)
     {
         $this->adminProvider = $adminProvider;
+        // $this->session = $session;
     }
 
     public function supports(Request $request): ?bool
     {
         return $request->getPathInfo() === '/login/admin' && $request->isMethod('POST');
+        //  détecter toute soumission de formulaire, quel que soit le chemin.
+        // return $request->isMethod('POST') && $request->request->has('username') && $request->request->has('password');
     }
 
     public function authenticate(Request $request): Passport
@@ -52,6 +57,9 @@ class AdminAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new RedirectResponse('/login/admin?error=1');
+        // return new RedirectResponse('/login/admin?error=1');
+        // Ajouter un message flash en cas d'échec
+        // $this->session->getFlashBag()->add('error', 'Identifiants invalides. Veuillez réessayer.');
+                return new RedirectResponse('/'); // Redirigez vers la page où se trouve la modale
     }
 }
